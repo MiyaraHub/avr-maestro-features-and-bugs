@@ -1,0 +1,119 @@
+name: Bug report
+description: Report something that's broken in AVR Maestro.
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for filing a bug. The more of this form you fill in,
+        the faster we can fix it. Skip a field only if it genuinely
+        doesn't apply.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: A short, plain-language description of what went wrong.
+      placeholder: "When I tap Dolby Surround in the Surround tab, nothing happens on my receiver."
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+      description: What did you think should happen?
+      placeholder: "The receiver should switch to Dolby Surround and the button should show as selected."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Numbered steps. Start from a known state (e.g. "I just opened the app") if you can.
+      placeholder: |
+        1. Open the app.
+        2. Tap Sound in the bottom nav.
+        3. Tap the Movie chip.
+        4. Tap Dolby Surround.
+        5. Nothing happens.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      description: Which device are you on?
+      options:
+        - Android (phone)
+        - Android (tablet)
+        - iOS (iPhone)
+        - iOS (iPad)
+        - Both Android and iOS
+    validations:
+      required: true
+
+  - type: input
+    id: app-version
+    attributes:
+      label: AVR Maestro version
+      description: Found in Settings -> About AVR Maestro -> Version.
+      placeholder: "4.2.0 (build 202)"
+    validations:
+      required: true
+
+  - type: input
+    id: device-os
+    attributes:
+      label: Phone / tablet model + OS version
+      placeholder: "Pixel 10 Pro XL, Android 16 / iPhone 15 Pro, iOS 18.2"
+    validations:
+      required: true
+
+  - type: input
+    id: receiver-model
+    attributes:
+      label: Receiver model
+      description: The exact model name shown on the front panel or in Settings -> Device Information.
+      placeholder: "Marantz Cinema 30 / Denon AVR-A10H / Marantz SR5015"
+    validations:
+      required: true
+
+  - type: input
+    id: receiver-firmware
+    attributes:
+      label: Receiver firmware version
+      description: Look in the receiver's own Setup -> Information -> Firmware screen.
+      placeholder: "13700-7160-2210-2110"
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots / video
+      description: Drag and drop image or video files here. Especially helpful for visual bugs.
+
+  - type: dropdown
+    id: frequency
+    attributes:
+      label: How often does this happen?
+      options:
+        - Every time
+        - Most of the time
+        - Sometimes
+        - Once
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: workarounds
+    attributes:
+      label: Did you try
+      description: Tick anything you've already tried.
+      options:
+        - label: Restarting the app
+        - label: Restarting the receiver
+        - label: Reinstalling the app
+        - label: Switching the receiver IP and reconnecting

@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: General questions / chat
+    url: https://discord.gg/UmVtxE5fXN
+    about: For general questions, troubleshooting, or just to chat with the community, drop into Discord.
+  - name: Email support
+    url: mailto:admin@miyarahub.com
+    about: For private issues (account, purchase, sensitive setup details).
+  - name: User Manual
+    url: https://github.com/MiyaraHub/avr-maestro-features-and-bugs#readme
+    about: Before filing a bug or feature request, the manual answers most "how do I..." questions.

@@ -1,0 +1,86 @@
+name: Feature request
+description: Suggest something the app should do.
+title: "[Feature]: "
+labels: ["feature-request", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Got an idea? Tell us what it is and why it matters. Vague
+        wishlists are hard to act on - the more specific you are, the
+        better the chance the feature actually ships.
+
+  - type: textarea
+    id: what
+    attributes:
+      label: What you want the app to do
+      description: One or two sentences describing the feature.
+      placeholder: "Let me set up a Quick Volume preset that ramps from 0 to my chosen level over a few seconds."
+    validations:
+      required: true
+
+  - type: textarea
+    id: why
+    attributes:
+      label: Why this matters
+      description: What's the problem this solves? When would you use it?
+      placeholder: "When my kids are asleep I want to start a movie without the receiver blasting loud for a second before I can mute it."
+    validations:
+      required: true
+
+  - type: textarea
+    id: how
+    attributes:
+      label: How you imagine it working
+      description: Sketch the user flow. UI ideas, settings, button placement, whatever you've got.
+      placeholder: |
+        1. Long-press a Quick Volume preset slot.
+        2. New option "Ramp from zero" with a 1-5 second slider.
+        3. Tap to save.
+        4. From now on, tapping that preset ramps instead of jumping.
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Where in the app would this live?
+      multiple: true
+      options:
+        - Dashboard
+        - Remote
+        - Sound
+        - Zones
+        - Settings
+        - Home-screen widget
+        - Receiver setup / connection
+        - Other (explain in description)
+    validations:
+      required: true
+
+  - type: input
+    id: receiver-context
+    attributes:
+      label: Receiver model (if relevant)
+      description: Some features only make sense on certain chassis. Skip if it applies to all receivers.
+      placeholder: "Marantz Cinema 30 / Denon AVR-A10H / All receivers"
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: How important is this to you
+      options:
+        - Nice to have
+        - Would use often
+        - Critical - I'd switch apps without it
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: alternatives
+    attributes:
+      label: Have you tried
+      description: Tick anything you've already considered.
+      options:
+        - label: Doing it through the receiver's official app
+        - label: Doing it through HEOS
+        - label: Doing it through the receiver's front panel / OSD
+        - label: A different setting in AVR Maestro that gets close
