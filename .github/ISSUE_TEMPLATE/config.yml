@@ -1,8 +1,11 @@
 blank_issues_enabled: false
 contact_links:
-  - name: General questions / chat
+  - name: General questions / chat (Discord)
     url: https://discord.gg/UmVtxE5fXN
     about: For general questions, troubleshooting, or just to chat with the community, drop into Discord.
+  - name: Facebook community
+    url: https://www.facebook.com/groups/avrmaestro
+    about: AVR Maestro Facebook group for tips, screenshots, and community support.
   - name: Email support
     url: mailto:admin@miyarahub.com
     about: For private issues (account, purchase, sensitive setup details).

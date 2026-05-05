@@ -5,6 +5,7 @@ The premium controller for Denon and Marantz AVR receivers.
 [![Get it on Google Play](https://img.shields.io/badge/Google%20Play-Download-414141?logo=google-play&logoColor=white&style=for-the-badge)](https://play.google.com/store/apps/details?id=com.miyarahub.avrmaestro)
 [![Download on the App Store](https://img.shields.io/badge/App%20Store-Download-0D96F6?logo=app-store&logoColor=white&style=for-the-badge)](https://apps.apple.com/app/id6502869826)
 [![Discord](https://img.shields.io/badge/Discord-Join-5865F2?logo=discord&logoColor=white&style=for-the-badge)](https://discord.gg/UmVtxE5fXN)
+[![Facebook](https://img.shields.io/badge/Facebook-Community-1877F2?logo=facebook&logoColor=white&style=for-the-badge)](https://www.facebook.com/groups/avrmaestro)
 [![Website](https://img.shields.io/badge/miyarahub.com-Visit-FF6E40?style=for-the-badge)](https://miyarahub.com)
 
 > This is the **public bug + feature request repo** for AVR Maestro.
@@ -518,6 +519,7 @@ share with someone setting up the same receivers.
 - **Bugs:** [Report a bug](https://github.com/MiyaraHub/avr-maestro-features-and-bugs/issues/new?template=bug_report.yml)
 - **Feature requests:** [Request a feature](https://github.com/MiyaraHub/avr-maestro-features-and-bugs/issues/new?template=feature_request.yml)
 - **Discord:** [discord.gg/UmVtxE5fXN](https://discord.gg/UmVtxE5fXN)
+- **Facebook community:** [facebook.com/groups/avrmaestro](https://www.facebook.com/groups/avrmaestro)
 - **Email:** [admin@miyarahub.com](mailto:admin@miyarahub.com)
 - **Website:** [miyarahub.com](https://miyarahub.com)
 
