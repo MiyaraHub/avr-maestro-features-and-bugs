@@ -305,6 +305,15 @@ Zone state syncs live: switch a zone from the receiver's front panel
 or the physical remote, and the app updates within a second. Zones
 the receiver doesn't expose are hidden automatically.
 
+When a zone is powered on, its card also shows the live HEOS
+now-playing stream for that zone with inline transport controls
+(play / pause / next / previous). Single-pid receivers (Cinema 30,
+mid-range Denon) route every zone to the chassis stream, so all
+zones display the same now-playing block - that matches what the
+receiver is actually doing internally. Multi-pid flagships that
+expose Zone 2 / Zone 3 as separate HEOS players show distinct
+streams per zone.
+
 Per-zone Quick Volume presets are stored separately by (receiver +
 zone), so each zone can have its own preset set.
 
@@ -398,12 +407,13 @@ passthrough all report "no metadata" by design.
 
 When AVR Maestro is the foreground app on Android, your phone's
 physical volume keys control the **receiver's** volume instead of
-the phone's. Volume Up, Volume Down, and Volume Mute all route to
-the receiver. Each press uses the volume-step preference from
-*Settings -> Audio -> Volume Step*.
+the phone's, no matter which tab you're on. Volume Up, Volume Down,
+and Volume Mute all route to the receiver. Each press uses the
+volume-step preference from *Settings -> Audio -> Volume Step*.
 
 This is foreground-only. The keys go back to controlling the phone
-the moment the app is backgrounded.
+the moment the app is backgrounded; on resume they take over again
+immediately.
 
 iOS does not allow third-party apps to intercept hardware volume
 keys, so this feature is Android-only.
