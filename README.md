@@ -91,6 +91,10 @@ AVR Maestro won't see it either.
 - The receiver's **IP address**. You can find it in
   *Setup -> General -> Network -> Information* on the receiver, or in
   your router's connected-devices list.
+- Optional: enable **Wake-on-LAN** on the receiver if you want the
+  app to power it up from cold standby (off, not Network Standby).
+  The first reconnect attempt after the receiver goes fully off
+  sends a WoL magic packet to wake it.
 
 ---
 
@@ -173,6 +177,7 @@ can't accidentally change a receiver setting by tapping inside one.
 | Dirac Live Filter | Quick deep-link to the Dirac Live tab |
 | Audyssey State | One-glance MultEQ + DynEQ + DynVol summary |
 | Channel Levels | Compact dB-per-channel snapshot |
+| Subwoofer Level | Per-source PSSWL playback offset (single or dual sub) with -/+ buttons. Auto-hides when the current source has no audio signal, matching the official app. |
 
 Widgets only render when the receiver actually exposes the feature
 (e.g. Audio Restore is hidden on chassis without PSRSTR, Audyssey
@@ -207,10 +212,21 @@ inputs appear in the app.
 Denon Quick Select / Marantz Smart Select buttons (1-4 on most
 chassis, 1-5 on flagships like A1H, AV10, A10H).
 
-- **Tap** a slot to recall the receiver's saved scene (input + volume
-  + sound mode).
-- **Long-press** a slot to *save* the receiver's current state to that
-  slot. A confirmation dialog protects against accidental overwrites.
+- **Tap** a slot to recall the receiver's saved scene.
+- **Long-press** a slot for a menu: **Rename**, **Save current state**,
+  or **Cancel**.
+  - **Rename** gives the slot a custom label that persists per-receiver
+    and rides along in Backup & Restore. The label shows on both the
+    Remote tab and the Dashboard Quick Select widget.
+  - **Save current state** opens the **Quick Select Creation** wizard:
+    pick exactly which receiver settings this preset captures across
+    up to 17 groups (Channel Levels, Subwoofer Level, Sound Mode,
+    Dirac Live Slot, Speaker Preset, Input Source, Master Volume,
+    Audyssey MultEQ / Dynamic EQ / Dynamic Volume / LFC, Audio
+    Restorer, Dialog Enhancer, HDMI Video Output, Playback Content,
+    All Zone Stereo, Tone Control). Recall replays *only* the captured
+    groups, leaving everything else untouched. Toggles that your
+    receiver doesn't expose are hidden.
 
 ### 4. System
 
@@ -250,7 +266,11 @@ modes.
 ### Always available
 
 - **Surround** - the surround mode picker plus an **Audio Features**
-  panel.
+  panel and a per-source **Subwoofer Level Adjust** card (PSSWL).
+  Single-sub chassis show one card ("Subwoofer Level"); dual-sub
+  chassis show two ("Sub 1 Level" + "Sub 2 Level"). The card
+  auto-hides when the current source isn't passing audio, matching
+  the official Denon / Marantz app behaviour.
   - Modes are grouped (Movie / Music / Game / Pure) using the
     receiver's own selectable list. Tap a mode to switch.
   - Audio Features pills (Cinema EQ, Loudness Management, Center
@@ -268,7 +288,10 @@ modes.
 - **Channels** - per-channel trim (Front L/R, Center, Surrounds,
   Heights, Subs) plus Bass Sync subwoofer alignment. Save and recall
   up to **20 presets per receiver** (e.g. "Movies", "Music",
-  "Late night").
+  "Late night"). Presets are portable across chassis with different
+  wire forms (e.g. a Cinema 30 preset restores correctly on an A10H
+  and vice versa) and capture both channel trims and the per-source
+  Subwoofer Level Adjust offset.
 - **Tone** - Bass, Treble, DAC Filter (when supported). Tone Control
   is locked off automatically when Dynamic EQ is on - that's how
   Audyssey works on the receiver.
@@ -279,8 +302,21 @@ modes.
   Dynamic EQ on/off, Dynamic Volume (Off / Light / Medium / Heavy),
   Reference Level Offset, and Audyssey LFC with a Containment Amount
   up/down stepper.
-- **Dirac Live** - Filter slot selection, with named slots if you've
-  labelled them on the receiver.
+- **Dirac Live** - Filter slot selection, with named slots pulled
+  from your Dirac Live software. The user-given filter name is the
+  primary label; "SLOT N" sits underneath as a small hint. Empty
+  slots are hidden so you can't accidentally pick one that does
+  nothing. The picker shows the active slot live, so changes made
+  via the physical remote, front panel, or Dirac Live software are
+  reflected immediately.
+- **Audyssey / Dirac Live are mutually exclusive on the receiver.**
+  When one is active, the other reads "N/A while X is active" and
+  dims out across the dashboard widget, the Sound tab, and any other
+  surface it appears on. Toggle the active system off to re-enable
+  the other.
+- **Tactile Transducer** - on chassis that expose it (Cinema 30,
+  X4500H+, A10H flagship): enable / disable, level adjust, and a
+  low-pass-filter selector.
 - **Shape** (Surround Shape) - Dolby Surround / Neural:X upmixer
   parameters: **Panorama** (on/off), **Dimension** (up/down step),
   **Center Width** (up/down step), and **Room Size**
@@ -364,6 +400,11 @@ Sections (from top to bottom):
   "how this works" cards spread across the app.
 - **Restore dismissed cards** - re-shows any cards you've previously
   swiped away.
+- **Debug Log** - live in-app log viewer. The toolbar has Copy, Save,
+  Share, and Clear shortcuts; the header also has a prominent
+  **Save & share** button that writes the log to a temp file and
+  hands it straight to the system share sheet, so dropping a log
+  into a support ticket is one tap.
 
 ### Backup
 
@@ -373,7 +414,8 @@ Sections (from top to bottom):
 
 ### App
 
-- **About AVR Maestro** - version info, website, Discord link,
+- **About AVR Maestro** - version info, website, **Discord Community**,
+  **Facebook Support Group** (facebook.com/groups/avrmaestro),
   privacy policy, terms of service, share-app, open-source licenses.
 
 ---
