@@ -178,6 +178,8 @@ can't accidentally change a receiver setting by tapping inside one.
 | Audyssey State | One-glance MultEQ + DynEQ + DynVol summary |
 | Channel Levels | Compact dB-per-channel snapshot |
 | Subwoofer Level | Per-source PSSWL playback offset (single or dual sub) with -/+ buttons. Auto-hides when the current source has no audio signal, matching the official app. |
+| LFE | LFE level offset (-10 dB to 0 dB) with -/+ buttons and a refresh button. Sticky-disables and shows an "N/A" banner if the receiver silently rejects the write (some chassis don't accept LFE adjust). |
+| Room Size | Auromatic 3D room size picker (S / MS / M / ML / L). Only visible on receivers that expose the Auromatic engine (Cinema 30, X4500H+, A10H flagship, etc). |
 
 Widgets only render when the receiver actually exposes the feature
 (e.g. Audio Restore is hidden on chassis without PSRSTR, Audyssey
@@ -309,11 +311,18 @@ modes.
   nothing. The picker shows the active slot live, so changes made
   via the physical remote, front panel, or Dirac Live software are
   reflected immediately.
+- **Per speaker preset.** Audyssey and Dirac Live are both detected
+  per speaker preset (SPP1 vs SPP2). If you have Audyssey on SPP1
+  and Dirac on SPP2, switching speaker presets will swap which
+  calibration controls show on the dashboard and Sound tab. The
+  refresh button on the calibration card forces a re-detection if
+  you ever need to push the receiver again.
 - **Audyssey / Dirac Live are mutually exclusive on the receiver.**
-  When one is active, the other reads "N/A while X is active" and
-  dims out across the dashboard widget, the Sound tab, and any other
-  surface it appears on. Toggle the active system off to re-enable
-  the other.
+  When one is active on the current speaker preset, the other reads
+  "N/A while X is active" and dims out across the dashboard widget,
+  the Sound tab, and any other surface it appears on. Switch to a
+  speaker preset that has the other system loaded, or toggle the
+  active system off to re-enable.
 - **Tactile Transducer** - on chassis that expose it (Cinema 30,
   X4500H+, A10H flagship): enable / disable, level adjust, and a
   low-pass-filter selector.
@@ -405,6 +414,28 @@ Sections (from top to bottom):
   **Save & share** button that writes the log to a temp file and
   hands it straight to the system share sheet, so dropping a log
   into a support ticket is one tap.
+
+### Developer Tools (advanced)
+
+Hidden by default; long-press the version number in the About screen
+to unlock. Once enabled, a **Developer Tools** entry appears in
+Settings. Tools available:
+
+- **Telnet Command** - send raw Denon / Marantz telnet commands and
+  view the response.
+- **HEOS Command** - send raw HEOS API commands.
+- **AJAX Dump** - inspect the receiver's AppCommand0300 + ajax
+  endpoints. Each capture has a canonical Download / Share / Email
+  action.
+- **Volume Cap Wire Diagnostic** - one-button probe that asks the
+  receiver which wire channel carries the user-set volume cap
+  (different chassis generations use different commands - Cinema 30
+  uses `SSVCTZMALIM`, some older Denon models may use
+  `SSCUST_MAX_VOL` per third-party documentation). Renders the raw
+  response as readable text + JSON with Share buttons - if your
+  receiver hits a volume-cap quirk we haven't seen, one tap captures
+  the wire shape and you can drop the JSON into the Discord or
+  Facebook community for us to add native support.
 
 ### Backup
 
