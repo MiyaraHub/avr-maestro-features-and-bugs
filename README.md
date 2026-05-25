@@ -3,7 +3,7 @@
 The premium controller for Denon and Marantz AVR receivers.
 
 [![Get it on Google Play](https://img.shields.io/badge/Google%20Play-Download-414141?logo=google-play&logoColor=white&style=for-the-badge)](https://play.google.com/store/apps/details?id=com.miyarahub.avrmaestro)
-[![Download on the App Store](https://img.shields.io/badge/App%20Store-Download-0D96F6?logo=app-store&logoColor=white&style=for-the-badge)](https://apps.apple.com/app/id6502869826)
+[![Download on the App Store](https://img.shields.io/badge/App%20Store-Download-0D96F6?logo=app-store&logoColor=white&style=for-the-badge)](https://apps.apple.com/us/app/avr-maestro-for-denon-marantz/id6762881597)
 [![Discord](https://img.shields.io/badge/Discord-Join-5865F2?logo=discord&logoColor=white&style=for-the-badge)](https://discord.gg/UmVtxE5fXN)
 [![Facebook](https://img.shields.io/badge/Facebook-Community-1877F2?logo=facebook&logoColor=white&style=for-the-badge)](https://www.facebook.com/groups/avrmaestro)
 [![Website](https://img.shields.io/badge/miyarahub.com-Visit-FF6E40?style=for-the-badge)](https://miyarahub.com)
