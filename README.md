@@ -40,7 +40,8 @@ The fastest way to get our attention:
 Both forms ask the bare minimum so we can act on the report without
 chasing details. The more you fill in, the faster we triage.
 
-If your question is more general, drop into [Discord](https://discord.gg/UmVtxE5fXN)
+If your question is more general, drop into [Discord](https://discord.gg/UmVtxE5fXN),
+join the [Facebook community](https://www.facebook.com/groups/avrmaestro),
 or email [admin@miyarahub.com](mailto:admin@miyarahub.com).
 
 ---
