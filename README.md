@@ -22,8 +22,9 @@ features the official apps either bury or skip, and runs without ads,
 without subscriptions, and without sending your data anywhere.
 
 Connect to a receiver on your local network and the app becomes your
-remote: power, volume, inputs, surround modes, EQ tuning, multi-zone
-control, and a live now-playing display.
+remote: power, volume, inputs, surround modes, EQ tuning, speaker
+calibration, multi-zone control, an FM/AM tuner, and a live
+now-playing display.
 
 ---
 
@@ -49,18 +50,19 @@ or email [admin@miyarahub.com](mailto:admin@miyarahub.com).
 1. [Supported receivers](#supported-receivers)
 2. [Before you start](#before-you-start)
 3. [Adding your first receiver](#adding-your-first-receiver)
-4. [The five tabs](#the-five-tabs)
+4. [The six tabs](#the-six-tabs)
 5. [Dashboard](#dashboard)
 6. [Remote](#remote)
 7. [Sound](#sound)
 8. [Zones](#zones)
-9. [Settings](#settings)
-10. [Media Player and HEOS](#media-player-and-heos)
-11. [Hardware volume keys (Android)](#hardware-volume-keys-android)
-12. [Home-screen widgets (Android)](#home-screen-widgets-android)
-13. [Backup and restore](#backup-and-restore)
-14. [Troubleshooting](#troubleshooting)
-15. [Support](#support)
+9. [Radio](#radio)
+10. [Settings](#settings)
+11. [Media Player and HEOS](#media-player-and-heos)
+12. [Hardware volume keys (Android)](#hardware-volume-keys-android)
+13. [Home-screen widgets (Android)](#home-screen-widgets-android)
+14. [Backup and restore](#backup-and-restore)
+15. [Troubleshooting](#troubleshooting)
+16. [Support](#support)
 
 ---
 
@@ -117,9 +119,9 @@ the Dashboard or open *Settings -> Devices -> Manage Receivers*
 
 ---
 
-## The five tabs
+## The six tabs
 
-The bottom navigation has up to five tabs. Dashboard is locked first;
+The bottom navigation has up to six tabs. Dashboard is locked first;
 the rest are reorderable / hideable from
 *Settings -> Appearance -> Customize Navigation*.
 
@@ -127,11 +129,14 @@ the rest are reorderable / hideable from
 | --- | --- |
 | **Dashboard** | At-a-glance status + customizable widget grid |
 | **Remote** | Four pages: Main Remote, Inputs, Quick Select, System |
-| **Sound** | Surround modes, EQ tuning, channel levels (model-aware tabs) |
+| **Sound** | Surround modes, EQ tuning, channel levels, speaker calibration (model-aware tabs) |
 | **Zones** | Independent Zone 2 / Zone 3 control |
+| **Radio** | FM/AM tuner: tune, band, presets, save stations (tuner-equipped receivers only) |
 | **Settings** | Theme, devices, customization, backup |
 
-You can run as few as 2 tabs or as many as 5.
+You can run as few as 2 tabs or as many as 6. The Radio tab only
+appears on receivers that have a built-in tuner; on tuner-less models
+it stays hidden (and out of the Customize Navigation list).
 
 ---
 
@@ -323,6 +328,21 @@ modes.
   the Sound tab, and any other surface it appears on. Switch to a
   speaker preset that has the other system loaded, or toggle the
   active system off to re-enable.
+- **Distances** - per-speaker distance from your listening position,
+  read from and written back to the receiver. Each active speaker
+  gets a stepper in the receiver's own units (meters or feet,
+  whichever the receiver is set to display). Locks automatically when
+  a Dirac Live filter is active on the current speaker preset (Dirac
+  owns the distances in that case) - switch to a non-Dirac speaker
+  preset to edit them. Shown only on receivers that expose distance
+  over their config API.
+- **Crossovers** - per-speaker crossover frequency (the point below
+  which bass is redirected to the subwoofer). Pick from the
+  receiver's allowed steps (40 Hz through 250 Hz, plus THRU for
+  full-range). Only speakers set to "small" appear; speakers set to
+  "large" run full-range and have no crossover, so they're omitted.
+  Like Distances, this reads live from the receiver and is shown only
+  where the chassis exposes it.
 - **Tactile Transducer** - on chassis that expose it (Cinema 30,
   X4500H+, A10H flagship): enable / disable, level adjust, and a
   low-pass-filter selector.
@@ -361,6 +381,44 @@ streams per zone.
 
 Per-zone Quick Volume presets are stored separately by (receiver +
 zone), so each zone can have its own preset set.
+
+---
+
+## Radio
+
+If your receiver has a built-in FM/AM tuner, the **Radio** tab is a
+full tuner front-end. It's capability-gated: on receivers without a
+tuner the tab never appears (and stays out of Customize Navigation).
+
+The big station card up top shows the live band, frequency, and
+active preset, and follows the receiver in real time - tune from the
+front panel or the original remote and the app keeps up.
+
+- **Band** - FM / AM toggle.
+- **Tune mode** - Auto / Manual. Auto scans to the next strong
+  station; Manual steps by the band increment.
+- **Tune** - the two large Tune buttons step the dial; **Enter
+  frequency** opens a keypad to jump straight to a station (e.g.
+  `97.9` FM or `1440` AM). Direct entry needs Manual mode, since in
+  Auto the receiver only stops on stations it can lock.
+- **Presets** - a grid of preset slots plus up / down steppers to
+  walk through your stored stations. The active preset is highlighted
+  and shown on the station card.
+
+### Saving and naming presets
+
+**Long-press** any preset slot for its menu:
+
+- **Save current station here** - stores whatever you're tuned to
+  into that slot on the receiver. (Disabled with a "Tune to a station
+  first" hint until the receiver has reported a frequency, so you
+  can't overwrite a slot with nothing.)
+- **Add label / Rename label** - give the slot a friendly name
+  ("Jazz 88", "NPR", "Classic FM"). Labels are stored in the app
+  per-receiver and show under the slot number - they're yours to
+  make as readable as you like, separate from the receiver's own
+  preset memory, and they ride along in Backup & Restore.
+- **Clear label** - removes a label (the saved station stays).
 
 ---
 
@@ -583,11 +641,20 @@ share with someone setting up the same receivers.
 ### Some Sound tabs are missing
 
 - Sound tabs are model-aware and mode-aware. Audyssey, Dirac Live,
-  IMAX, Auro-3D, and Surround Shape only appear on receivers that
-  expose them. Shape additionally requires the upmixer to be
-  engaged. If you expect a tab and it's missing, check
-  *Settings -> Devices -> Device Information* to see what the app
-  detected on your chassis.
+  IMAX, Auro-3D, Surround Shape, Distances, and Crossovers only
+  appear on receivers that expose them. Shape additionally requires
+  the upmixer to be engaged. If you expect a tab and it's missing,
+  check *Settings -> Devices -> Device Information* to see what the
+  app detected on your chassis.
+
+### The Radio tab isn't showing
+
+- Radio is capability-gated: it only appears on receivers that
+  report a built-in FM/AM tuner. If your receiver has a tuner but the
+  tab is hidden, confirm the tuner shows as an input on the receiver
+  itself, then reconnect in the app so it re-reads the capability
+  list. If you've hidden it, re-add it from
+  *Settings -> Appearance -> Customize Navigation*.
 
 ### App crashes on startup
 
