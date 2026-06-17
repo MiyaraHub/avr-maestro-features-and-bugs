@@ -53,7 +53,9 @@ For general questions, drop into [Discord](https://discord.gg/UmVtxE5fXN), the [
 
 ## Supported receivers
 
-Networked Denon and Marantz receivers from 2014 onward - Denon AVR (X-series), Denon AVC (A1H, X8500H+), Marantz Cinema (30/40/50+), Marantz SR (5015/6015/7015+) and Marantz AV (AV7706/AV8805/AV10+). If your receiver shows up in the official Denon or HEOS app on the same network, AVR Maestro will see it too.
+Networked Denon and Marantz receivers from 2014 onward - Denon AVR (X-series), Denon AVC (A1H, X8500H+), Marantz Cinema (30/40/50+), Marantz SR (5015/6015/7015+) and Marantz AV (AV7706/AV8805/AV10+).
+
+Reachability comes down to your network, not just the model. If the receiver's own web portal, the HEOS app and the official Denon or Marantz app can all reach it on the same network - and its network ports aren't blocked - AVR Maestro should see it too.
 
 ## Support
 
