@@ -116,6 +116,9 @@
 
   .note{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--accent);
     border-radius:12px;padding:16px 18px;color:var(--mut);margin-top:18px;font-size:.94rem}
+  .lockrow{display:grid;grid-template-columns:1fr 210px;gap:28px;align-items:center;margin-top:22px}
+  .lockrow img{width:210px;filter:drop-shadow(0 16px 30px rgba(0,0,0,.45))}
+  @media(max-width:760px){.lockrow{grid-template-columns:1fr}.lockrow img{width:200px;margin:4px auto 0}}
   details{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;overflow:hidden}
   details summary{cursor:pointer;padding:15px 18px;font-weight:650;color:var(--txt);list-style:none}
   details summary::-webkit-details-marker{display:none}
@@ -271,7 +274,10 @@
       <figure><img alt="Levels" src="screenshots/speakers-levels.png" /><figcaption>Levels</figcaption></figure>
       <figure><img alt="Speaker Presets" src="screenshots/speakers-preset.png" /><figcaption>Speaker Presets</figcaption></figure>
     </div>
-    <div class="note">Smart about Dirac: when a Dirac Live filter is active on a Speaker Preset, the app respects the receiver's lock instead of letting you push changes it would reject - and tells you exactly why.</div>
+    <div class="lockrow">
+      <div class="note" style="margin:0">Smart about Dirac: the screens above are fully editable on a standard Speaker Preset. But when a <b>Dirac Live filter is active</b> on a preset, Dirac owns the layout, distances and crossovers - so instead of letting you push changes the receiver would silently reject, the app shows a clear lock and tells you exactly why (right). Switch to a non-Dirac preset to edit them.</div>
+      <img alt="A Dirac-locked speaker screen" src="screenshots/speakers-layout-locked.png" />
+    </div>
   </div>
 </section>
 
