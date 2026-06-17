@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="docs/assets/avr-maestro-icon.png" width="104" alt="AVR Maestro" />
+
 # AVR Maestro
 
 ### The premium controller for Denon &amp; Marantz AV receivers
@@ -64,4 +66,12 @@ If the app made your home theatre easier to live with, leave a review on the Pla
 
 ---
 
+<div align="center">
+
+<img src="docs/assets/logo-square.jpg" width="88" alt="MiyaraHub Technologies" />
+
+**A MiyaraHub Technologies app**
+
 <sub>&copy; MiyaraHub Technologies LLC. All rights reserved. AVR Maestro is not affiliated with, endorsed by, or sponsored by Denon, Marantz, Sound United, or Masimo Consumer.</sub>
+
+</div>

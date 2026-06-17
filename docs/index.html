@@ -8,6 +8,9 @@
 <meta property="og:title" content="AVR Maestro for Denon &amp; Marantz" />
 <meta property="og:description" content="One-tap Scenes, full speaker calibration, Audyssey &amp; Dirac Live, multi-zone control and more. The control your receiver always deserved." />
 <meta property="og:type" content="website" />
+<meta property="og:image" content="assets/icon-192.png" />
+<link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48.png" />
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <style>
   :root{
@@ -120,6 +123,31 @@
   details[open] summary::before{content:"\2212"}
   details .body{padding:0 18px 16px 18px;color:var(--mut);font-size:.94rem}
 
+  .brand .brandmark{width:28px;height:28px;border-radius:8px;display:block}
+
+  /* user guide */
+  .guide-toc{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:6px 0 40px}
+  .guide-toc a{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 14px;
+    color:var(--txt);font-weight:600;font-size:.9rem;display:flex;align-items:center;gap:8px}
+  .guide-toc a:hover{border-color:var(--accent);color:var(--accent)}
+  @media(max-width:860px){.guide-toc{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.guide-toc{grid-template-columns:1fr}}
+  .gsec{padding-top:34px;margin-top:34px;border-top:1px dashed var(--line);scroll-margin-top:74px}
+  .gsec:first-of-type{border-top:0;margin-top:0;padding-top:0}
+  .gsec h3{font-size:1.32rem;margin-bottom:6px}
+  .gsec .sub{color:var(--mut);margin-bottom:16px;max-width:64ch}
+  .gsec .with-shot{display:grid;grid-template-columns:1fr 250px;gap:30px;align-items:start}
+  .gsec .with-shot img{width:250px;filter:drop-shadow(0 14px 28px rgba(0,0,0,.45))}
+  @media(max-width:760px){.gsec .with-shot{grid-template-columns:1fr}.gsec .with-shot img{width:220px;margin:0 auto}}
+  table.t{width:100%;border-collapse:collapse;margin:14px 0;font-size:.92rem}
+  table.t th,table.t td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  table.t th{color:var(--accent);font-weight:700;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
+  table.t td:first-child{color:var(--txt);font-weight:600;white-space:nowrap}
+  table.t td{color:var(--mut)}
+  .foot-brand{display:flex;flex-direction:column;align-items:center;gap:12px;margin-bottom:24px}
+  .foot-brand img{width:92px;height:92px;border-radius:18px;opacity:.95}
+  .foot-brand span{color:var(--mut);font-size:.9rem}
+
   .cta{text-align:center;background:radial-gradient(800px 320px at 50% 0%,var(--glow),transparent 60%)}
   .btn{display:inline-block;background:linear-gradient(135deg,var(--accent),#ff4f1a);color:#1a0d07;
     font-weight:800;padding:13px 26px;border-radius:12px;font-size:1rem}
@@ -135,13 +163,13 @@
 
 <header class="nav">
   <div class="wrap">
-    <span class="brand"><span class="dot">&#9835;</span> AVR Maestro</span>
+    <span class="brand"><img class="brandmark" src="assets/avr-maestro-icon.png" alt="AVR Maestro icon" /> AVR Maestro</span>
     <nav>
       <a href="#scenes">Scenes</a>
-      <a href="#sound">Sound</a>
       <a href="#speakers">Speakers</a>
-      <a href="#power">Power Features</a>
+      <a href="#power">Features</a>
       <a href="#start">Get Started</a>
+      <a href="#guide">User Guide</a>
       <a href="#help">Help</a>
     </nav>
   </div>
@@ -342,6 +370,180 @@
   </div>
 </section>
 
+<!-- USER GUIDE -->
+<section id="guide">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">User guide</div>
+      <h2>How to use every screen.</h2>
+      <p class="lead">The complete manual. Everything below adapts to your receiver - the app only shows controls your chassis actually exposes, so your screens may show fewer options than listed here.</p>
+    </div>
+
+    <div class="guide-toc">
+      <a href="#g-dashboard">&#127968; Dashboard</a>
+      <a href="#g-scenes">&#127917; Scenes</a>
+      <a href="#g-sound">&#127925; Sound</a>
+      <a href="#g-speakers">&#128266; Speakers</a>
+      <a href="#g-zones">&#127970; Zones</a>
+      <a href="#g-remote">&#127918; Remote</a>
+      <a href="#g-radio">&#128251; Radio</a>
+      <a href="#g-settings">&#9881; Settings</a>
+      <a href="#g-nowplaying">&#127911; Now Playing &amp; HEOS</a>
+      <a href="#g-android">&#128241; Android extras</a>
+    </div>
+
+    <div class="gsec" id="g-dashboard">
+      <div class="with-shot">
+        <div>
+          <h3>Dashboard</h3>
+          <p class="sub">Your at-a-glance home base. A device status card (model, connection, power) stays pinned at the top, with a customizable grid of widgets below it.</p>
+          <p><b>Customize it:</b> tap the <b>Customize Dashboard</b> icon (top-left). In edit mode: <b>drag</b> a card to reorder, tap the red circle to <b>remove</b> it, <b>Add</b> opens a sheet of widgets you don't have yet, <b>Reset</b> restores defaults, <b>Done</b> exits. Cards are dimmed while editing so you can't change a receiver setting by accident.</p>
+          <table class="t">
+            <tr><th>Widget</th><th>What it does</th></tr>
+            <tr><td>Volume</td><td>Slider with dB readout, mute, and 8 saved volume presets.</td></tr>
+            <tr><td>Source</td><td>Open the input picker; long-press tiles to reorder.</td></tr>
+            <tr><td>Sound Mode</td><td>Current surround mode; tap for a grouped picker.</td></tr>
+            <tr><td>Now Playing</td><td>Album art, track info and transport for HEOS sources.</td></tr>
+            <tr><td>Zones</td><td>Compact Zone 2 / Zone 3 status + quick controls.</td></tr>
+            <tr><td>Quick Select</td><td>Denon Quick Select / Marantz Smart Select buttons.</td></tr>
+            <tr><td>Speaker Preset</td><td>Preset 1 / 2 switcher (chassis-dependent).</td></tr>
+            <tr><td>Audyssey / Dirac</td><td>One-glance calibration state + quick deep-link.</td></tr>
+            <tr><td>Channel / Sub Levels</td><td>Per-channel and subwoofer level snapshots with steppers.</td></tr>
+            <tr><td>ECO, Sleep, DRC, Restorer, Video, Room Size, LFE</td><td>One-tap toggles and pickers, each shown only when supported.</td></tr>
+          </table>
+          <p style="color:var(--mut);font-size:.9rem">Widgets only render when your receiver exposes the feature.</p>
+        </div>
+        <img alt="Customize the dashboard" src="screenshots/dashboard-customize.png" />
+      </div>
+    </div>
+
+    <div class="gsec" id="g-scenes">
+      <div class="with-shot">
+        <div>
+          <h3>Scenes</h3>
+          <p class="sub">Capture your receiver's state and recall it in one tap.</p>
+          <ol class="steps">
+            <li><b>Save:</b> tap <b>Save Scene</b>, name it, and check which settings to capture. The picker is grouped (Routing &amp; Volume, Sound, Audyssey &amp; Dirac, Speakers &amp; Levels, Zones, Other) and only shows what your receiver has.</li>
+            <li><b>Recall:</b> tap a Scene (here or on the Home dashboard card). Settings are applied in a safe order, one at a time, so even slower receivers never get overloaded.</li>
+            <li><b>Manage:</b> long-press a Scene for <b>Apply</b>, <b>Update with current settings</b>, <b>Rename</b>, or <b>Delete</b>.</li>
+          </ol>
+          <p style="margin-top:12px">A Scene can capture input, master volume, sound mode, Audyssey (MultEQ / Dynamic EQ / Dynamic Volume / LFC), Dirac slot, speaker preset, channel &amp; subwoofer levels, tone, Cinema EQ, center spread/level, Eco, sleep timer, dimmer, HDMI audio out, speaker virtualizer, Zone 2/3, and the tuner station. Recall replays <i>only</i> the settings you captured.</p>
+        </div>
+        <img alt="Save a Scene" src="screenshots/scenes-save-dialog.png" />
+      </div>
+    </div>
+
+    <div class="gsec" id="g-sound">
+      <div class="with-shot">
+        <div>
+          <h3>Sound</h3>
+          <p class="sub">A model- and mode-aware DSP suite. Tabs appear only when your receiver supports them; some (like Shape) slide in based on the active surround mode.</p>
+          <ul class="plain">
+            <li><b>Surround:</b> pick a mode (grouped Movie / Music / Game / Pure) and toggle Audio Feature pills. Pills are three-state - <b>lit</b> (on, tap to turn off), <b>subtle</b> (off, tap to turn on), or <b>N/A</b> (greyed with a (?) explaining why the current mode/format doesn't support it).</li>
+            <li><b>Audyssey:</b> MultEQ (Reference / Bypass L+R / Flat / Off), Dynamic EQ, Dynamic Volume, Reference Level Offset, and LFC with a containment stepper.</li>
+            <li><b>Dirac Live:</b> pick a filter slot by its name (from your Dirac software). Empty slots are hidden; the active slot updates live if you change it elsewhere.</li>
+            <li><b>Dialog &amp; DRC, Channels, Tone, Shape, IMAX, Auro-3D:</b> dialog level + dynamic range, per-channel trims with Bass Sync, bass/treble, the upmixer parameters, and the immersive-format controls - each where your chassis exposes it.</li>
+          </ul>
+          <div class="note">Audyssey and Dirac Live are detected <b>per speaker preset</b> and are mutually exclusive - when one is active the other shows "N/A while X is active." Switch speaker presets to swap which calibration is in control.</div>
+        </div>
+        <img alt="Sound modes" src="screenshots/sound-main.png" />
+      </div>
+    </div>
+
+    <div class="gsec" id="g-speakers">
+      <div class="with-shot">
+        <div>
+          <h3>Speakers</h3>
+          <p class="sub">The full speaker-setup suite, read live from the receiver. Every screen follows the active Speaker Preset.</p>
+          <ul class="plain">
+            <li><b>Speaker Layout:</b> amp assignment and per-speaker Spkr / Pre-out config.</li>
+            <li><b>Distances:</b> per-speaker distance from your seat, in the receiver's units (m or ft).</li>
+            <li><b>Levels:</b> per-speaker trim level.</li>
+            <li><b>Crossovers:</b> the frequency below which bass routes to the sub (only "small" speakers appear; "large" run full-range).</li>
+            <li><b>Subwoofer:</b> subwoofer output settings.</li>
+            <li><b>Preset:</b> switch between Speaker Preset 1 / 2 - each stores its own layout, distances, levels, crossovers and calibration.</li>
+          </ul>
+          <div class="note">When a Dirac Live filter is active on a Speaker Preset, Dirac owns the layout and distances - the app shows a clear lock instead of letting you push edits the receiver would reject. Switch to a non-Dirac preset to edit them.</div>
+        </div>
+        <img alt="Speaker Layout" src="screenshots/speakers-layout.png" />
+      </div>
+    </div>
+
+    <div class="gsec" id="g-zones">
+      <div class="with-shot">
+        <div>
+          <h3>Zones</h3>
+          <p class="sub">Independent control of Zone 2 and Zone 3 on multi-zone receivers.</p>
+          <p>Each zone gets its own power, volume, mute, input and quick-volume presets, fully separate from the main zone. Zone state syncs live - change a zone from the receiver's panel or remote and the app updates within a second. When a zone is on, its card also shows the live HEOS now-playing stream for that zone with transport controls.</p>
+        </div>
+        <img alt="Zones" src="screenshots/zones.png" />
+      </div>
+    </div>
+
+    <div class="gsec" id="g-remote">
+      <div class="with-shot">
+        <div>
+          <h3>Remote</h3>
+          <p class="sub">Four pages - swipe or tap the page tabs.</p>
+          <ul class="plain">
+            <li><b>Main Remote:</b> command bar (Power / Info / Setup / Option / Back), D-pad, transport, and a volume bar - with a live header showing the input, sound mode, and the IN/OUT channels in use.</li>
+            <li><b>Inputs:</b> the full source grid. To <b>rename or reorder</b>, open the Source widget on the Dashboard, long-press a tile to enter edit mode, drag to reorder, and tap Done. The order saves per-receiver everywhere.</li>
+            <li><b>Quick / Smart Select:</b> tap a slot to recall the receiver's saved scene; long-press to <b>Rename</b> it or <b>Save current state</b> (a wizard lets you pick exactly which settings the slot captures).</li>
+            <li><b>System:</b> direct receiver controls - HDMI output, dimmer / illumination, triggers, ECO, auto standby, sleep timer, CEC, HDMI audio out, speaker preset, picture/video mode, all-zone stereo, auto lip sync, audio delay, input mode. Anything unsupported is hidden.</li>
+          </ul>
+        </div>
+        <img alt="Inputs" src="screenshots/remote-inputs.png" />
+      </div>
+    </div>
+
+    <div class="gsec" id="g-radio">
+      <h3>Radio (FM/AM tuner)</h3>
+      <p class="sub">On receivers with a built-in tuner. The station card shows the live band, frequency and active preset, and follows the receiver in real time.</p>
+      <ul class="plain">
+        <li><b>Band:</b> FM / AM. <b>Tune mode:</b> Auto (scan to the next strong station) or Manual (step by the band increment).</li>
+        <li><b>Tune:</b> the two Tune buttons step the dial; <b>Enter frequency</b> opens a keypad to jump straight to a station (needs Manual mode).</li>
+        <li><b>Presets:</b> a grid of preset slots plus up/down steppers. <b>Long-press</b> a slot to <b>Save current station</b>, <b>Add / Rename label</b> ("Jazz 88", "NPR"), or <b>Clear label</b>.</li>
+      </ul>
+      <p style="color:var(--mut);font-size:.9rem;margin-top:6px">Hidden by default if Scenes replaced Radio in your tab bar - re-add it from Settings &rarr; Customize Navigation.</p>
+    </div>
+
+    <div class="gsec" id="g-settings">
+      <div class="with-shot">
+        <div>
+          <h3>Settings</h3>
+          <p class="sub">Everything that tailors the app to you and your gear.</p>
+          <table class="t">
+            <tr><th>Section</th><th>What's in it</th></tr>
+            <tr><td>Devices</td><td>Switch receivers, full Device Information, Manage Receivers (rename/delete), Add Receiver.</td></tr>
+            <tr><td>Appearance</td><td>Theme (Light / Dark / Device / <b>TJ Mode</b> - pick any accent color and the app rebuilds its palette), Display Size, Widget Size, Customize Navigation, Customize Tabs.</td></tr>
+            <tr><td>Audio</td><td>Volume Step (0.5-2.0 dB) and whether the absolute volume or dB shows on top.</td></tr>
+            <tr><td>Help</td><td>Explanation cards toggle, restore dismissed cards, and a live Debug Log with one-tap Save &amp; Share for support.</td></tr>
+            <tr><td>Developer Tools</td><td>Hidden until you long-press the version number - raw Telnet / HEOS commands, AJAX dump, and a volume-cap wire diagnostic.</td></tr>
+            <tr><td>Backup</td><td>Export every receiver, preset and preference to a JSON file; import to restore.</td></tr>
+            <tr><td>App</td><td>About, website, Discord, Facebook, privacy, terms, licenses.</td></tr>
+          </table>
+        </div>
+        <img alt="TJ Mode accent color" src="screenshots/settings-tjmode.png" />
+      </div>
+    </div>
+
+    <div class="gsec" id="g-nowplaying">
+      <h3>Now Playing &amp; HEOS</h3>
+      <p class="sub">When the active source exposes metadata, the Dashboard's Now Playing card shows album art, track / artist / station info and transport (play / pause / next / previous).</p>
+      <p>To browse music - stations, queues, streaming services, HEOS rooms - tap <b>Launch HEOS</b> on the Now Playing card. AVR Maestro opens the official HEOS app for browsing; once playback starts there, AVR Maestro takes back over the now-playing display, transport and widgets. Analog, optical/coaxial and HDMI passthrough sources don't report metadata, so the card stays empty for those.</p>
+    </div>
+
+    <div class="gsec" id="g-android">
+      <h3>Android extras &amp; backup</h3>
+      <ul class="plain">
+        <li><b>Hardware volume keys:</b> while AVR Maestro is in the foreground, your phone's volume keys control the <b>receiver's</b> volume (using your Volume Step setting). Foreground-only; iOS doesn't allow this.</li>
+        <li><b>Home-screen widgets:</b> Quick Control (power / volume / mute / source), Now Playing, and Status - all resizable, tap-only, and auto-refreshing. Android only.</li>
+        <li><b>Backup &amp; Restore:</b> export every receiver, preset and preference to a JSON file and restore it on a new phone. The file holds no credentials or personal data beyond receiver IPs and your own preset names - safe to share.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 <!-- HELP -->
 <section id="help">
   <div class="wrap">
@@ -375,6 +577,10 @@
 
 <footer>
   <div class="wrap">
+    <div class="foot-brand">
+      <img src="assets/logo-square.jpg" alt="MiyaraHub Technologies" />
+      <span>A <b style="color:var(--txt)">MiyaraHub Technologies</b> app</span>
+    </div>
     <div class="flinks">
       <a href="https://play.google.com/store/apps/details?id=com.miyarahub.avr_maestro">Google Play</a>
       <a href="https://apps.apple.com/us/app/avr-maestro-for-denon-marantz/id6762881597">App Store</a>
