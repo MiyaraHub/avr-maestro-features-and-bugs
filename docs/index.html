@@ -37,7 +37,8 @@
   header.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);
     background:rgba(12,12,15,.72);border-bottom:1px solid var(--line)}
   .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:62px}
-  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.05rem;color:var(--txt)}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.05rem;color:var(--txt);text-decoration:none}
+  .brand:hover{color:var(--accent)}
   .brand .dot{width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,var(--accent),#ff4f1a);
     display:grid;place-items:center;font-size:15px}
   .nav nav{display:flex;gap:26px}
@@ -166,8 +167,9 @@
 
 <header class="nav">
   <div class="wrap">
-    <span class="brand"><img class="brandmark" src="assets/avr-maestro-icon.png" alt="AVR Maestro icon" /> AVR Maestro</span>
+    <a class="brand" href="#top" aria-label="Back to top"><img class="brandmark" src="assets/avr-maestro-icon.png" alt="AVR Maestro icon" /> AVR Maestro</a>
     <nav>
+      <a href="#top">Home</a>
       <a href="#scenes">Scenes</a>
       <a href="#speakers">Speakers</a>
       <a href="#power">Features</a>
@@ -179,7 +181,7 @@
 </header>
 
 <!-- HERO -->
-<div class="hero">
+<div class="hero" id="top">
   <div class="wrap">
     <div>
       <div class="eyebrow">For Denon &amp; Marantz</div>
