@@ -1,0 +1,11 @@
+# gh-site is the PUBLIC GitHub Pages branch that serves avrmaestro.com.
+# ONLY the marketing site belongs here. This working tree ALSO contains
+# the proprietary Flutter app source (android/, ios/, lib/, build/, ...)
+# from the app branches. Ignore everything by default and allow-list only
+# the site files, so even an accidental `git add -A` can NEVER publish the
+# app code to this public repo.
+/*
+!/.gitignore
+!/docs/
+!/.github/
+!/README.md
