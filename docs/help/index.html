@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Help &amp; Troubleshooting - AVR Maestro for Denon &amp; Marantz</title>
+<meta name="description" content="AVR Maestro help and troubleshooting: fix Test Connection failures, dropped connections, wrong volume readouts, greyed-out sound modes, missing tabs and a blank Now Playing card on your Denon or Marantz receiver." />
+<meta name="keywords" content="AVR Maestro help, AVR Maestro troubleshooting, AVR Maestro not connecting, Denon app connection fix, Marantz app wont connect, receiver app test connection failed, AVR Maestro support" />
+<meta name="author" content="MiyaraHub Technologies LLC" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<meta name="theme-color" content="#ff6e40" />
+<link rel="canonical" href="https://avrmaestro.com/help/" />
+<meta property="og:title" content="Help &amp; Troubleshooting - AVR Maestro" />
+<meta property="og:description" content="Fix connection issues, missing tabs, greyed-out modes and more." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://avrmaestro.com/help/" />
+<meta property="og:site_name" content="AVR Maestro" />
+<meta property="og:image" content="https://avrmaestro.com/screenshots/dashboard.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Help &amp; Troubleshooting - AVR Maestro" />
+<meta name="twitter:description" content="Fix connection issues, missing tabs, greyed-out modes and more." />
+<meta name="twitter:image" content="https://avrmaestro.com/screenshots/dashboard.png" />
+<link rel="icon" type="image/png" sizes="48x48" href="../assets/favicon-48.png" />
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
+<link rel="stylesheet" href="../assets/site.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "AVR Maestro won't connect - Test Connection fails",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Make sure the phone and receiver are on the same Wi-Fi network and subnet - mesh systems, guest networks and IoT VLANs can isolate devices. On the receiver, Setup, Network, Network Control must be On. Re-check the IP against the receiver's own Network, Information screen, since DHCP addresses change. HTTP is required; Telnet and HEOS are nice-to-have."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "The connection drops every few seconds",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Receiver Telnet ports can get sticky after long uptimes - power-cycle the receiver from the wall to clear the listener. On Wi-Fi 6 mesh, force the phone onto the same band as the receiver, since AVRs usually sit on 2.4 GHz while phones prefer 5 GHz."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "The volume readout looks wrong",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Receivers report volume as absolute (0-98) or relative (-80 to +18 dB). The app handles both; if you recently changed the receiver's volume-display setting, restart the app so it re-reads the scale. You can flip which value shows on top in Settings, Audio."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Sound modes or feature pills are greyed out or show N/A",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Surround modes and features are gated by the input's audio format and the active sound mode - a 2-channel source won't enable Dolby Atmos. That's the receiver's behavior, not the app's. Tap the (?) next to an N/A pill for the exact requirement."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Some Sound or Speaker tabs are missing",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tabs are model- and mode-aware. Audyssey, Dirac Live, IMAX, Auro-3D, Surround Shape, Distances and Crossovers only appear on receivers that expose them. Check Settings, Devices, Device Information to see what the app detected, or re-add a hidden tab from Settings, Customize Tabs or Customize Navigation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "The Now Playing card is blank",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The current input doesn't expose metadata - analog, optical/coaxial and most HDMI passthrough sources don't report track data. For HEOS sources, tap Launch HEOS to start playback, then return and the metadata populates."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/"><img src="../assets/avr-maestro-icon.png" alt="AVR Maestro icon" /> AVR Maestro</a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('m').classList.toggle('open')">&#9776;</button>
+    <nav id="m">
+      <a href="/">Home</a>
+      <a href="/guide/">User Guide</a>
+      <a href="/receivers/">Receivers</a>
+      <a href="/audyssey-dirac-control/">Audyssey &amp; Dirac</a>
+      <a href="/best-denon-marantz-app/">Why switch</a>
+      <a href="/#top" class="cta">Download</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="crumb"><a href="/">Home</a> &rsaquo; Help</div>
+    <div class="eyebrow">Help &amp; troubleshooting</div>
+    <h1><span class="g">Help</span> &amp; troubleshooting</h1>
+    <p>Quick fixes for the most common questions. If you're still stuck, the in-app Debug Log (Settings &rarr; Help &rarr; Save &amp; Share) is the fastest way to get support on <a href="https://discord.gg/UmVtxE5fXN">Discord</a>.</p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Connection</div>
+      <h2>Getting connected</h2>
+    </div>
+    <details open><summary>"Test Connection" fails</summary><div class="body">Make sure the phone and receiver are on the same Wi-Fi network and subnet - mesh systems, guest networks and IoT VLANs can isolate devices. On the receiver, <i>Setup &rarr; Network &rarr; Network Control</i> must be On. Re-check the IP against the receiver's own <i>Network &rarr; Information</i> screen, since DHCP addresses change. HTTP is required; Telnet and HEOS are nice-to-have. Full steps on the <a href="/guide/getting-started/">getting started guide</a>.</div></details>
+    <details><summary>Connection drops every few seconds</summary><div class="body">Receiver Telnet ports can get sticky after long uptimes - power-cycle the receiver from the wall to clear the listener. On Wi-Fi 6 mesh, force the phone onto the same band as the receiver (AVRs usually sit on 2.4 GHz; phones prefer 5 GHz).</div></details>
+    <details><summary>How do I know my receiver is supported?</summary><div class="body">It comes down to your network, not just the model. If the receiver's web portal, the HEOS app and the official Denon/Marantz app can all reach it, AVR Maestro should too. See the <a href="/receivers/">supported receivers</a> page.</div></details>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Controls &amp; display</div>
+      <h2>Why something looks off</h2>
+    </div>
+    <details open><summary>The volume readout looks wrong</summary><div class="body">Receivers report volume as absolute (0-98) or relative (-80 to +18 dB). The app handles both; if you recently changed the receiver's volume-display setting, restart the app so it re-reads the scale. You can flip which value shows on top in <i>Settings &rarr; Audio</i>.</div></details>
+    <details><summary>Sound modes or feature pills are greyed out / "N/A"</summary><div class="body">Surround modes and features are gated by the input's audio format and the active sound mode - a 2-channel source won't enable Dolby Atmos. That's the receiver's behavior, not the app's. Tap the (?) next to an N/A pill for the exact requirement.</div></details>
+    <details><summary>Some Sound or Speaker tabs are missing</summary><div class="body">Tabs are model- and mode-aware. Audyssey, Dirac Live, IMAX, Auro-3D, Surround Shape, Distances and Crossovers only appear on receivers that expose them. Check <i>Settings &rarr; Devices &rarr; Device Information</i> to see what the app detected, or re-add a hidden tab from <i>Settings &rarr; Customize Tabs / Customize Navigation</i>.</div></details>
+    <details><summary>The Radio tab isn't showing</summary><div class="body">Radio is capability-gated: it only appears on receivers with a built-in FM/AM tuner. If yours has one but the tab is hidden, confirm the tuner appears as an input on the receiver and re-enable it from <i>Settings &rarr; Customize Navigation</i>. See the <a href="/guide/radio/">Radio guide</a>.</div></details>
+    <details><summary>Now Playing card is blank</summary><div class="body">The current input doesn't expose metadata - analog, optical/coaxial and most HDMI passthrough sources don't report track data. For HEOS sources, tap <b>Launch HEOS</b> to start playback, then return and the metadata populates.</div></details>
+    <details><summary>Some speaker screens open in the receiver's web control</summary><div class="body">On some pre-2025 receivers (X4500H / X6700H / S960H / X4700H class), the receiver can't serve the Speaker Layout or Subwoofer Output screens to the app, so AVR Maestro hands you a one-tap button into the receiver's own web control for those edits. Everything else works normally; newer firmware serves every screen in the app.</div></details>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <h2>Still stuck? We're quick to help</h2>
+    <p class="lead" style="margin:0 auto 24px">Grab the in-app Debug Log (Settings &rarr; Help) and reach the developer on Discord or Facebook - replies are fast.</p>
+    <div class="badges social">
+      <a href="https://discord.gg/UmVtxE5fXN"><img alt="Join the Discord" src="https://img.shields.io/badge/Discord-Join-5865F2?logo=discord&logoColor=white&style=for-the-badge" /></a>
+      <a href="https://www.facebook.com/groups/avrmaestro"><img alt="Facebook community" src="https://img.shields.io/badge/Facebook-Community-1877F2?logo=facebook&logoColor=white&style=for-the-badge" /></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="flinks">
+      <a href="/">Home</a>
+      <a href="/guide/">User Guide</a>
+      <a href="/receivers/">Receivers</a>
+      <a href="/best-denon-marantz-app/">Why switch</a>
+      <a href="https://play.google.com/store/apps/details?id=com.miyarahub.avr_maestro">Google Play</a>
+      <a href="https://apps.apple.com/us/app/avr-maestro-for-denon-marantz/id6762881597">App Store</a>
+      <a href="https://apps.microsoft.com/detail/9P4M7W4J5106">Microsoft Store</a>
+      <a href="https://discord.gg/UmVtxE5fXN">Discord</a>
+      <a href="https://www.facebook.com/groups/avrmaestro">Facebook</a>
+      <a href="https://miyarahub.com">MiyaraHub</a>
+    </div>
+    <p class="legal">AVR Maestro is an independent app by MiyaraHub Technologies LLC and is not affiliated with, endorsed by, or sponsored by Denon, Marantz, D&amp;M Holdings or Sound United. Denon, Marantz, HEOS, Audyssey and Dirac Live are trademarks of their respective owners.</p>
+  </div>
+</footer>
+
+</body>
+</html>
