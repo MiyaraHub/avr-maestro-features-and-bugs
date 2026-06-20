@@ -34,7 +34,14 @@
   "url": "https://avrmaestro.com/",
   "image": "https://avrmaestro.com/screenshots/dashboard.png",
   "author": { "@type": "Organization", "name": "MiyaraHub Technologies LLC", "url": "https://miyarahub.com" },
-  "offers": { "@type": "Offer", "price": "6.99", "priceCurrency": "USD" }
+  "offers": { "@type": "Offer", "price": "6.99", "priceCurrency": "USD" },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "ratingCount": "75",
+    "bestRating": "5",
+    "worstRating": "1"
+  }
 }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -85,6 +92,10 @@
   .badges.social img{height:38px}
   .pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
   .pill{font-size:.8rem;color:var(--mut);border:1px solid var(--line);border-radius:999px;padding:5px 12px;background:var(--bg2)}
+  .rating{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:-8px 0 22px;font-size:.96rem;color:var(--mut)}
+  .rating .stars{color:#ffc23d;letter-spacing:2px;font-size:1.06rem}
+  .rating strong{color:var(--txt);font-weight:750}
+  @media(max-width:860px){.rating{justify-content:center}}
   .hero-shot{justify-self:center;filter:drop-shadow(0 30px 60px rgba(0,0,0,.5))}
   .hero-shot img{width:300px}
   @media(max-width:860px){.hero .wrap{grid-template-columns:1fr;text-align:center}
@@ -215,6 +226,11 @@
       <div class="eyebrow">For Denon &amp; Marantz</div>
       <h1>The control your receiver <span class="g">always deserved.</span></h1>
       <p>AVR Maestro is a premium network controller for Denon and Marantz AV receivers. It speaks their native protocols and surfaces the features the official apps bury - or skip entirely. No ads. No subscriptions. No data leaves your network.</p>
+      <div class="rating" aria-label="Rated 4.9 out of 5 from 75 ratings">
+        <span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <strong>4.9</strong>
+        <span>&middot; 75 ratings on the App Store, Google Play &amp; Microsoft Store</span>
+      </div>
       <div class="badges">
         <a href="https://play.google.com/store/apps/details?id=com.miyarahub.avr_maestro"><img alt="Get it on Google Play" src="https://img.shields.io/badge/Google%20Play-Download-414141?logo=google-play&logoColor=white&style=for-the-badge" /></a>
         <a href="https://apps.apple.com/us/app/avr-maestro-for-denon-marantz/id6762881597"><img alt="Download on the App Store" src="https://img.shields.io/badge/App%20Store-Download-0D96F6?logo=app-store&logoColor=white&style=for-the-badge" /></a>
