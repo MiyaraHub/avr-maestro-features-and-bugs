@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>AVR Maestro - The premium controller for Denon &amp; Marantz</title>
 <meta name="description" content="AVR Maestro is the premium network controller for Denon and Marantz AV receivers: one-tap Scenes, full speaker preset control, Audyssey and Dirac Live, multi-zone, FM/AM tuner, and a deep virtual remote. No ads, no subscriptions, no cloud." />
-<meta name="keywords" content="Denon receiver app, Marantz receiver app, Denon remote app, Marantz remote app, AV receiver controller app, AVR Maestro, HEOS controller, Audyssey app, Dirac Live controller, Marantz Cinema 30 app, Denon X3800H app, Denon X4800H app, multi-zone receiver control, FM AM tuner app, Dolby Atmos receiver control, home theater remote app" />
+<meta name="keywords" content="Denon receiver app, Marantz receiver app, Denon remote app, Marantz remote app, AV receiver controller app, AVR Maestro, HEOS controller, Audyssey app, Dirac Live controller, Marantz Cinema 30 app, Denon X3800H app, Denon AVR-A1H app, multi-zone receiver control, FM AM tuner app, Dolby Atmos receiver control, home theater remote app" />
 <meta name="author" content="MiyaraHub Technologies LLC" />
 <meta name="robots" content="index, follow, max-image-preview:large" />
 <meta name="theme-color" content="#ff6e40" />
@@ -23,12 +23,13 @@
 <meta name="twitter:image" content="https://avrmaestro.com/screenshots/dashboard.png" />
 <link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48.png" />
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+<link rel="stylesheet" href="assets/site.css" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": "AVR Maestro",
-  "operatingSystem": "Android, iOS",
+  "operatingSystem": "Android, iOS, Windows, macOS",
   "applicationCategory": "MultimediaApplication",
   "description": "Premium network controller for Denon and Marantz AV receivers: one-tap Scenes, full speaker preset control, Audyssey and Dirac Live, multi-zone, FM/AM tuner and a deep virtual remote.",
   "url": "https://avrmaestro.com/",
@@ -44,183 +45,26 @@
   }
 }
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<style>
-  :root{
-    --bg:#0c0c0f; --bg2:#141418; --card:#191920; --card2:#20202a;
-    --line:#2a2a33; --txt:#ecedf1; --mut:#9c9caa; --accent:#ff6e40;
-    --accent2:#ff8a63; --glow:rgba(255,110,64,.18);
-    --maxw:1160px; --radius:18px;
-    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{background:var(--bg);color:var(--txt);font-family:var(--sans);line-height:1.65;-webkit-font-smoothing:antialiased}
-  a{color:var(--accent);text-decoration:none}
-  a:hover{color:var(--accent2)}
-  img{max-width:100%;display:block}
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
-  .eyebrow{color:var(--accent);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.74rem;margin-bottom:10px}
-  h1,h2,h3{line-height:1.2;letter-spacing:-.01em}
-  h2{font-size:clamp(1.7rem,3.4vw,2.5rem);font-weight:800;margin-bottom:14px}
-  h3{font-size:1.18rem;font-weight:700;margin-bottom:8px}
-  p.lead{color:var(--mut);font-size:1.06rem;max-width:62ch}
-
-  /* nav */
-  header.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);
-    background:rgba(12,12,15,.72);border-bottom:1px solid var(--line)}
-  .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:62px}
-  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.05rem;color:var(--txt);text-decoration:none}
-  .brand:hover{color:var(--accent)}
-  .brand .dot{width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,var(--accent),#ff4f1a);
-    display:grid;place-items:center;font-size:15px}
-  .nav nav{display:flex;gap:26px}
-  .nav nav a{color:var(--mut);font-size:.92rem;font-weight:600}
-  .nav nav a:hover{color:var(--txt)}
-  @media(max-width:760px){.nav nav{display:none}}
-
-  /* hero */
-  .hero{position:relative;overflow:hidden;padding:84px 0 40px;
-    background:radial-gradient(1200px 520px at 78% -8%,var(--glow),transparent 60%)}
-  .hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
-  .hero h1{font-size:clamp(2.4rem,5.6vw,4rem);font-weight:850;margin-bottom:18px}
-  .hero h1 .g{background:linear-gradient(120deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .hero p{color:var(--mut);font-size:1.16rem;max-width:54ch;margin-bottom:26px}
-  .badges{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:18px}
-  .badges img{height:48px}
-  .badges.social{margin-top:-8px;margin-bottom:22px}
-  .badges.social img{height:38px}
-  .pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-  .pill{font-size:.8rem;color:var(--mut);border:1px solid var(--line);border-radius:999px;padding:5px 12px;background:var(--bg2)}
-  .rating{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:-8px 0 22px;font-size:.96rem;color:var(--mut)}
-  .rating .stars{color:#ffc23d;letter-spacing:2px;font-size:1.06rem}
-  .rating strong{color:var(--txt);font-weight:750}
-  @media(max-width:860px){.rating{justify-content:center}}
-  .hero-shot{justify-self:center;filter:drop-shadow(0 30px 60px rgba(0,0,0,.5))}
-  .hero-shot img{width:300px}
-  @media(max-width:860px){.hero .wrap{grid-template-columns:1fr;text-align:center}
-    .badges,.pills{justify-content:center}.hero p{margin-left:auto;margin-right:auto}
-    .hero-shot img{width:240px}}
-
-  /* generic section */
-  section{padding:64px 0;border-top:1px solid var(--line)}
-  .section-head{max-width:64ch;margin-bottom:38px}
-
-  /* feature rows */
-  .feat{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-bottom:8px}
-  .feat.rev .shots{order:2}
-  .feat + .feat{margin-top:64px}
-  .shots{display:flex;gap:16px;justify-content:center}
-  .shots img{width:230px;filter:drop-shadow(0 18px 34px rgba(0,0,0,.45));transition:transform .25s ease}
-  .shots img:hover{transform:translateY(-6px)}
-  .shots.one img{width:264px}
-  .feat ul{list-style:none;margin-top:14px;display:flex;flex-direction:column;gap:9px}
-  .feat li{position:relative;padding-left:26px;color:var(--mut)}
-  .feat li b{color:var(--txt);font-weight:650}
-  .feat li::before{content:"";position:absolute;left:2px;top:9px;width:9px;height:9px;border-radius:3px;
-    background:linear-gradient(135deg,var(--accent),#ff4f1a)}
-  @media(max-width:860px){.feat,.feat.rev{grid-template-columns:1fr;gap:26px}
-    .feat.rev .shots{order:0}}
-
-  /* power-features grid */
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  .gcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;transition:border-color .2s,transform .2s}
-  .gcard:hover{border-color:var(--accent);transform:translateY(-3px)}
-  .gcard .ic{font-size:1.4rem;margin-bottom:10px}
-  .gcard h3{font-size:1.02rem;margin-bottom:6px}
-  .gcard p{color:var(--mut);font-size:.92rem}
-  @media(max-width:860px){.grid{grid-template-columns:1fr 1fr}}
-  @media(max-width:560px){.grid{grid-template-columns:1fr}}
-
-  /* gallery */
-  .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-  .gallery figure{margin:0}
-  .gallery img{width:100%;border-radius:8px;filter:drop-shadow(0 12px 24px rgba(0,0,0,.4))}
-  .gallery figcaption{color:var(--mut);font-size:.78rem;text-align:center;margin-top:8px}
-  @media(max-width:860px){.gallery{grid-template-columns:repeat(3,1fr)}}
-  @media(max-width:560px){.gallery{grid-template-columns:repeat(2,1fr)}}
-
-  /* steps + lists */
-  .cols{display:grid;grid-template-columns:1fr 1fr;gap:40px}
-  @media(max-width:860px){.cols{grid-template-columns:1fr;gap:28px}}
-  ol.steps{list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:14px}
-  ol.steps li{position:relative;padding-left:46px;color:var(--mut)}
-  ol.steps li b{color:var(--txt)}
-  ol.steps li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:-2px;
-    width:30px;height:30px;border-radius:9px;background:var(--card2);border:1px solid var(--line);
-    color:var(--accent);font-weight:800;display:grid;place-items:center}
-  ul.plain{list-style:none;display:flex;flex-direction:column;gap:10px}
-  ul.plain li{padding-left:22px;position:relative;color:var(--mut)}
-  ul.plain li b{color:var(--txt)}
-  ul.plain li::before{content:"\2022";position:absolute;left:4px;color:var(--accent);font-weight:800}
-
-  .note{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--accent);
-    border-radius:12px;padding:16px 18px;color:var(--mut);margin-top:18px;font-size:.94rem}
-  .lockrow{display:grid;grid-template-columns:1fr 210px;gap:28px;align-items:center;margin-top:22px}
-  .lockrow img{width:210px;filter:drop-shadow(0 16px 30px rgba(0,0,0,.45))}
-  @media(max-width:760px){.lockrow{grid-template-columns:1fr}.lockrow img{width:200px;margin:4px auto 0}}
-  details{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;overflow:hidden}
-  details summary{cursor:pointer;padding:15px 18px;font-weight:650;color:var(--txt);list-style:none}
-  details summary::-webkit-details-marker{display:none}
-  details summary::before{content:"+";color:var(--accent);font-weight:800;margin-right:12px}
-  details[open] summary::before{content:"\2212"}
-  details .body{padding:0 18px 16px 18px;color:var(--mut);font-size:.94rem}
-
-  .brand .brandmark{width:28px;height:28px;border-radius:8px;display:block}
-
-  /* user guide */
-  .guide-toc{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:6px 0 40px}
-  .guide-toc a{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 14px;
-    color:var(--txt);font-weight:600;font-size:.9rem;display:flex;align-items:center;gap:8px}
-  .guide-toc a:hover{border-color:var(--accent);color:var(--accent)}
-  @media(max-width:860px){.guide-toc{grid-template-columns:1fr 1fr}}
-  @media(max-width:560px){.guide-toc{grid-template-columns:1fr}}
-  .gsec{padding-top:34px;margin-top:34px;border-top:1px dashed var(--line);scroll-margin-top:74px}
-  .gsec:first-of-type{border-top:0;margin-top:0;padding-top:0}
-  .gsec h3{font-size:1.32rem;margin-bottom:6px}
-  .gsec .sub{color:var(--mut);margin-bottom:16px;max-width:64ch}
-  .gsec .with-shot{display:grid;grid-template-columns:1fr 250px;gap:30px;align-items:start}
-  .gsec .with-shot img{width:250px;filter:drop-shadow(0 14px 28px rgba(0,0,0,.45))}
-  @media(max-width:760px){.gsec .with-shot{grid-template-columns:1fr}.gsec .with-shot img{width:220px;margin:0 auto}}
-  table.t{width:100%;border-collapse:collapse;margin:14px 0;font-size:.92rem}
-  table.t th,table.t td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
-  table.t th{color:var(--accent);font-weight:700;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
-  table.t td:first-child{color:var(--txt);font-weight:600;white-space:nowrap}
-  table.t td{color:var(--mut)}
-  .foot-brand{display:flex;flex-direction:column;align-items:center;gap:12px;margin-bottom:24px}
-  .foot-brand img{width:92px;height:92px;border-radius:18px;opacity:.95}
-  .foot-brand span{color:var(--mut);font-size:.9rem}
-
-  .cta{text-align:center;background:radial-gradient(800px 320px at 50% 0%,var(--glow),transparent 60%)}
-  .btn{display:inline-block;background:linear-gradient(135deg,var(--accent),#ff4f1a);color:#1a0d07;
-    font-weight:800;padding:13px 26px;border-radius:12px;font-size:1rem}
-  .btn:hover{color:#1a0d07;filter:brightness(1.06)}
-  .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--txt)}
-
-  footer{padding:46px 0;border-top:1px solid var(--line);color:var(--mut);font-size:.88rem;text-align:center}
-  footer .flinks{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-bottom:18px}
-  footer .legal{max-width:64ch;margin:0 auto;font-size:.78rem;opacity:.8}
-</style>
 </head>
 <body>
 
 <header class="nav">
   <div class="wrap">
-    <a class="brand" href="#top" aria-label="Back to top"><img class="brandmark" src="assets/avr-maestro-icon.png" alt="AVR Maestro icon" /> AVR Maestro</a>
-    <nav>
-      <a href="#top">Home</a>
-      <a href="#scenes">Scenes</a>
-      <a href="#speakers">Speakers</a>
-      <a href="#power">Features</a>
-      <a href="#start">Get Started</a>
-      <a href="#guide">User Guide</a>
-      <a href="#help">Help</a>
+    <a class="brand" href="/"><img class="brandmark" src="assets/avr-maestro-icon.png" alt="AVR Maestro icon" /> AVR Maestro</a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('m').classList.toggle('open')">&#9776;</button>
+    <nav id="m">
+      <a href="/" class="active">Home</a>
+      <a href="/guide/">User Guide</a>
+      <a href="/receivers/">Receivers</a>
+      <a href="/audyssey-dirac-control/">Audyssey &amp; Dirac</a>
+      <a href="/best-denon-marantz-app/">Why switch</a>
+      <a href="/help/">Help</a>
+      <a href="/#top" class="cta">Download</a>
     </nav>
   </div>
 </header>
 
-<!-- HERO -->
-<div class="hero" id="top">
+<div class="hero split" id="top">
   <div class="wrap">
     <div>
       <div class="eyebrow">For Denon &amp; Marantz</div>
@@ -236,7 +80,7 @@
         <a href="https://apps.apple.com/us/app/avr-maestro-for-denon-marantz/id6762881597"><img alt="Download on the App Store" src="https://img.shields.io/badge/App%20Store-Download-0D96F6?logo=app-store&logoColor=white&style=for-the-badge" /></a>
         <a href="https://apps.microsoft.com/detail/9P4M7W4J5106"><img alt="Get it on the Microsoft Store" src="https://img.shields.io/badge/Microsoft%20Store-Download-0078D4?logo=windows&logoColor=white&style=for-the-badge" /></a>
       </div>
-      <div class="badges social">
+      <div class="badges social" style="margin-top:12px">
         <a href="https://discord.gg/UmVtxE5fXN"><img alt="Join the Discord" src="https://img.shields.io/badge/Discord-Join-5865F2?logo=discord&logoColor=white&style=for-the-badge" /></a>
         <a href="https://www.facebook.com/groups/avrmaestro"><img alt="Facebook community" src="https://img.shields.io/badge/Facebook-Community-1877F2?logo=facebook&logoColor=white&style=for-the-badge" /></a>
       </div>
@@ -253,384 +97,78 @@
   </div>
 </div>
 
-<!-- WHY -->
 <section id="why">
   <div class="wrap">
     <div class="section-head">
       <div class="eyebrow">Why AVR Maestro</div>
       <h2>Everything your receiver can do, finally in one place.</h2>
-      <p class="lead">Power, volume, inputs, surround modes, room correction, speaker setup, multi-zone audio, an FM/AM tuner and a live now-playing display - all over your local network, all in a clean, fast interface that adapts to exactly what your chassis supports.</p>
+      <p class="lead">Power, volume, inputs, surround modes, room correction, speaker setup, multi-zone audio, an FM/AM tuner and a live now-playing display - all over your local network, in a clean, fast interface that adapts to exactly what your chassis supports.</p>
     </div>
     <div class="grid">
-      <div class="gcard"><div class="ic">&#9889;</div><h3>Native protocol control</h3><p>Talks to your receiver the way the receiver expects - reliable, instant, no cloud round-trips.</p></div>
-      <div class="gcard"><div class="ic">&#129520;</div><h3>Chassis-aware</h3><p>The app reads your model's capabilities and only shows what your receiver actually has. No dead buttons.</p></div>
+      <div class="gcard"><div class="ic">&#9889;</div><h3>Native protocol control</h3><p>Talks to your receiver the way it expects - reliable, instant, no cloud round-trips.</p></div>
+      <div class="gcard"><div class="ic">&#129520;</div><h3>Chassis-aware</h3><p>Reads your model's capabilities and only shows what your receiver actually has. No dead buttons.</p></div>
       <div class="gcard"><div class="ic">&#128274;</div><h3>Private by design</h3><p>No ads, no subscriptions, no tracking. Your setup and your data stay on your network.</p></div>
     </div>
   </div>
 </section>
 
-<!-- SCENES -->
-<section id="scenes">
-  <div class="wrap">
-    <div class="feat">
-      <div class="shots"><img alt="Scenes list" src="screenshots/scenes-list.png" /><img alt="Save a Scene" src="screenshots/scenes-save-dialog.png" /></div>
-      <div>
-        <div class="eyebrow">The headline feature</div>
-        <h2>Scenes: your whole setup, one tap.</h2>
-        <p class="lead">Capture your receiver exactly how you like it and bring it back instantly - the killer feature no official app has.</p>
-        <ul>
-          <li><b>Save almost everything:</b> input, volume, sound mode, Audyssey / Dirac, speaker preset, channel &amp; sub levels, tone, Zone 2/3, even the tuner station.</li>
-          <li><b>You choose what each Scene captures</b> - the picker only shows what your receiver supports.</li>
-          <li><b>One-tap recall</b> from the Scenes tab or a Home dashboard card. Save, update, rename, delete.</li>
-          <li><b>Mid-range friendly:</b> recall is paced and ordered so it never overloads a slower receiver.</li>
-          <li>Your existing Channel Presets carry over automatically - nothing to re-save.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SOUND -->
-<section id="sound">
-  <div class="wrap">
-    <div class="feat rev">
-      <div class="shots"><img alt="Sound modes" src="screenshots/sound-main.png" /><img alt="Dirac Live" src="screenshots/sound-dirac.png" /></div>
-      <div>
-        <div class="eyebrow">Sound &amp; surround</div>
-        <h2>Tune the room, not just the volume.</h2>
-        <p class="lead">A full DSP suite that mirrors your receiver's audio menu - and shows the live signal as it plays.</p>
-        <ul>
-          <li><b>Every surround mode</b> by genre - Movie, Music, Game, Pure - with the active mode shown live (Dolby Atmos, Auro-3D, DTS:X and more).</li>
-          <li><b>Audyssey MultEQ, Dynamic EQ / Volume, LFC</b> and reference-level control.</li>
-          <li><b>Dirac Live slot selection</b> - switch room-correction filters right from the app.</li>
-          <li><b>Dialog enhancer, tone, Restorer, Cinema EQ, Center Spread</b> and the surround-shape upmixer parameters.</li>
-          <li>Tabs are model- and mode-aware: you only see what's actually available.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SPEAKERS -->
-<section id="speakers">
+<section id="features">
   <div class="wrap">
     <div class="section-head">
-      <div class="eyebrow">Speaker setup &amp; presets</div>
-      <h2>A dedicated Speakers workshop.</h2>
-      <p class="lead">Layout, distances, levels, crossovers, subwoofer and speaker presets - the full setup suite, with each screen following the active Speaker Preset.</p>
-    </div>
-    <div class="gallery">
-      <figure><img alt="Speaker Layout" src="screenshots/speakers-layout.png" /><figcaption>Layout &amp; Amp Assign</figcaption></figure>
-      <figure><img alt="Distances" src="screenshots/speakers-distances.png" /><figcaption>Distances</figcaption></figure>
-      <figure><img alt="Levels" src="screenshots/speakers-levels.png" /><figcaption>Levels</figcaption></figure>
-      <figure><img alt="Speaker Presets" src="screenshots/speakers-preset.png" /><figcaption>Speaker Presets</figcaption></figure>
-    </div>
-    <div class="lockrow">
-      <div class="note" style="margin:0">Smart about Dirac: the screens above are fully editable on a standard Speaker Preset. But when a <b>Dirac Live filter is active</b> on a preset, Dirac owns the layout, distances and crossovers - so instead of letting you push changes the receiver would silently reject, the app shows a clear lock and tells you exactly why (right). Switch to a non-Dirac preset to edit them.</div>
-      <img alt="A Dirac-locked speaker screen" src="screenshots/speakers-layout-locked.png" />
-    </div>
-    <div class="note" style="margin-top:18px">Older firmware? On some pre-2025 receivers (the X4500H / X6700H / S960H / X4700H class), the receiver can't serve the Speaker Layout or Subwoofer Output screens to the app over the network. Rather than show a broken screen, AVR Maestro hands you a one-tap button straight into the receiver's own web control to make those edits - the rest of the Speakers suite still works normally. Receivers on newer firmware serve every screen directly in the app.</div>
-  </div>
-</section>
-
-<!-- ZONES + REMOTE -->
-<section id="control">
-  <div class="wrap">
-    <div class="feat">
-      <div class="shots one"><img alt="Multi-zone" src="screenshots/zones.png" /></div>
-      <div>
-        <div class="eyebrow">Multi-zone</div>
-        <h2>Run the whole house.</h2>
-        <p class="lead">Independent power, input and volume for Zone 2 and Zone 3 on multi-zone receivers - and Scenes can capture and restore zone state too.</p>
-      </div>
-    </div>
-    <div class="feat rev">
-      <div class="shots"><img alt="Main remote" src="screenshots/remote-main.png" /><img alt="Inputs" src="screenshots/remote-inputs.png" /></div>
-      <div>
-        <div class="eyebrow">The remote</div>
-        <h2>A real remote, plus the live picture.</h2>
-        <p class="lead">Full D-pad and transport control with a live header showing the input, sound mode, and the actual channels in use.</p>
-        <ul>
-          <li><b>Main Remote:</b> power, navigation, options, info, plus a live IN/OUT channel map.</li>
-          <li><b>Inputs:</b> a clean source grid you can <b>rename and reorder</b> to match your gear.</li>
-          <li><b>Quick / Smart Select</b> recall and the system menu, one tap away.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- POWER FEATURES -->
-<section id="power">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">Power features</div>
-      <h2>The stuff most people never find.</h2>
-      <p class="lead">AVR Maestro is deep. Here are the gems worth knowing about.</p>
+      <div class="eyebrow">Features</div>
+      <h2>Deep where it counts</h2>
+      <p class="lead">Tap any feature for the full guide - what it does and exactly how to use it.</p>
     </div>
     <div class="grid">
-      <div class="gcard"><div class="ic">&#127917;</div><h3>Scenes &amp; volume presets</h3><p>Save full-setup Scenes, and tap a volume preset chip to jump straight to a level you like.</p></div>
-      <div class="gcard"><div class="ic">&#128260;</div><h3>Reorder &amp; rename inputs</h3><p>Make the source list yours - "Nvidia Shield", "Xbox", "PS5" - in the order you actually use them.</p></div>
-      <div class="gcard"><div class="ic">&#127912;</div><h3>TJ Mode</h3><p>Pick your own accent color and theme the whole app to taste, on top of light / dark / system.</p></div>
-      <div class="gcard"><div class="ic">&#129518;</div><h3>Customizable dashboard</h3><p>Add, remove and reorder Home cards so the dashboard shows exactly what you care about.</p></div>
-      <div class="gcard"><div class="ic">&#128203;</div><h3>Hide &amp; reorder tabs</h3><p>Customize Navigation and Customize Tabs let you trim the app down to the features you use.</p></div>
-      <div class="gcard"><div class="ic">&#128251;</div><h3>FM/AM tuner + presets</h3><p>Tune by frequency or recall saved station presets, on receivers with a built-in tuner.</p></div>
-      <div class="gcard"><div class="ic">&#127925;</div><h3>HEOS now-playing</h3><p>Live track, artwork and transport controls for HEOS sources, right on the dashboard.</p></div>
-      <div class="gcard"><div class="ic">&#128190;</div><h3>Backup &amp; restore</h3><p>Export your receivers, Scenes and settings, and restore them on a new phone in seconds.</p></div>
-      <div class="gcard"><div class="ic">&#128241;</div><h3>Widgets &amp; volume keys</h3><p>Home-screen widgets and hardware volume-key control (Android) for the fastest possible access.</p></div>
-    </div>
-    <div class="cols" style="margin-top:40px">
-      <div class="shots one"><img alt="TJ Mode accent color" src="screenshots/settings-tjmode.png" /></div>
-      <div class="shots one"><img alt="Customize tabs" src="screenshots/dashboard-customize.png" /></div>
+      <a class="gcard link" href="/guide/scenes/"><div class="ic">&#127917;</div><h3>One-tap Scenes &rsaquo;</h3><p>Capture your whole setup - input, mode, calibration, levels, zones, tuner - and recall it in a tap. No official app has it.</p></a>
+      <a class="gcard link" href="/audyssey-dirac-control/"><div class="ic">&#127925;</div><h3>Sound, Audyssey &amp; Dirac &rsaquo;</h3><p>Every surround mode plus MultEQ, Dynamic EQ/Volume, LFC and Dirac Live filter switching.</p></a>
+      <a class="gcard link" href="/guide/speakers/"><div class="ic">&#128266;</div><h3>Speaker workshop &rsaquo;</h3><p>Layout, distances, levels, crossovers, subwoofer and presets - read live from the receiver.</p></a>
+      <a class="gcard link" href="/guide/multi-zone/"><div class="ic">&#127968;</div><h3>Multi-zone &rsaquo;</h3><p>Independent Zone 2 / Zone 3 power, input and volume - run the whole house.</p></a>
+      <a class="gcard link" href="/guide/remote/"><div class="ic">&#127918;</div><h3>The remote &rsaquo;</h3><p>D-pad, transport, renamable inputs and a live header showing the channels in use.</p></a>
+      <a class="gcard link" href="/guide/radio/"><div class="ic">&#128251;</div><h3>FM/AM tuner &rsaquo;</h3><p>Tune by frequency and recall named station presets, on receivers with a tuner.</p></a>
     </div>
   </div>
 </section>
 
-<!-- GET STARTED -->
-<section id="start">
+<section id="reviews">
   <div class="wrap">
     <div class="section-head">
-      <div class="eyebrow">Get started</div>
-      <h2>Connected in under a minute.</h2>
+      <div class="eyebrow">What owners say</div>
+      <h2>The app Denon &amp; Marantz owners switch to</h2>
     </div>
+    <div class="quotes">
+      <div class="quote"><div class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"Denon really should hire this guy - somehow he made a much better app than the whole team at Denon could. Worth the money at triple the cost."</p><div class="who">App Store review, Sweden</div></div>
+      <div class="quote"><div class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"Same app the Android and iPhone has - works perfect and solves pretty much all of the Denon and Marantz original app issues."</p><div class="who">Microsoft Store review, US</div></div>
+      <div class="quote"><div class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"Much better than the Denon app. Better layout, better information. The channel preset option is great too."</p><div class="who">Google Play review</div></div>
+      <div class="quote"><div class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"Brilliant app. Absolutely essential for all Marantz and Denon owners."</p><div class="who">App Store review, Australia</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="receivers">
+  <div class="wrap">
     <div class="cols">
       <div>
-        <h3>Before you start</h3>
-        <ul class="plain">
-          <li>An iOS or Android device on the <b>same Wi-Fi network</b> as the receiver.</li>
-          <li>Receiver powered on with <b>Network Standby</b> enabled (<i>Setup &rarr; General &rarr; Network &rarr; Network Control &rarr; On</i>) so the app can wake it.</li>
-          <li>The receiver's <b>IP address</b> (<i>Setup &rarr; General &rarr; Network &rarr; Information</i>, or your router's device list).</li>
-          <li>Optional: enable <b>Wake-on-LAN</b> to power the receiver from cold standby.</li>
-        </ul>
+        <div class="eyebrow">Your receiver</div>
+        <h2>Works with your Denon or Marantz</h2>
+        <p class="lead">Network-enabled Denon and Marantz models from roughly 2014 on - the Marantz Cinema series, Denon AVR-A1H, the X-series and the AVR-S budget line, and more.</p>
+        <p style="margin-top:14px"><a class="btn" href="/receivers/">See supported receivers</a></p>
       </div>
       <div>
-        <h3>Add your receiver</h3>
-        <ol class="steps">
-          <li>Open the app and tap <b>Add Receiver</b>.</li>
-          <li>Type the receiver's <b>IP address</b> and tap <b>Test Connection</b> - the app probes HTTP, Telnet and HEOS.</li>
-          <li>Confirm the detected model and capabilities to save it.</li>
-          <li>You're in. Switch or manage receivers any time from <i>Settings &rarr; Devices</i>.</li>
-        </ol>
+        <div class="eyebrow">New here?</div>
+        <h2>Connected in under a minute</h2>
+        <p class="lead">Enable Network Control on the receiver, add it by IP, and you're in. The full walkthrough plus the complete manual is in the User Guide.</p>
+        <p style="margin-top:14px"><a class="btn ghost" href="/guide/getting-started/">Getting started</a> &nbsp; <a class="btn ghost" href="/guide/">User Guide</a></p>
       </div>
-    </div>
-    <div class="section-head" style="margin-top:48px">
-      <h3>Supported receivers</h3>
-      <p class="lead">Networked Denon &amp; Marantz receivers from 2014 onward:</p>
-    </div>
-    <div class="grid">
-      <div class="gcard"><h3>Denon AVR</h3><p>X-series networked AV receivers.</p></div>
-      <div class="gcard"><h3>Denon AVC</h3><p>AVC-A1H, AVC-X8500H and newer.</p></div>
-      <div class="gcard"><h3>Marantz Cinema</h3><p>Cinema 30, 40, 50 and up.</p></div>
-      <div class="gcard"><h3>Marantz SR</h3><p>SR5015, SR6015, SR7015 and newer.</p></div>
-      <div class="gcard"><h3>Marantz AV</h3><p>AV7706, AV8805, AV10 and newer.</p></div>
-      <div class="gcard"><h3>Not sure?</h3><p>It comes down to your network, not just the model. Confirm the receiver's <b>web portal</b>, the <b>HEOS app</b> and the official <b>Denon/Marantz app</b> can all reach it, and that its network ports aren't blocked. If those can talk to it, AVR Maestro should see it too.</p></div>
     </div>
   </div>
 </section>
 
-<!-- USER GUIDE -->
-<section id="guide">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">User guide</div>
-      <h2>How to use every screen.</h2>
-      <p class="lead">The complete manual. Everything below adapts to your receiver - the app only shows controls your chassis actually exposes, so your screens may show fewer options than listed here.</p>
-    </div>
-
-    <div class="guide-toc">
-      <a href="#g-dashboard">&#127968; Dashboard</a>
-      <a href="#g-scenes">&#127917; Scenes</a>
-      <a href="#g-sound">&#127925; Sound</a>
-      <a href="#g-speakers">&#128266; Speakers</a>
-      <a href="#g-zones">&#127970; Zones</a>
-      <a href="#g-remote">&#127918; Remote</a>
-      <a href="#g-radio">&#128251; Radio</a>
-      <a href="#g-settings">&#9881; Settings</a>
-      <a href="#g-nowplaying">&#127911; Now Playing &amp; HEOS</a>
-      <a href="#g-android">&#128241; Android extras</a>
-    </div>
-
-    <div class="gsec" id="g-dashboard">
-      <div class="with-shot">
-        <div>
-          <h3>Dashboard</h3>
-          <p class="sub">Your at-a-glance home base. A device status card (model, connection, power) stays pinned at the top, with a customizable grid of widgets below it.</p>
-          <p><b>Customize it:</b> tap the <b>Customize Dashboard</b> icon (top-left). In edit mode: <b>drag</b> a card to reorder, tap the red circle to <b>remove</b> it, <b>Add</b> opens a sheet of widgets you don't have yet, <b>Reset</b> restores defaults, <b>Done</b> exits. Cards are dimmed while editing so you can't change a receiver setting by accident.</p>
-          <table class="t">
-            <tr><th>Widget</th><th>What it does</th></tr>
-            <tr><td>Volume</td><td>Slider with dB readout, mute, and 8 saved volume presets.</td></tr>
-            <tr><td>Source</td><td>Open the input picker; long-press tiles to reorder.</td></tr>
-            <tr><td>Sound Mode</td><td>Current surround mode; tap for a grouped picker.</td></tr>
-            <tr><td>Now Playing</td><td>Album art, track info and transport for HEOS sources.</td></tr>
-            <tr><td>Zones</td><td>Compact Zone 2 / Zone 3 status + quick controls.</td></tr>
-            <tr><td>Quick Select</td><td>Denon Quick Select / Marantz Smart Select buttons.</td></tr>
-            <tr><td>Speaker Preset</td><td>Preset 1 / 2 switcher (chassis-dependent).</td></tr>
-            <tr><td>Audyssey / Dirac</td><td>One-glance calibration state + quick deep-link.</td></tr>
-            <tr><td>Channel / Sub Levels</td><td>Per-channel and subwoofer level snapshots with steppers.</td></tr>
-            <tr><td>ECO, Sleep, DRC, Restorer, Video, Room Size, LFE</td><td>One-tap toggles and pickers, each shown only when supported.</td></tr>
-          </table>
-          <p style="color:var(--mut);font-size:.9rem">Widgets only render when your receiver exposes the feature.</p>
-        </div>
-        <img alt="Customize the dashboard" src="screenshots/dashboard-customize.png" />
-      </div>
-    </div>
-
-    <div class="gsec" id="g-scenes">
-      <div class="with-shot">
-        <div>
-          <h3>Scenes</h3>
-          <p class="sub">Capture your receiver's state and recall it in one tap.</p>
-          <ol class="steps">
-            <li><b>Save:</b> tap <b>Save Scene</b>, name it, and check which settings to capture. The picker is grouped (Routing &amp; Volume, Sound, Audyssey &amp; Dirac, Speakers &amp; Levels, Zones, Other) and only shows what your receiver has.</li>
-            <li><b>Recall:</b> tap a Scene (here or on the Home dashboard card). Settings are applied in a safe order, one at a time, so even slower receivers never get overloaded.</li>
-            <li><b>Manage:</b> long-press a Scene for <b>Apply</b>, <b>Update with current settings</b>, <b>Rename</b>, or <b>Delete</b>.</li>
-          </ol>
-          <p style="margin-top:12px">A Scene can capture input, master volume, sound mode, Audyssey (MultEQ / Dynamic EQ / Dynamic Volume / LFC), Dirac slot, speaker preset, channel &amp; subwoofer levels, tone, Cinema EQ, center spread/level, Eco, sleep timer, dimmer, HDMI audio out, speaker virtualizer, Zone 2/3, and the tuner station. Recall replays <i>only</i> the settings you captured.</p>
-        </div>
-        <img alt="Save a Scene" src="screenshots/scenes-save-dialog.png" />
-      </div>
-    </div>
-
-    <div class="gsec" id="g-sound">
-      <div class="with-shot">
-        <div>
-          <h3>Sound</h3>
-          <p class="sub">A model- and mode-aware DSP suite. Tabs appear only when your receiver supports them; some (like Shape) slide in based on the active surround mode.</p>
-          <ul class="plain">
-            <li><b>Surround:</b> pick a mode (grouped Movie / Music / Game / Pure) and toggle Audio Feature pills. Pills are three-state - <b>lit</b> (on, tap to turn off), <b>subtle</b> (off, tap to turn on), or <b>N/A</b> (greyed with a (?) explaining why the current mode/format doesn't support it).</li>
-            <li><b>Audyssey:</b> MultEQ (Reference / Bypass L+R / Flat / Off), Dynamic EQ, Dynamic Volume, Reference Level Offset, and LFC with a containment stepper.</li>
-            <li><b>Dirac Live:</b> pick a filter slot by its name (from your Dirac software). Empty slots are hidden; the active slot updates live if you change it elsewhere.</li>
-            <li><b>Dialog &amp; DRC, Channels, Tone, Shape, IMAX, Auro-3D:</b> dialog level + dynamic range, per-channel trims with Bass Sync, bass/treble, the upmixer parameters, and the immersive-format controls - each where your chassis exposes it.</li>
-          </ul>
-          <div class="note">Audyssey and Dirac Live are detected <b>per speaker preset</b> and are mutually exclusive - when one is active the other shows "N/A while X is active." Switch speaker presets to swap which calibration is in control.</div>
-        </div>
-        <img alt="Sound modes" src="screenshots/sound-main.png" />
-      </div>
-    </div>
-
-    <div class="gsec" id="g-speakers">
-      <div class="with-shot">
-        <div>
-          <h3>Speakers</h3>
-          <p class="sub">The full speaker-setup suite, read live from the receiver. Every screen follows the active Speaker Preset.</p>
-          <ul class="plain">
-            <li><b>Speaker Layout:</b> amp assignment and per-speaker Spkr / Pre-out config.</li>
-            <li><b>Distances:</b> per-speaker distance from your seat, in the receiver's units (m or ft).</li>
-            <li><b>Levels:</b> per-speaker trim level.</li>
-            <li><b>Crossovers:</b> the frequency below which bass routes to the sub (only "small" speakers appear; "large" run full-range).</li>
-            <li><b>Subwoofer:</b> subwoofer output settings.</li>
-            <li><b>Preset:</b> switch between Speaker Preset 1 / 2 - each stores its own layout, distances, levels, crossovers and calibration.</li>
-          </ul>
-          <div class="note">When a Dirac Live filter is active on a Speaker Preset, Dirac owns the layout and distances - the app shows a clear lock instead of letting you push edits the receiver would reject. Switch to a non-Dirac preset to edit them.</div>
-        </div>
-        <img alt="Speaker Layout" src="screenshots/speakers-layout.png" />
-      </div>
-    </div>
-
-    <div class="gsec" id="g-zones">
-      <div class="with-shot">
-        <div>
-          <h3>Zones</h3>
-          <p class="sub">Independent control of Zone 2 and Zone 3 on multi-zone receivers.</p>
-          <p>Each zone gets its own power, volume, mute, input and quick-volume presets, fully separate from the main zone. Zone state syncs live - change a zone from the receiver's panel or remote and the app updates within a second. When a zone is on, its card also shows the live HEOS now-playing stream for that zone with transport controls.</p>
-        </div>
-        <img alt="Zones" src="screenshots/zones.png" />
-      </div>
-    </div>
-
-    <div class="gsec" id="g-remote">
-      <div class="with-shot">
-        <div>
-          <h3>Remote</h3>
-          <p class="sub">Four pages - swipe or tap the page tabs.</p>
-          <ul class="plain">
-            <li><b>Main Remote:</b> command bar (Power / Info / Setup / Option / Back), D-pad, transport, and a volume bar - with a live header showing the input, sound mode, and the IN/OUT channels in use.</li>
-            <li><b>Inputs:</b> the full source grid. To <b>rename or reorder</b>, open the Source widget on the Dashboard, long-press a tile to enter edit mode, drag to reorder, and tap Done. The order saves per-receiver everywhere.</li>
-            <li><b>Quick / Smart Select:</b> tap a slot to recall the receiver's saved scene; long-press to <b>Rename</b> it or <b>Save current state</b> (a wizard lets you pick exactly which settings the slot captures).</li>
-            <li><b>System:</b> direct receiver controls - HDMI output, dimmer / illumination, triggers, ECO, auto standby, sleep timer, CEC, HDMI audio out, speaker preset, picture/video mode, all-zone stereo, auto lip sync, audio delay, input mode. Anything unsupported is hidden.</li>
-          </ul>
-        </div>
-        <img alt="Inputs" src="screenshots/remote-inputs.png" />
-      </div>
-    </div>
-
-    <div class="gsec" id="g-radio">
-      <div class="with-shot">
-        <div>
-          <h3>Radio (FM/AM tuner)</h3>
-          <p class="sub">On receivers with a built-in tuner. The station card shows the live band, frequency and active preset, and follows the receiver in real time.</p>
-          <ul class="plain">
-            <li><b>Band:</b> FM / AM. <b>Tune mode:</b> Auto (scan to the next strong station) or Manual (step by the band increment).</li>
-            <li><b>Tune:</b> the two Tune buttons step the dial; <b>Enter frequency</b> opens a keypad to jump straight to a station (needs Manual mode).</li>
-            <li><b>Presets:</b> a grid of preset slots plus up/down steppers. <b>Long-press</b> a slot to <b>Save current station</b>, <b>Add / Rename label</b> ("Jazz 88", "NPR"), or <b>Clear label</b>.</li>
-          </ul>
-          <p style="color:var(--mut);font-size:.9rem;margin-top:6px">If the Radio tab is hidden, re-add it from Settings &rarr; Customize Navigation (it only appears when your receiver exposes a tuner).</p>
-        </div>
-        <img alt="Radio / FM-AM tuner" src="screenshots/radio.png" />
-      </div>
-    </div>
-
-    <div class="gsec" id="g-settings">
-      <div class="with-shot">
-        <div>
-          <h3>Settings</h3>
-          <p class="sub">Everything that tailors the app to you and your gear.</p>
-          <table class="t">
-            <tr><th>Section</th><th>What's in it</th></tr>
-            <tr><td>Devices</td><td>Switch receivers, full Device Information, Manage Receivers (rename/delete), Add Receiver.</td></tr>
-            <tr><td>Appearance</td><td>Theme (Light / Dark / Device / <b>TJ Mode</b> - pick any accent color and the app rebuilds its palette), Display Size, Widget Size, Customize Navigation, Customize Tabs.</td></tr>
-            <tr><td>Audio</td><td>Volume Step (0.5-2.0 dB) and whether the absolute volume or dB shows on top.</td></tr>
-            <tr><td>Help</td><td>Explanation cards toggle, restore dismissed cards, and a live Debug Log with one-tap Save &amp; Share for support.</td></tr>
-            <tr><td>Developer Tools</td><td>Hidden until you long-press the version number - raw Telnet / HEOS commands, AJAX dump, and a volume-cap wire diagnostic.</td></tr>
-            <tr><td>Backup</td><td>Export every receiver, preset and preference to a JSON file; import to restore.</td></tr>
-            <tr><td>App</td><td>About, website, Discord, Facebook, privacy, terms, licenses.</td></tr>
-          </table>
-        </div>
-        <img alt="TJ Mode accent color" src="screenshots/settings-tjmode.png" />
-      </div>
-    </div>
-
-    <div class="gsec" id="g-nowplaying">
-      <h3>Now Playing &amp; HEOS</h3>
-      <p class="sub">When the active source exposes metadata, the Dashboard's Now Playing card shows album art, track / artist / station info and transport (play / pause / next / previous).</p>
-      <p>To browse music - stations, queues, streaming services, HEOS rooms - tap <b>Launch HEOS</b> on the Now Playing card. AVR Maestro opens the official HEOS app for browsing; once playback starts there, AVR Maestro takes back over the now-playing display, transport and widgets. Analog, optical/coaxial and HDMI passthrough sources don't report metadata, so the card stays empty for those.</p>
-    </div>
-
-    <div class="gsec" id="g-android">
-      <h3>Android extras &amp; backup</h3>
-      <ul class="plain">
-        <li><b>Hardware volume keys:</b> while AVR Maestro is in the foreground, your phone's volume keys control the <b>receiver's</b> volume (using your Volume Step setting). Foreground-only; iOS doesn't allow this.</li>
-        <li><b>Home-screen widgets:</b> Quick Control (power / volume / mute / source), Now Playing, and Status - all resizable, tap-only, and auto-refreshing. Android only.</li>
-        <li><b>Backup &amp; Restore:</b> export every receiver, preset and preference to a JSON file and restore it on a new phone. The file holds no credentials or personal data beyond receiver IPs and your own preset names - safe to share.</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- HELP -->
-<section id="help">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">Help</div>
-      <h2>Troubleshooting.</h2>
-    </div>
-    <details><summary>"Test Connection" fails</summary><div class="body">Make sure the phone and receiver are on the same Wi-Fi network and subnet (mesh systems, guest networks and IoT VLANs can isolate devices). On the receiver, <i>Setup &rarr; Network &rarr; Network Control</i> must be On. Re-check the IP against the receiver's own <i>Network &rarr; Information</i> screen - DHCP addresses change. HTTP is required; Telnet and HEOS are nice-to-have.</div></details>
-    <details><summary>Connection drops every few seconds</summary><div class="body">Receiver Telnet ports get sticky after long uptimes - power-cycle the receiver from the wall to clear the listener. On Wi-Fi 6 mesh, force the phone to the same band as the receiver (AVRs usually sit on 2.4 GHz; phones prefer 5 GHz).</div></details>
-    <details><summary>Volume readout looks wrong</summary><div class="body">Receivers report volume as absolute (0-98) or relative (-80 to +18 dB). The app handles both; if you recently changed the receiver's volume-display setting, restart the app so it re-reads the scale. You can flip which value shows on top in <i>Settings &rarr; Audio</i>.</div></details>
-    <details><summary>Sound modes or feature pills are greyed out / "N/A"</summary><div class="body">Surround modes and features are gated by the input's audio format and the active sound mode - a 2-channel source won't enable Dolby Atmos. That's the receiver's behavior, not the app's. Tap the (?) next to an N/A pill for the exact requirement.</div></details>
-    <details><summary>Some Sound or Speaker tabs are missing</summary><div class="body">Tabs are model- and mode-aware. Audyssey, Dirac Live, IMAX, Auro-3D, Surround Shape, Distances and Crossovers only appear on receivers that expose them. Check <i>Settings &rarr; Devices &rarr; Device Information</i> to see what the app detected - or re-add a hidden tab from <i>Settings &rarr; Customize Tabs / Customize Navigation</i>.</div></details>
-    <details><summary>The Radio tab isn't showing</summary><div class="body">Radio is capability-gated: it only appears on receivers with a built-in FM/AM tuner. If yours has one but the tab is hidden, confirm the tuner appears as an input on the receiver, reconnect in the app, or re-enable it from <i>Settings &rarr; Customize Navigation</i>.</div></details>
-    <details><summary>Now Playing card is blank</summary><div class="body">The current input doesn't expose metadata - analog, optical/coaxial and most HDMI passthrough sources don't report track data. For HEOS sources, tap <b>Launch HEOS</b> to start playback, then return and the metadata populates.</div></details>
-    <div class="note">Older firmware note: on some pre-2025 receivers (X4500H / X6700H / S960H / X4700H class), the receiver can't serve the Speaker Layout or Subwoofer Output screens to the app, so those open in the receiver's own web control with one tap. Everything else works normally.</div>
-  </div>
-</section>
-
-<!-- CTA -->
 <section class="cta">
   <div class="wrap">
     <h2>Ready to take control?</h2>
-    <p class="lead" style="margin:0 auto 26px">Free, no ads, no subscriptions. Download it and connect to your receiver in under a minute.</p>
-    <div class="badges" style="justify-content:center">
+    <p class="lead" style="margin:0 auto 26px">One-time purchase. No ads, no subscriptions. Download it and connect to your receiver in under a minute.</p>
+    <div class="badges">
       <a href="https://play.google.com/store/apps/details?id=com.miyarahub.avr_maestro"><img alt="Get it on Google Play" src="https://img.shields.io/badge/Google%20Play-Download-414141?logo=google-play&logoColor=white&style=for-the-badge" /></a>
       <a href="https://apps.apple.com/us/app/avr-maestro-for-denon-marantz/id6762881597"><img alt="Download on the App Store" src="https://img.shields.io/badge/App%20Store-Download-0D96F6?logo=app-store&logoColor=white&style=for-the-badge" /></a>
       <a href="https://apps.microsoft.com/detail/9P4M7W4J5106"><img alt="Get it on the Microsoft Store" src="https://img.shields.io/badge/Microsoft%20Store-Download-0078D4?logo=windows&logoColor=white&style=for-the-badge" /></a>
@@ -646,20 +184,19 @@
       <span>A <b style="color:var(--txt)">MiyaraHub Technologies</b> app</span>
     </div>
     <div class="flinks">
-      <a href="/best-denon-marantz-app/">Best Denon &amp; Marantz app</a>
-      <a href="/guide/">User guide</a>
-      <a href="/receivers/">Supported receivers</a>
+      <a href="/guide/">User Guide</a>
+      <a href="/receivers/">Receivers</a>
       <a href="/audyssey-dirac-control/">Audyssey &amp; Dirac</a>
+      <a href="/best-denon-marantz-app/">Why switch</a>
+      <a href="/help/">Help</a>
       <a href="https://play.google.com/store/apps/details?id=com.miyarahub.avr_maestro">Google Play</a>
       <a href="https://apps.apple.com/us/app/avr-maestro-for-denon-marantz/id6762881597">App Store</a>
       <a href="https://apps.microsoft.com/detail/9P4M7W4J5106">Microsoft Store</a>
       <a href="https://discord.gg/UmVtxE5fXN">Discord</a>
       <a href="https://www.facebook.com/groups/avrmaestro">Facebook</a>
-      <a href="https://github.com/MiyaraHub/avr-maestro-for-denon-marantz/issues/new/choose">Bug / feature</a>
-      <a href="mailto:admin@miyarahub.com">Email</a>
       <a href="https://miyarahub.com">miyarahub.com</a>
     </div>
-    <div class="legal">&copy; MiyaraHub Technologies LLC. All rights reserved. AVR Maestro is not affiliated with, endorsed by, or sponsored by Denon, Marantz, Sound United, or Masimo Consumer.</div>
+    <div class="legal">&copy; MiyaraHub Technologies LLC. AVR Maestro is an independent app and is not affiliated with, endorsed by, or sponsored by Denon, Marantz, D&amp;M Holdings or Sound United. Denon, Marantz, HEOS, Audyssey and Dirac Live are trademarks of their respective owners.</div>
   </div>
 </footer>
 
