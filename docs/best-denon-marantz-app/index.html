@@ -63,97 +63,28 @@
   ]
 }
 </script>
-<style>
-  :root{
-    --bg:#0c0c0f; --bg2:#141418; --card:#191920; --card2:#20202a;
-    --line:#2a2a33; --txt:#ecedf1; --mut:#9c9caa; --accent:#ff6e40;
-    --accent2:#ff8a63; --glow:rgba(255,110,64,.18);
-    --maxw:1160px; --radius:18px;
-    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{background:var(--bg);color:var(--txt);font-family:var(--sans);line-height:1.65;-webkit-font-smoothing:antialiased}
-  a{color:var(--accent);text-decoration:none}
-  a:hover{color:var(--accent2)}
-  img{max-width:100%;display:block}
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
-  .eyebrow{color:var(--accent);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.74rem;margin-bottom:10px}
-  h1,h2,h3{line-height:1.2;letter-spacing:-.01em}
-  h2{font-size:clamp(1.7rem,3.4vw,2.5rem);font-weight:800;margin-bottom:14px}
-  h3{font-size:1.18rem;font-weight:700;margin-bottom:8px}
-  p.lead{color:var(--mut);font-size:1.06rem;max-width:64ch}
-  header.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);
-    background:rgba(12,12,15,.72);border-bottom:1px solid var(--line)}
-  .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:62px}
-  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.05rem;color:var(--txt)}
-  .brand:hover{color:var(--accent)}
-  .brand img{width:28px;height:28px;border-radius:8px;display:block}
-  .nav nav{display:flex;gap:26px}
-  .nav nav a{color:var(--mut);font-size:.92rem;font-weight:600}
-  .nav nav a:hover{color:var(--txt)}
-  @media(max-width:760px){.nav nav{display:none}}
-  .hero{position:relative;overflow:hidden;padding:72px 0 36px;
-    background:radial-gradient(1200px 520px at 78% -8%,var(--glow),transparent 60%)}
-  .hero h1{font-size:clamp(2.1rem,4.6vw,3.3rem);font-weight:850;margin-bottom:16px;max-width:18ch}
-  .hero h1 .g{background:linear-gradient(120deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .hero p{color:var(--mut);font-size:1.12rem;max-width:60ch;margin-bottom:22px}
-  .rating{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:0 0 22px;font-size:.96rem;color:var(--mut)}
-  .rating .stars{color:#ffc23d;letter-spacing:2px;font-size:1.06rem}
-  .rating strong{color:var(--txt);font-weight:750}
-  .badges{display:flex;flex-wrap:wrap;gap:12px}
-  .badges img{height:46px}
-  section{padding:58px 0;border-top:1px solid var(--line)}
-  .section-head{max-width:68ch;margin-bottom:32px}
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  .gcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
-  .gcard .ic{font-size:1.4rem;margin-bottom:10px}
-  .gcard h3{font-size:1.02rem;margin-bottom:6px}
-  .gcard p{color:var(--mut);font-size:.92rem}
-  @media(max-width:860px){.grid{grid-template-columns:1fr 1fr}}
-  @media(max-width:560px){.grid{grid-template-columns:1fr}}
-  table.t{width:100%;border-collapse:collapse;margin:8px 0;font-size:.94rem}
-  table.t th,table.t td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
-  table.t thead th{color:var(--accent);font-weight:700;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
-  table.t td:first-child,table.t th:first-child{color:var(--txt);font-weight:600}
-  table.t td{color:var(--mut)}
-  table.t .yes{color:var(--accent);font-weight:700}
-  .quotes{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-  .quote{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
-  .quote .stars{color:#ffc23d;letter-spacing:2px;font-size:.95rem;margin-bottom:10px}
-  .quote p{color:var(--txt);font-size:1rem;margin-bottom:10px}
-  .quote .who{color:var(--mut);font-size:.84rem}
-  @media(max-width:760px){.quotes{grid-template-columns:1fr}}
-  details{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;overflow:hidden}
-  details summary{cursor:pointer;padding:15px 18px;font-weight:650;color:var(--txt);list-style:none}
-  details summary::-webkit-details-marker{display:none}
-  details summary::before{content:"+";color:var(--accent);font-weight:800;margin-right:12px}
-  details[open] summary::before{content:"\2212"}
-  details .body{padding:0 18px 16px 18px;color:var(--mut);font-size:.94rem}
-  .cta{text-align:center;background:radial-gradient(800px 320px at 50% 0%,var(--glow),transparent 60%)}
-  .cta .badges{justify-content:center}
-  footer{padding:44px 0;border-top:1px solid var(--line);color:var(--mut);font-size:.88rem;text-align:center}
-  footer .flinks{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-bottom:16px}
-  footer .legal{max-width:64ch;margin:0 auto;font-size:.78rem;opacity:.8}
-</style>
+<link rel="stylesheet" href="../assets/site.css" />
 </head>
 <body>
 
 <header class="nav">
   <div class="wrap">
     <a class="brand" href="/"><img src="../assets/avr-maestro-icon.png" alt="AVR Maestro icon" /> AVR Maestro</a>
-    <nav>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('m').classList.toggle('open')">&#9776;</button>
+    <nav id="m">
       <a href="/">Home</a>
-      <a href="/#scenes">Scenes</a>
-      <a href="/#speakers">Speakers</a>
-      <a href="/#power">Features</a>
-      <a href="/#start">Get Started</a>
+      <a href="/guide/">User Guide</a>
+      <a href="/receivers/">Receivers</a>
+      <a href="/audyssey-dirac-control/">Audyssey &amp; Dirac</a>
+      <a href="/best-denon-marantz-app/">Why switch</a>
+      <a href="/#top" class="cta">Download</a>
     </nav>
   </div>
 </header>
 
 <div class="hero">
   <div class="wrap">
+    <div class="crumb"><a href="/">Home</a> &rsaquo; Why switch</div>
     <div class="eyebrow">Denon &amp; Marantz owners switch for a reason</div>
     <h1>The best <span class="g">Denon &amp; Marantz</span> controller app</h1>
     <p>The official Denon AVR Remote and Marantz AVR Remote apps are free - and owners routinely call them slow, buggy and shallow. AVR Maestro is the controller they move to: fast, stable, and built to expose everything your receiver can do, not just the basics.</p>
