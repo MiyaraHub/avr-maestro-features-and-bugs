@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>How to Control Your Denon or Marantz Receiver From Your Phone | AVR Maestro</title>
+<meta name="description" content="Step-by-step: connect AVR Maestro to your Denon or Marantz AV receiver over your network and control it from your phone in under a minute. Network setup, finding the receiver's IP, and adding it to the app." />
+<meta name="keywords" content="how to control Denon receiver from phone, how to control Marantz from phone, connect AVR Maestro to receiver, Denon network control setup, Marantz network standby, control AV receiver over wifi, add receiver AVR Maestro" />
+<meta name="author" content="MiyaraHub Technologies LLC" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<meta name="theme-color" content="#ff6e40" />
+<link rel="canonical" href="https://avrmaestro.com/guide/getting-started/" />
+<meta property="og:title" content="How to Control Your Denon or Marantz Receiver From Your Phone" />
+<meta property="og:description" content="Connect AVR Maestro to your receiver over your network and control it from your phone in under a minute." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://avrmaestro.com/guide/getting-started/" />
+<meta property="og:site_name" content="AVR Maestro" />
+<meta property="og:image" content="https://avrmaestro.com/screenshots/dashboard.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="How to Control Your Denon or Marantz Receiver From Your Phone" />
+<meta name="twitter:description" content="Connect AVR Maestro to your receiver in under a minute." />
+<meta name="twitter:image" content="https://avrmaestro.com/screenshots/dashboard.png" />
+<link rel="icon" type="image/png" sizes="48x48" href="../../assets/favicon-48.png" />
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+<link rel="stylesheet" href="../../assets/site.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to control your Denon or Marantz receiver from your phone with AVR Maestro",
+  "totalTime": "PT1M",
+  "step": [
+    { "@type": "HowToStep", "name": "Connect to the same network", "text": "Put your phone on the same Wi-Fi network as the receiver." },
+    { "@type": "HowToStep", "name": "Enable Network Control", "text": "On the receiver, turn on Network Standby / Network Control under Setup, General, Network." },
+    { "@type": "HowToStep", "name": "Find the receiver's IP", "text": "Get the receiver's IP address from Setup, General, Network, Information, or from your router's device list." },
+    { "@type": "HowToStep", "name": "Add the receiver in AVR Maestro", "text": "Open AVR Maestro, tap Add Receiver, enter the IP, tap Test Connection, confirm the detected model, and save." }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/"><img src="../../assets/avr-maestro-icon.png" alt="AVR Maestro icon" /> AVR Maestro</a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('m').classList.toggle('open')">&#9776;</button>
+    <nav id="m">
+      <a href="/">Home</a>
+      <a href="/guide/">User Guide</a>
+      <a href="/receivers/">Receivers</a>
+      <a href="/audyssey-dirac-control/">Audyssey &amp; Dirac</a>
+      <a href="/best-denon-marantz-app/">Why switch</a>
+      <a href="/#top" class="cta">Download</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="crumb"><a href="/">Home</a> &rsaquo; <a href="/guide/">User Guide</a> &rsaquo; Getting started</div>
+    <div class="eyebrow">Getting started</div>
+    <h1>Control your <span class="g">Denon or Marantz</span> from your phone</h1>
+    <p>AVR Maestro talks to your receiver over your local network using its native protocol - no cloud account, no extra hardware. Here's how to connect and be in control in under a minute.</p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <div class="eyebrow">Before you start</div>
+        <h2>What you need</h2>
+        <ul class="plain">
+          <li>An iPhone or Android device on the <b>same Wi-Fi network</b> as the receiver.</li>
+          <li>The receiver powered on with <b>Network Standby</b> enabled (<i>Setup &rarr; General &rarr; Network &rarr; Network Control &rarr; On</i>) so the app can wake and reach it.</li>
+          <li>The receiver's <b>IP address</b> (<i>Setup &rarr; General &rarr; Network &rarr; Information</i>, or your router's device list).</li>
+          <li>Optional: enable <b>Wake-on-LAN</b> to power the receiver from cold standby.</li>
+        </ul>
+      </div>
+      <div>
+        <div class="eyebrow">Four steps</div>
+        <h2>Add your receiver</h2>
+        <ol class="steps">
+          <li>Open AVR Maestro and tap <b>Add Receiver</b>.</li>
+          <li>Type the receiver's <b>IP address</b> and tap <b>Test Connection</b> - the app probes HTTP, Telnet and HEOS.</li>
+          <li>Confirm the detected model and capabilities to save it.</li>
+          <li>You're in. Switch or manage receivers any time from <i>Settings &rarr; Devices</i>.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Troubleshooting</div>
+      <h2>If it won't connect</h2>
+    </div>
+    <details open><summary>"Test Connection" fails</summary><div class="body">Make sure the phone and receiver are on the same Wi-Fi network and subnet - mesh systems, guest networks and IoT VLANs can isolate devices. On the receiver, <i>Setup &rarr; Network &rarr; Network Control</i> must be On. Re-check the IP against the receiver's own <i>Network &rarr; Information</i> screen, since DHCP addresses change. HTTP is required; Telnet and HEOS are nice-to-have.</div></details>
+    <details><summary>Connection drops every few seconds</summary><div class="body">Receiver Telnet ports can get sticky after long uptimes - power-cycle the receiver from the wall to clear the listener. On Wi-Fi 6 mesh, force the phone onto the same band as the receiver (AVRs usually sit on 2.4 GHz; phones prefer 5 GHz).</div></details>
+    <details><summary>How do I know my receiver is supported?</summary><div class="body">It comes down to your network, not just the model. If the receiver's web portal, the HEOS app and the official Denon/Marantz app can all reach it, AVR Maestro should too. See the <a href="/receivers/">supported receivers</a> page for the model list.</div></details>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <h2>Get connected</h2>
+    <p class="lead" style="margin:0 auto 24px">One-time purchase, no ads, no subscriptions, no cloud - nothing leaves your network.</p>
+    <div class="badges">
+      <a href="https://play.google.com/store/apps/details?id=com.miyarahub.avr_maestro"><img alt="Get it on Google Play" src="https://img.shields.io/badge/Google%20Play-Download-414141?logo=google-play&logoColor=white&style=for-the-badge" /></a>
+      <a href="https://apps.apple.com/us/app/avr-maestro-for-denon-marantz/id6762881597"><img alt="Download on the App Store" src="https://img.shields.io/badge/App%20Store-Download-0D96F6?logo=app-store&logoColor=white&style=for-the-badge" /></a>
+      <a href="https://apps.microsoft.com/detail/9P4M7W4J5106"><img alt="Get it on the Microsoft Store" src="https://img.shields.io/badge/Microsoft%20Store-Download-0078D4?logo=windows&logoColor=white&style=for-the-badge" /></a>
+    </div>
+    <p class="lead" style="margin:18px auto 0;font-size:.92rem"><a href="/guide/">Back to the full User Guide &rarr;</a></p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="flinks">
+      <a href="/">Home</a>
+      <a href="/guide/">User Guide</a>
+      <a href="/receivers/">Receivers</a>
+      <a href="/best-denon-marantz-app/">Why switch</a>
+      <a href="https://play.google.com/store/apps/details?id=com.miyarahub.avr_maestro">Google Play</a>
+      <a href="https://apps.apple.com/us/app/avr-maestro-for-denon-marantz/id6762881597">App Store</a>
+      <a href="https://apps.microsoft.com/detail/9P4M7W4J5106">Microsoft Store</a>
+      <a href="https://discord.gg/UmVtxE5fXN">Discord</a>
+      <a href="https://www.facebook.com/groups/avrmaestro">Facebook</a>
+      <a href="https://miyarahub.com">MiyaraHub</a>
+    </div>
+    <p class="legal">AVR Maestro is an independent app by MiyaraHub Technologies LLC and is not affiliated with, endorsed by, or sponsored by Denon, Marantz, D&amp;M Holdings or Sound United. Denon, Marantz, HEOS, Audyssey and Dirac Live are trademarks of their respective owners.</p>
+  </div>
+</footer>
+
+</body>
+</html>
