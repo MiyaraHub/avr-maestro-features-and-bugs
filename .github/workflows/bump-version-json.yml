@@ -1,0 +1,62 @@
+name: Bump version.json
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Production version now live on ALL stores (e.g. 4.17.2)'
+        required: true
+        type: string
+      min_version:
+        description: 'Minimum supported version floor (optional; blank keeps current)'
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update docs/version.json
+        env:
+          NEW_VERSION: ${{ inputs.version }}
+          NEW_MIN: ${{ inputs.min_version }}
+        run: |
+          python3 - <<'PY'
+          import json, os, re
+          version = os.environ['NEW_VERSION'].strip()
+          minv = os.environ.get('NEW_MIN', '').strip()
+          if not re.fullmatch(r'\d+\.\d+\.\d+', version):
+              raise SystemExit(f'version must be X.Y.Z, got: {version!r}')
+          if minv and not re.fullmatch(r'\d+\.\d+\.\d+', minv):
+              raise SystemExit(f'min_version must be X.Y.Z, got: {minv!r}')
+          path = 'docs/version.json'
+          with open(path) as f:
+              data = json.load(f)
+          for platform in data:
+              data[platform]['latest'] = version
+              if minv:
+                  data[platform]['min'] = minv
+          with open(path, 'w') as f:
+              json.dump(data, f, indent=2)
+              f.write('\n')
+          print('version.json latest ->', version, '| min ->', minv or 'unchanged')
+          PY
+
+      - name: Commit and push
+        env:
+          NEW_VERSION: ${{ inputs.version }}
+        run: |
+          git config user.name 'Meir Miyara'
+          git config user.email 'mase1981@users.noreply.github.com'
+          if git diff --quiet -- docs/version.json; then
+            echo 'version.json already at the requested values; nothing to commit.'
+            exit 0
+          fi
+          git add docs/version.json
+          git commit -m "chore: bump version.json latest to ${NEW_VERSION}"
+          git push
