@@ -4,8 +4,8 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>The Remote - D-Pad, Transport, Inputs &amp; System Controls | AVR Maestro</title>
-<meta name="description" content="AVR Maestro's virtual remote for Denon and Marantz: a full D-pad and transport, a live header showing input, sound mode and the channels in use, a rename-and-reorder input grid, Quick/Smart Select recall, and direct system controls." />
-<meta name="keywords" content="Denon virtual remote app, Marantz remote app, AV receiver remote app, rename inputs Denon, reorder sources receiver, Quick Select app, Smart Select app, receiver D-pad app" />
+<meta name="description" content="AVR Maestro's virtual remote for Denon and Marantz: a full D-pad and transport, a live header showing input, sound mode and the channels in use, a rename-and-reorder input grid, Quick/Smart Select recall, and direct system controls. Plus desktop keyboard shortcuts on Mac and Windows for transport and volume." />
+<meta name="keywords" content="Denon virtual remote app, Marantz remote app, AV receiver remote app, rename inputs Denon, reorder sources receiver, Quick Select app, Smart Select app, receiver D-pad app, Denon keyboard shortcuts, Marantz app keyboard shortcuts, AV receiver keyboard control, media keys receiver app" />
 <meta name="author" content="MiyaraHub Technologies LLC" />
 <meta name="robots" content="index, follow, max-image-preview:large" />
 <meta name="theme-color" content="#ff6e40" />
@@ -42,6 +42,14 @@
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "The Main Remote has a command bar (Power, Info, Setup, Option, Back), a D-pad, transport controls and a volume bar, with a live header showing the input, sound mode and the IN/OUT channels in use. A System page exposes direct controls like HDMI output, dimmer, triggers, ECO, sleep timer, CEC and more - anything your receiver doesn't support is hidden."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does AVR Maestro have keyboard shortcuts on desktop?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. On the Mac and Windows apps you can drive transport and volume straight from the keyboard. Use Cmd on macOS or Ctrl on Windows: Space for Play/Pause, . (period) for Stop, Left and Right for previous and next track, Up and Down for volume, and M to toggle mute. Your keyboard's dedicated media keys - play, pause, next, previous, stop, volume up, volume down and mute - work too. Shortcuts never fire while a text field has focus, so typing a receiver name or IP address is never interrupted."
       }
     }
   ]
@@ -98,12 +106,38 @@
 <section>
   <div class="wrap">
     <div class="section-head">
+      <div class="eyebrow">Desktop</div>
+      <h2>Keyboard shortcuts on <span class="g">Mac &amp; Windows</span></h2>
+      <p class="lead">On the Mac App Store and Microsoft Store builds you can drive playback and volume straight from the keyboard - no reaching for the mouse. Use <b>Cmd</b> on macOS or <b>Ctrl</b> on Windows, and your keyboard's dedicated media keys work too. Nothing fires while you're typing in a text field, so renaming an input or entering an IP is never interrupted.</p>
+    </div>
+    <table class="t">
+      <thead><tr><th>Shortcut</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td>Cmd + Space / Ctrl + Space</td><td>Play / Pause</td></tr>
+        <tr><td>Cmd + . / Ctrl + . (period)</td><td>Stop</td></tr>
+        <tr><td>Cmd + Right / Ctrl + Right</td><td>Next track</td></tr>
+        <tr><td>Cmd + Left / Ctrl + Left</td><td>Previous track</td></tr>
+        <tr><td>Cmd + Up / Ctrl + Up</td><td>Volume up</td></tr>
+        <tr><td>Cmd + Down / Ctrl + Down</td><td>Volume down</td></tr>
+        <tr><td>Cmd + M / Ctrl + M</td><td>Toggle mute</td></tr>
+        <tr><td>Media keys: Play, Pause, Play/Pause, Stop</td><td>The matching transport action</td></tr>
+        <tr><td>Media keys: Next Track, Previous Track</td><td>Skip to next / previous track</td></tr>
+        <tr><td>Media keys: Volume Up, Volume Down, Mute</td><td>Volume up, volume down, mute</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
       <div class="eyebrow">Common questions</div>
       <h2>Remote FAQ</h2>
     </div>
     <details open><summary>Can I rename and reorder my inputs?</summary><div class="body">Yes - open the Source widget on the Home screen, long-press a tile to edit, drag to reorder, and tap Done. Rename them to "Nvidia Shield", "Xbox", "PS5" - the order saves per receiver everywhere.</div></details>
     <details><summary>What does the virtual remote control?</summary><div class="body">A command bar (Power/Info/Setup/Option/Back), D-pad, transport and volume, with a live header showing input, sound mode and the channels in use. The System page adds direct controls (HDMI output, dimmer, triggers, ECO, sleep, CEC and more); unsupported items are hidden.</div></details>
     <details><summary>What is Quick / Smart Select?</summary><div class="body">Denon Quick Select / Marantz Smart Select are the receiver's own saved-scene slots. Tap to recall; long-press to rename or save the current state with a capture wizard.</div></details>
+    <details><summary>Does AVR Maestro have keyboard shortcuts on desktop?</summary><div class="body">Yes - on Mac and Windows you can drive transport and volume from the keyboard. Use <b>Cmd</b> on macOS or <b>Ctrl</b> on Windows: Space for Play/Pause, . (period) for Stop, Left/Right for previous/next track, Up/Down for volume, and M to mute. Your dedicated media keys (play, pause, next, previous, stop, volume, mute) work too. Shortcuts pause while you're typing in a text field.</div></details>
   </div>
 </section>
 
