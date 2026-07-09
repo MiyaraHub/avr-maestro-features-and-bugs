@@ -78,7 +78,7 @@
     <div class="crumb"><a href="/">Home</a> &rsaquo; <a href="/guide/">User Guide</a> &rsaquo; Speakers</div>
     <div class="eyebrow">Speaker setup &amp; presets</div>
     <h1>A dedicated <span class="g">Speakers</span> workshop</h1>
-    <p>Layout, distances, levels, crossovers, subwoofer and speaker presets - the full setup suite, read live from your Denon or Marantz receiver, with each screen following the active Speaker Preset.</p>
+    <p>Layout, distances, levels, crossovers, subwoofer, bass management and speaker presets - the full setup suite, read live from your Denon or Marantz receiver, with each screen following the active Speaker Preset.</p>
   </div>
 </div>
 
@@ -99,6 +99,7 @@
       <li><b>Levels:</b> per-speaker trim level.</li>
       <li><b>Crossovers:</b> the frequency below which bass routes to the sub (only "small" speakers appear; "large" run full-range).</li>
       <li><b>Subwoofer:</b> subwoofer output settings.</li>
+      <li><b>Bass:</b> LPF for LFE (the low-pass cutoff for the LFE channel) and LFE Distribution (route the LFE .1 channel to full-range speakers - only offered when the receiver allows it).</li>
       <li><b>Preset:</b> switch between Speaker Preset 1 / 2 - each stores its own layout, distances, levels, crossovers and calibration.</li>
     </ul>
   </div>
@@ -127,6 +128,7 @@
     <details open><summary>Can I set distances and levels from the app?</summary><div class="body">Yes - amp assign and layout, per-speaker distances, channel levels, crossovers and subwoofer settings, all read live and following the active Speaker Preset.</div></details>
     <details><summary>Why are some speaker screens locked?</summary><div class="body">When a Dirac Live filter is active on the preset, Dirac owns the layout, distances and crossovers. The app shows a lock instead of letting you push edits the receiver would reject. Switch to a non-Dirac preset to edit them. More on the <a href="/audyssey-dirac-control/">Audyssey &amp; Dirac guide</a>.</div></details>
     <details><summary>What are Speaker Presets?</summary><div class="body">Preset 1 and 2 each store their own layout, distances, levels, crossovers and calibration. Switch between them in the app; every Speakers screen follows the active preset.</div></details>
+    <details><summary>Can I send the LFE channel to my front speakers without a subwoofer?</summary><div class="body">Yes, on receivers that support it. When your main speakers are set to Full Range in Crossovers and the receiver isn't routing the LFE to a subwoofer, the Bass screen's LFE Distribution sends the LFE (.1) channel to those speakers with a per-speaker level. AVR Maestro only offers it when the receiver actually allows it - if the speakers aren't Full Range, or a subwoofer is configured to take the LFE, the receiver locks the setting and the app shows exactly why. It can never route bass to a speaker the receiver forbids. The LPF for LFE control on the same screen sets the low-pass cutoff for the LFE channel.</div></details>
   </div>
 </section>
 
