@@ -39,7 +39,7 @@
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "4.9",
-    "ratingCount": "88",
+    "ratingCount": "117",
     "bestRating": "5",
     "worstRating": "1"
   }
@@ -55,6 +55,7 @@
     <nav id="m">
       <a href="/" class="active">Home</a>
       <a href="/guide/">User Guide</a>
+      <a href="/#screenshots">Screenshots</a>
       <a href="/receivers/">Receivers</a>
       <a href="/audyssey-dirac-control/">Audyssey &amp; Dirac</a>
       <a href="/best-denon-marantz-app/">Why switch</a>
@@ -73,7 +74,7 @@
       <div class="rating" aria-label="Average user rating">
         <span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
         <strong class="js-rate-val">4.9</strong>
-        <span>&middot; <span class="js-rate-count">88</span> ratings on the App Store, Google Play &amp; Microsoft Store</span>
+        <span>&middot; <span class="js-rate-count">117</span> ratings on the App Store, Google Play &amp; Microsoft Store</span>
       </div>
       <div class="badges">
         <a href="https://play.google.com/store/apps/details?id=com.miyarahub.avr_maestro"><img alt="Get it on Google Play" src="https://img.shields.io/badge/Google%20Play-Download-414141?logo=google-play&logoColor=white&style=for-the-badge" /></a>
@@ -130,6 +131,46 @@
     </div>
   </div>
 </section>
+
+<section id="screenshots">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Screenshots</div>
+      <h2>See it on every screen</h2>
+      <p class="lead">The same premium controller, native on iPhone, iPad, Android, Windows and Mac.</p>
+    </div>
+    <div class="shots-grid">
+        <button class="shot" onclick="avrLb('screenshots/store/iphone/01_dashboard.jpg')" aria-label="AVR Maestro on iPhone"><img src="screenshots/store/iphone/01_dashboard.jpg" loading="lazy" alt="AVR Maestro on iPhone" /><span class="shot-plat">iPhone</span></button>
+        <button class="shot" onclick="avrLb('screenshots/store/iphone/02_main_remote.jpg')" aria-label="AVR Maestro on iPhone"><img src="screenshots/store/iphone/02_main_remote.jpg" loading="lazy" alt="AVR Maestro on iPhone" /><span class="shot-plat">iPhone</span></button>
+        <button class="shot" onclick="avrLb('screenshots/store/iphone/05_zones.jpg')" aria-label="AVR Maestro on iPhone"><img src="screenshots/store/iphone/05_zones.jpg" loading="lazy" alt="AVR Maestro on iPhone" /><span class="shot-plat">iPhone</span></button>
+        <button class="shot" onclick="avrLb('screenshots/store/ipad/01_dashboard.jpg')" aria-label="AVR Maestro on iPad"><img src="screenshots/store/ipad/01_dashboard.jpg" loading="lazy" alt="AVR Maestro on iPad" /><span class="shot-plat">iPad</span></button>
+        <button class="shot" onclick="avrLb('screenshots/store/ipad/03_audyssey.jpg')" aria-label="AVR Maestro on iPad"><img src="screenshots/store/ipad/03_audyssey.jpg" loading="lazy" alt="AVR Maestro on iPad" /><span class="shot-plat">iPad</span></button>
+        <button class="shot" onclick="avrLb('screenshots/store/android/01_dashboard.jpg')" aria-label="AVR Maestro on Android"><img src="screenshots/store/android/01_dashboard.jpg" loading="lazy" alt="AVR Maestro on Android" /><span class="shot-plat">Android</span></button>
+        <button class="shot" onclick="avrLb('screenshots/store/android/03_remote.jpg')" aria-label="AVR Maestro on Android"><img src="screenshots/store/android/03_remote.jpg" loading="lazy" alt="AVR Maestro on Android" /><span class="shot-plat">Android</span></button>
+        <button class="shot" onclick="avrLb('screenshots/store/android/06_sound.jpg')" aria-label="AVR Maestro on Android"><img src="screenshots/store/android/06_sound.jpg" loading="lazy" alt="AVR Maestro on Android" /><span class="shot-plat">Android</span></button>
+        <button class="shot" onclick="avrLb('screenshots/store/windows/01_dashboard.jpg')" aria-label="AVR Maestro on Windows"><img src="screenshots/store/windows/01_dashboard.jpg" loading="lazy" alt="AVR Maestro on Windows" /><span class="shot-plat">Windows</span></button>
+        <button class="shot" onclick="avrLb('screenshots/store/windows/07_zones.jpg')" aria-label="AVR Maestro on Windows"><img src="screenshots/store/windows/07_zones.jpg" loading="lazy" alt="AVR Maestro on Windows" /><span class="shot-plat">Windows</span></button>
+        <button class="shot" onclick="avrLb('screenshots/store/mac/03_remote.jpg')" aria-label="AVR Maestro on Mac"><img src="screenshots/store/mac/03_remote.jpg" loading="lazy" alt="AVR Maestro on Mac" /><span class="shot-plat">Mac</span></button>
+        <button class="shot" onclick="avrLb('screenshots/store/mac/08_settings.jpg')" aria-label="AVR Maestro on Mac"><img src="screenshots/store/mac/08_settings.jpg" loading="lazy" alt="AVR Maestro on Mac" /><span class="shot-plat">Mac</span></button>
+    </div>
+  </div>
+</section>
+
+<style>
+  #screenshots .shots-grid { column-count: 3; column-gap: 16px; margin-top: 8px; }
+  #screenshots .shot { position: relative; display: block; width: 100%; margin: 0 0 16px; padding: 0; border: 0; background: none; cursor: pointer; break-inside: avoid; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+  #screenshots .shot img { width: 100%; display: block; border-radius: 12px; transition: transform .5s ease; }
+  #screenshots .shot:hover img { transform: scale(1.03); }
+  #screenshots .shot-plat { position: absolute; top: 10px; left: 10px; font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #fff; background: rgba(0,0,0,.55); padding: 4px 9px; border-radius: 999px; }
+  @media (max-width: 900px) { #screenshots .shots-grid { column-count: 2; } }
+  @media (max-width: 560px) { #screenshots .shots-grid { column-count: 1; } }
+  #avrLb { position: fixed; inset: 0; background: rgba(8,10,16,.92); display: none; align-items: center; justify-content: center; z-index: 999; padding: 24px; }
+  #avrLb.open { display: flex; }
+  #avrLb img { max-width: 92vw; max-height: 88vh; border-radius: 10px; box-shadow: 0 24px 70px rgba(0,0,0,.6); }
+  #avrLb .x { position: absolute; top: 16px; right: 20px; width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255,255,255,.3); background: rgba(0,0,0,.3); color: #fff; font-size: 1.5rem; cursor: pointer; }
+</style>
+<div id="avrLb" onclick="this.classList.remove('open')"><button class="x" aria-label="Close">&times;</button><img id="avrLbImg" src="" alt="AVR Maestro screenshot" /></div>
+<script>function avrLb(s){document.getElementById('avrLbImg').src=s;document.getElementById('avrLb').classList.add('open');}</script>
 
 <section id="reviews">
   <div class="wrap">
