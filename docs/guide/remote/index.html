@@ -4,8 +4,8 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>The Remote - D-Pad, Transport, Inputs &amp; System Controls | AVR Maestro</title>
-<meta name="description" content="AVR Maestro's virtual remote for Denon and Marantz: a full D-pad and transport, a live header showing input, sound mode and the channels in use, a rename-and-reorder input grid, Quick/Smart Select recall, and direct system controls. Plus desktop keyboard shortcuts on Mac and Windows for transport and volume." />
-<meta name="keywords" content="Denon virtual remote app, Marantz remote app, AV receiver remote app, rename inputs Denon, reorder sources receiver, Quick Select app, Smart Select app, receiver D-pad app, Denon keyboard shortcuts, Marantz app keyboard shortcuts, AV receiver keyboard control, media keys receiver app" />
+<meta name="description" content="AVR Maestro's virtual remote for Denon and Marantz: a full D-pad and transport, a live header showing input, sound mode and the channels in use, an input grid with on-receiver renaming and custom icons from your own images, Quick/Smart Select recall, and direct system controls. Plus desktop keyboard shortcuts on Mac and Windows for transport and volume." />
+<meta name="keywords" content="Denon virtual remote app, Marantz remote app, AV receiver remote app, rename inputs Denon, reorder sources receiver, custom input icons receiver app, change input icon Denon Marantz, Quick Select app, Smart Select app, receiver D-pad app, Denon keyboard shortcuts, Marantz app keyboard shortcuts, AV receiver keyboard control, media keys receiver app" />
 <meta name="author" content="MiyaraHub Technologies LLC" />
 <meta name="robots" content="index, follow, max-image-preview:large" />
 <meta name="theme-color" content="#ff6e40" />
@@ -33,7 +33,15 @@
       "name": "Can I rename and reorder my receiver's inputs?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. In AVR Maestro you can rename inputs (for example to Nvidia Shield, Xbox, PS5) and drag to reorder them. Open the Source widget on the Home screen, long-press a tile to enter edit mode, drag to reorder, and tap Done. The order saves per receiver everywhere in the app."
+        "text": "Yes. In AVR Maestro you can rename inputs (for example to Nvidia Shield, Xbox, PS5) and drag to reorder them. Open the source list, tap a tile to edit, and tap a source to rename it. The new name is written to the receiver itself, so it shows up immediately in AVR Maestro, in the manufacturer's own app and in every other client - and it works on older chassis too. The order saves per receiver everywhere in the app."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I give my inputs custom icons?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Long-press an input tile, pick any image - PNG, JPG, ICO, WebP and more - position it in a passport-style cropper, and save. The custom icon shows on the input tiles and the Home dashboard, and it is carried inside your settings backup so it survives a move to a new phone."
       }
     },
     {
@@ -120,12 +128,31 @@
         <h2>Everything, without the physical remote</h2>
         <ul>
           <li><b>Main Remote:</b> command bar (Power / Info / Setup / Option / Back), D-pad, transport, and a volume bar - with a live header showing input, sound mode and the IN/OUT channels in use.</li>
-          <li><b>Inputs:</b> the full source grid. <b>Rename and reorder</b> sources to match your gear - long-press a tile to edit, drag to reorder, tap Done. Saves per receiver.</li>
-          <li><b>Quick / Smart Select:</b> tap a slot to recall the receiver's saved scene; long-press to <b>Rename</b> or <b>Save current state</b> (a wizard lets you pick exactly which settings to capture).</li>
+          <li><b>Inputs:</b> the full source grid. <b>Rename and reorder</b> sources to match your gear - open the source list, tap a tile to edit, tap a source to rename it, drag to reorder. Renames are written to the <b>receiver itself</b>, so they show immediately here, in the manufacturer's app and in every other client - older chassis included. The order saves per receiver.</li>
+          <li><b>Quick / Smart Select:</b> tap a slot to recall the receiver's saved scene; long-press to <b>Rename</b> or <b>Save current state</b> (a wizard lets you pick exactly which settings to capture). Slot renames are saved on the receiver too, so they follow you to every other app.</li>
           <li><b>System:</b> direct controls - HDMI output, dimmer/illumination, triggers, ECO, auto standby, sleep timer, CEC, HDMI audio out, speaker preset, picture/video mode, all-zone stereo, auto lip sync, audio delay, input mode. Unsupported items are hidden.</li>
         </ul>
       </div>
     </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Custom input icons</div>
+      <h2>Your gear, <span class="g">your icons</span></h2>
+      <p class="lead">Stock icons are fine - until your Shield, your HTPC and your Blu-ray player all deserve their real faces. Give any input its own icon from any image you have.</p>
+    </div>
+    <div class="gallery" style="max-width:300px;margin:0 auto">
+      <figure><img alt="Input tiles with custom icons in AVR Maestro" src="../../screenshots/remote-input-icons.jpg" /><figcaption>Your own icons, right on the input grid</figcaption></figure>
+    </div>
+    <ul class="plain" style="margin-top:28px">
+      <li><b>Long-press an input tile</b> and pick an image - PNG, JPG, ICO, WebP and more all work.</li>
+      <li><b>Position it in a passport-style cropper:</b> drag to move, pinch to zoom - what's inside the frame is your icon. Tap <b>Save icon</b> and you're done.</li>
+      <li>The icon shows on the <b>input tiles and the Home dashboard</b> - wherever that source appears.</li>
+      <li>Custom icons ride along in your <a href="/guide/settings/">settings backup</a>, so they move to a new phone with the rest of your setup.</li>
+    </ul>
   </div>
 </section>
 
@@ -160,7 +187,8 @@
       <div class="eyebrow">Common questions</div>
       <h2>Remote FAQ</h2>
     </div>
-    <details open><summary>Can I rename and reorder my inputs?</summary><div class="body">Yes - open the Source widget on the Home screen, long-press a tile to edit, drag to reorder, and tap Done. Rename them to "Nvidia Shield", "Xbox", "PS5" - the order saves per receiver everywhere.</div></details>
+    <details open><summary>Can I rename and reorder my inputs?</summary><div class="body">Yes - open the source list, tap a tile to edit, tap a source to rename it, drag to reorder. Rename them to "Nvidia Shield", "Xbox", "PS5" - the new name is written to the receiver itself, so it shows immediately in AVR Maestro, in the manufacturer's app and in every other client, older chassis included. The order saves per receiver everywhere.</div></details>
+    <details><summary>Can I give my inputs custom icons?</summary><div class="body">Yes - long-press an input tile, pick any image (PNG, JPG, ICO, WebP and more), position it in the passport-style cropper and save. The icon shows on the input tiles and the Home dashboard, and it's carried inside your settings backup.</div></details>
     <details><summary>What does the virtual remote control?</summary><div class="body">A command bar (Power/Info/Setup/Option/Back), D-pad, transport and volume, with a live header showing input, sound mode and the channels in use. The System page adds direct controls (HDMI output, dimmer, triggers, ECO, sleep, CEC and more); unsupported items are hidden.</div></details>
     <details><summary>What is Quick / Smart Select?</summary><div class="body">Denon Quick Select / Marantz Smart Select are the receiver's own saved-scene slots. Tap to recall; long-press to rename or save the current state with a capture wizard.</div></details>
     <details><summary>Does AVR Maestro have keyboard shortcuts on desktop?</summary><div class="body">Yes - on Mac and Windows you can drive transport and volume from the keyboard. Use <b>Cmd</b> on macOS or <b>Ctrl</b> on Windows: Space for Play/Pause, . (period) for Stop, Left/Right for previous/next track, Up/Down for volume, and M to mute. Your dedicated media keys (play, pause, next, previous, stop, volume, mute) work too. Shortcuts pause while you're typing in a text field.</div></details>

@@ -33,7 +33,7 @@
       "name": "AVR Maestro won't connect - Test Connection fails",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Make sure the phone and receiver are on the same Wi-Fi network and subnet - mesh systems, guest networks and IoT VLANs can isolate devices. On the receiver, Setup, Network, Network Control must be On. Re-check the IP against the receiver's own Network, Information screen, since DHCP addresses change. HTTP is required; Telnet and HEOS are nice-to-have."
+        "text": "Make sure the phone and receiver are on the same Wi-Fi network and subnet - mesh systems, guest networks and IoT VLANs can isolate devices. On the receiver, Setup, Network, Network Control must be On. Re-check the IP against the receiver's own Network, Information screen, since DHCP addresses change. HTTP is required; Telnet and HEOS are nice-to-have. If the receiver is reachable but its network stack is saturated - too many controller apps holding connections - AVR Maestro says so with a clear network busy message instead of a generic failure; close another controller or give it a few seconds."
       }
     },
     {
@@ -132,7 +132,7 @@
       <div class="eyebrow">Connection</div>
       <h2>Getting connected</h2>
     </div>
-    <details open><summary>"Test Connection" fails</summary><div class="body">Make sure the phone and receiver are on the same Wi-Fi network and subnet - mesh systems, guest networks and IoT VLANs can isolate devices. On the receiver, <i>Setup &rarr; Network &rarr; Network Control</i> must be On. Re-check the IP against the receiver's own <i>Network &rarr; Information</i> screen, since DHCP addresses change. HTTP is required; Telnet and HEOS are nice-to-have. Full steps on the <a href="/guide/getting-started/">getting started guide</a>.</div></details>
+    <details open><summary>"Test Connection" fails</summary><div class="body">Make sure the phone and receiver are on the same Wi-Fi network and subnet - mesh systems, guest networks and IoT VLANs can isolate devices. On the receiver, <i>Setup &rarr; Network &rarr; Network Control</i> must be On. Re-check the IP against the receiver's own <i>Network &rarr; Information</i> screen, since DHCP addresses change. HTTP is required; Telnet and HEOS are nice-to-have. If the receiver is reachable but its network stack is saturated - too many controller apps holding connections - the app says so with a clear <b>network busy</b> message instead of a generic failure; close another controller or give it a few seconds. Full steps on the <a href="/guide/getting-started/">getting started guide</a>.</div></details>
     <details><summary>Connection drops every few seconds</summary><div class="body">Receiver Telnet ports can get sticky after long uptimes - power-cycle the receiver from the wall to clear the listener. On Wi-Fi 6 mesh, force the phone onto the same band as the receiver (AVRs usually sit on 2.4 GHz; phones prefer 5 GHz).</div></details>
     <details><summary>How do I know my receiver is supported?</summary><div class="body">It comes down to your network, not just the model. If the receiver's web portal, the HEOS app and the official Denon/Marantz app can all reach it, AVR Maestro should too. See the <a href="/receivers/">supported receivers</a> page.</div></details>
   </div>

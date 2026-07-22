@@ -41,7 +41,7 @@
       "name": "Can I back up my AVR Maestro setup?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. Settings, Backup exports every receiver, preset and preference to a JSON file, and you import it to restore on a new phone in seconds. The file holds no credentials or personal data beyond receiver IPs and your own preset names, so it is safe to share."
+        "text": "Yes. Settings, Backup exports every receiver, preset and preference to a .zip file that also bundles your custom input icons, and you import it to restore on a new phone in seconds. Older .json backups still import fine. The file holds no credentials or personal data beyond receiver IPs and your own preset names, so it is safe to share."
       }
     },
     {
@@ -134,7 +134,7 @@
         <tr><td>Audio</td><td>Volume Step (0.5-2.0 dB), whether the absolute volume or dB shows on top, and <b>Gradual</b> vs <b>Direct</b> volume presets - Gradual (the default) ramps smoothly to a preset's target instead of jumping straight there, on the main zone and Zone 2/3.</td></tr>
         <tr><td>Help</td><td>Explanation cards toggle, restore dismissed cards, and a live Debug Log with one-tap Save &amp; Share for support.</td></tr>
         <tr><td>Developer Tools</td><td>Hidden until you tap the version number (in About) seven times - then it stays available across launches until you remove it. Raw Telnet / HEOS commands, AJAX dump, and a volume-cap wire diagnostic.</td></tr>
-        <tr><td>Backup</td><td>Export every receiver, preset and preference to a JSON file and import to restore on a new phone - works on both iOS and Android. The file holds no credentials, only receiver IPs and your own preset names, so it is safe to share.</td></tr>
+        <tr><td>Backup</td><td>Export every receiver, preset and preference to a <b>.zip file that also bundles your custom input icons</b>, and import to restore on a new phone - works on both iOS and Android. Older .json backups still import fine. The file holds no credentials, only receiver IPs and your own preset names, so it is safe to share.</td></tr>
         <tr><td>App</td><td>Rate the app, About, App Manual (this guide), website, Discord, Facebook, privacy, terms, licenses.</td></tr>
         <tr><td>More from MiyaraHub</td><td><b>Browse all our apps</b> opens the MiyaraHub developer page on your store - Google Play, the App Store or the Microsoft Store, depending on your device - so you can see every app we make in one place.</td></tr>
       </tbody>
@@ -150,7 +150,7 @@
     </div>
     <ul class="plain">
       <li><b>Hardware volume keys:</b> while AVR Maestro is in the foreground, your phone's volume keys control the <b>receiver's</b> volume (using your Volume Step). Foreground-only; iOS doesn't allow this.</li>
-      <li><b>Home-screen widgets:</b> Quick Control (power / volume / mute / source), Now Playing, and Status - all resizable, tap-only and auto-refreshing.</li>
+      <li><b>Home-screen widgets:</b> Quick Control (power / volume / mute / source), Now Playing, and Status - all resizable, tap-only and auto-refreshing. When the receiver is off or unreachable, widgets show a clear <b>"AVR off" / "Standby"</b> state instead of stale input and volume - and the power button stays live, so you can wake the receiver straight from the widget.</li>
     </ul>
     <div class="note">Backup &amp; Restore is <b>not</b> Android-only - it works on iOS too (see the Backup row above). These two conveniences are the genuinely Android-only ones.</div>
   </div>
@@ -163,7 +163,7 @@
       <h2>Settings FAQ</h2>
     </div>
     <details open><summary>Can I change the app's theme and colors?</summary><div class="body">Yes - Light, Dark, Device or AMOLED (true black), plus TJ Mode where you pick any accent color and the app rebuilds its palette. You can also set Display/Widget size and customize navigation and tabs.</div></details>
-    <details><summary>Can I back up my setup?</summary><div class="body">Yes - Settings, Backup exports every receiver, preset and preference to a JSON file; import to restore on a new phone. No credentials in the file, so it's safe to share.</div></details>
+    <details><summary>Can I back up my setup?</summary><div class="body">Yes - Settings, Backup exports every receiver, preset and preference to a .zip file that also bundles your custom input icons; import to restore on a new phone. Older .json backups still import fine. No credentials in the file, so it's safe to share.</div></details>
     <details><summary>Do volume presets jump straight to the target, or ramp there?</summary><div class="body">Your call - Settings, Audio has a Gradual / Direct switch. Gradual (the default) ramps smoothly toward a preset's target so a tap can never slam your speakers with a sudden jump. Direct applies it instantly. Works on the main zone and Zone 2/3.</div></details>
     <details><summary>Can I lock the receiver's physical remote from the app?</summary><div class="body">Yes, on receivers that support it - Settings, Receiver has a Remote Lock switch to lock or unlock the receiver's own IR remote.</div></details>
     <details><summary>Do the phone's volume keys control the receiver?</summary><div class="body">On Android, yes - while the app is in the foreground, your volume keys control the receiver's volume. iOS doesn't allow this.</div></details>

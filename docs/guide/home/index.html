@@ -38,6 +38,14 @@
     },
     {
       "@type": "Question",
+      "name": "Can I rename my zones, including the main zone?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Long-press the zone name on the Home screen to rename any zone - the main zone included. The name is written to the receiver itself, so it shows up in the manufacturer's own app and every other client, and it works on older chassis too."
+      }
+    },
+    {
+      "@type": "Question",
       "name": "Does AVR Maestro show what's playing?",
       "acceptedAnswer": {
         "@type": "Answer",
@@ -126,6 +134,16 @@
 <section>
   <div class="wrap">
     <div class="section-head">
+      <div class="eyebrow">Name your rooms</div>
+      <h2>"Living Room", not "MAIN ZONE"</h2>
+      <p class="lead"><b>Long-press the zone name</b> on the Home screen to rename any zone - the <b>main zone included</b>. The name is written to the <b>receiver itself</b>, not just the app, so it shows up in the manufacturer's own app and every other client, and it works on older chassis too. Rename once, and every controller in the house agrees on what the room is called.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
       <div class="eyebrow">The widgets</div>
       <h2>Everything you can pin</h2>
     </div>
@@ -136,11 +154,11 @@
         <tr><td>Source</td><td>Open the input picker; long-press tiles to reorder.</td></tr>
         <tr><td>Sound Mode</td><td>Current surround mode; tap for a grouped picker.</td></tr>
         <tr><td>Now Playing</td><td>Album art, track info and transport for HEOS sources.</td></tr>
-        <tr><td>Zones</td><td>Compact Zone 2 / Zone 3 status + quick controls.</td></tr>
-        <tr><td>Quick Select</td><td>Denon Quick Select / Marantz Smart Select buttons.</td></tr>
-        <tr><td>Speaker Preset</td><td>Preset 1 / 2 switcher (chassis-dependent).</td></tr>
+        <tr><td>Zones</td><td>Compact Zone 2 / Zone 3 status + quick controls, including the zone's own Quick/Smart Select slots - tap a slot to recall it, press and hold to save the zone's current state into it.</td></tr>
+        <tr><td>Quick Select</td><td>Denon Quick Select / Marantz Smart Select buttons. Renamed slots are saved on the receiver, so your names show in every app.</td></tr>
+        <tr><td>Speaker Preset</td><td>Preset 1 / 2 switcher - only shown on receivers that expose more than one preset.</td></tr>
         <tr><td>Audyssey / Dirac</td><td>One-glance calibration state + quick deep-link.</td></tr>
-        <tr><td>Channel / Sub Levels</td><td>Per-channel and subwoofer level snapshots with steppers.</td></tr>
+        <tr><td>Channel / Sub Levels</td><td>Per-channel and subwoofer level snapshots with steppers - the subwoofer count follows your live receiver configuration.</td></tr>
         <tr><td>ECO, Sleep, DRC, Restorer, Video, Room Size, LFE</td><td>One-tap toggles and pickers, each shown only when supported.</td></tr>
       </tbody>
     </table>
@@ -151,11 +169,12 @@
   <div class="wrap">
     <div class="section-head">
       <div class="eyebrow">Sound controls</div>
-      <h2>Two quick toggles in Audio Features</h2>
+      <h2>Quick toggles in Sound</h2>
     </div>
     <ul class="plain">
       <li><b>Graphic EQ:</b> turn the receiver's Graphic EQ on or off from Sound, Audio Features. Only available when neither Dirac Live nor Audyssey is running room correction - the app matches the receiver's own rule.</li>
       <li><b>Subwoofer:</b> mute or enable the subwoofer from Sound, Audio Features, without diving into Speaker setup. Only shown on receivers that report and accept it.</li>
+      <li><b>Audio Restorer:</b> the receiver's compressed-audio restorer - <b>Restorer</b> on Denon, <b>M-DAX</b> on Marantz - as a toggle under Sound, Tone, right next to the DAC Filter. Bring the life back into MP3s and streaming sources without a trip to the on-screen menu.</li>
     </ul>
   </div>
 </section>
@@ -178,6 +197,7 @@
       <h2>Home Screen FAQ</h2>
     </div>
     <details open><summary>Can I customize the Home screen?</summary><div class="body">Yes - tap Customize Home, then drag to reorder, tap the red circle to remove, Add for more widgets, Reset for defaults, Done to finish. Cards dim while editing so you can't change a setting by accident.</div></details>
+    <details><summary>Can I rename my zones, including the main zone?</summary><div class="body">Yes - long-press the zone name on the Home screen. The name is written to the receiver itself, so it shows in the manufacturer's app and every other client, and it works on older chassis too.</div></details>
     <details><summary>Does it show what's playing?</summary><div class="body">Yes, for sources that expose metadata - album art, track/artist/station and transport. Tap Launch HEOS to browse; AVR Maestro takes back over the now-playing display once playback starts.</div></details>
   </div>
 </section>
