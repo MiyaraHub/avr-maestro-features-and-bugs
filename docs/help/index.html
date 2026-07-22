@@ -75,6 +75,14 @@
         "@type": "Answer",
         "text": "The current input doesn't expose metadata - analog, optical/coaxial and most HDMI passthrough sources don't report track data. For HEOS sources, tap Launch HEOS to start playback, then return and the metadata populates."
       }
+    },
+    {
+      "@type": "Question",
+      "name": "The home-screen widget says AVR off or Standby",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "That is the widget's off-state, not a fault. When the receiver is off, in standby or unreachable, the widgets on iOS and Android show AVR off or Standby instead of the last input and volume, so you never read stale data. On the Quick Control widget the volume and mute buttons hide in that state, but the power button stays live - tap it to wake the receiver straight from the widget (Network Standby must be enabled on the receiver)."
+      }
     }
   ]
 }
@@ -149,6 +157,7 @@
     <details><summary>Some Sound or Speaker tabs are missing</summary><div class="body">Tabs are model- and mode-aware. Audyssey, Dirac Live, IMAX, Auro-3D, Surround Shape, Distances and Crossovers only appear on receivers that expose them. Check <i>Settings &rarr; Devices &rarr; Device Information</i> to see what the app detected, or re-add a hidden tab from <i>Settings &rarr; Customize Tabs / Customize Navigation</i>.</div></details>
     <details><summary>The Radio tab isn't showing</summary><div class="body">Radio is capability-gated: it only appears on receivers with a built-in FM/AM tuner. If yours has one but the tab is hidden, confirm the tuner appears as an input on the receiver and re-enable it from <i>Settings &rarr; Customize Navigation</i>. See the <a href="/guide/radio/">Radio guide</a>.</div></details>
     <details><summary>Now Playing card is blank</summary><div class="body">The current input doesn't expose metadata - analog, optical/coaxial and most HDMI passthrough sources don't report track data. For HEOS sources, tap <b>Launch HEOS</b> to start playback, then return and the metadata populates.</div></details>
+    <details><summary>The home-screen widget says "AVR off" or "Standby"</summary><div class="body">That's the widget's off-state, not a fault. When the receiver is off, in standby or unreachable, the widgets (iOS and Android) show <b>"AVR off"</b> / <b>"Standby"</b> instead of the last input and volume, so you never read stale data. On the Quick Control widget the volume and mute buttons hide in that state, but the <b>power button stays live</b> - tap it to wake the receiver straight from the widget (Network Standby must be enabled on the receiver).</div></details>
     <details><summary>Some speaker screens open in the receiver's web control</summary><div class="body">On some pre-2025 receivers (X4500H / X6700H / S960H / X4700H class), the receiver can't serve the Speaker Layout or Subwoofer Output screens to the app, so AVR Maestro hands you a one-tap button into the receiver's own web control for those edits. Everything else works normally; newer firmware serves every screen in the app.</div></details>
   </div>
 </section>
