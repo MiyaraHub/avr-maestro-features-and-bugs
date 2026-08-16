@@ -4,21 +4,21 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Settings, Themes &amp; Backup - Tailor AVR Maestro to You | AVR Maestro</title>
-<meta name="description" content="AVR Maestro's settings: manage receivers, theme the app with TJ Mode (any accent color) plus light/dark/AMOLED, set volume step, view a debug log, and back up every receiver, preset and preference to a file. Plus home-screen widgets on iOS and Android, and Android hardware volume keys." />
-<meta name="keywords" content="AVR Maestro settings, TJ Mode theme, AVR Maestro backup restore, AV receiver app theme, hardware volume keys receiver, AV receiver home screen widget, AVR Maestro AMOLED, MiyaraHub apps, more from MiyaraHub" />
+<meta name="description" content="AVR Maestro's settings: manage receivers, theme the app with Color Theme (any accent color, typed as a hex code) plus light/dark/AMOLED, set volume step, view a debug log, and back up every receiver, preset and preference to a file. Plus home-screen widgets on iOS and Android, and Android hardware volume keys." />
+<meta name="keywords" content="AVR Maestro settings, Color Theme, AVR Maestro backup restore, AV receiver app theme, hardware volume keys receiver, AV receiver home screen widget, AVR Maestro AMOLED, MiyaraHub apps, more from MiyaraHub" />
 <meta name="author" content="MiyaraHub Technologies LLC" />
 <meta name="robots" content="index, follow, max-image-preview:large" />
 <meta name="theme-color" content="#ff6e40" />
 <link rel="canonical" href="https://avrmaestro.com/guide/settings/" />
 <meta property="og:title" content="Settings, Themes &amp; Backup - AVR Maestro" />
-<meta property="og:description" content="Manage receivers, theme with TJ Mode, set volume step, debug log, and back up everything to a file." />
+<meta property="og:description" content="Manage receivers, theme with Color Theme by hex code, set volume step, debug log, and back up everything to a file." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://avrmaestro.com/guide/settings/" />
 <meta property="og:site_name" content="AVR Maestro" />
 <meta property="og:image" content="https://avrmaestro.com/screenshots/settings-tjmode.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Settings, Themes &amp; Backup - AVR Maestro" />
-<meta name="twitter:description" content="Manage receivers, theme with TJ Mode, debug log, and back up everything." />
+<meta name="twitter:description" content="Manage receivers, theme with Color Theme by hex code, debug log, and back up everything." />
 <meta name="twitter:image" content="https://avrmaestro.com/screenshots/settings-tjmode.png" />
 <link rel="icon" type="image/png" sizes="48x48" href="../../assets/favicon-48.png" />
 <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
@@ -33,7 +33,7 @@
       "name": "Can I change the app's theme and colors?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. Under Settings, Appearance you can choose Light, Dark, Device or AMOLED (true black), and TJ Mode lets you pick any accent color and the app rebuilds its whole palette around it. You can also set Display Size, Widget Size, and customize the navigation and tabs."
+        "text": "Yes. Under Settings, Appearance you can choose Light, Dark, Device or AMOLED (true black), and Color Theme lets you pick any accent color and the app rebuilds its whole palette around it. You can also set Display Size, Widget Size, and customize the navigation and tabs."
       }
     },
     {
@@ -121,9 +121,9 @@
       <div class="crumb"><a href="/">Home</a> &rsaquo; <a href="/guide/">User Guide</a> &rsaquo; Settings</div>
       <div class="eyebrow">Settings</div>
       <h1>Make it <span class="g">yours</span></h1>
-      <p>Everything that tailors AVR Maestro to you and your gear - manage receivers, theme the whole app with TJ Mode, tune the volume step, grab a debug log for support, and back up your entire setup to a file.</p>
+      <p>Everything that tailors AVR Maestro to you and your gear - manage receivers, theme the whole app with Color Theme, tune the volume step, grab a debug log for support, and back up your entire setup to a file.</p>
     </div>
-    <div class="hero-shot"><img alt="TJ Mode accent color in AVR Maestro" src="../../screenshots/settings-tjmode.png" /></div>
+    <div class="hero-shot"><img alt="Color Theme accent color in AVR Maestro" src="../../screenshots/settings-tjmode.png" /></div>
   </div>
 </div>
 
@@ -138,7 +138,7 @@
       <tbody>
         <tr><td>Devices</td><td>Switch receivers, full Device Information, Manage Receivers (rename/delete), Add Receiver.</td></tr>
         <tr><td>Receiver</td><td><b>Remote Lock</b> - lock or unlock the receiver's own physical IR remote from the app. Only shown on receivers that support it.</td></tr>
-        <tr><td>Appearance</td><td>Theme (Light / Dark / Device / AMOLED true-black) and <b>TJ Mode</b> - pick any accent color and the app rebuilds its palette. Plus Display Size, Widget Size, Customize Navigation and Customize Tabs.</td></tr>
+        <tr><td>Appearance</td><td>Theme (Light / Dark / Device / AMOLED true-black) and <b>Color Theme</b> - pick any accent color, from the wheel or by typing a hex code like <code>#FF8C00</code>, and the app rebuilds its palette around it. A code it cannot read is refused with the reason, and a colour too close to black is refused separately, because on the AMOLED theme it would have nothing to show against. Plus Display Size, Widget Size, Customize Navigation and Customize Tabs.</td></tr>
         <tr><td>Audio</td><td>Volume Step (0.5-2.0 dB), whether the absolute volume or dB shows on top, and <b>Gradual</b> vs <b>Direct</b> volume presets - Gradual (the default) ramps smoothly to a preset's target instead of jumping straight there, on the main zone and Zone 2/3.</td></tr>
         <tr><td>Help</td><td>Explanation cards toggle, restore dismissed cards, and a live Debug Log with one-tap Save &amp; Share for support.</td></tr>
         <tr><td>Developer Tools</td><td>Hidden until you tap the version number (in About) seven times - then it stays available across launches until you remove it. Raw Telnet / HEOS commands, AJAX dump, and a volume-cap wire diagnostic.</td></tr>
@@ -170,7 +170,7 @@
       <div class="eyebrow">Common questions</div>
       <h2>Settings FAQ</h2>
     </div>
-    <details open><summary>Can I change the app's theme and colors?</summary><div class="body">Yes - Light, Dark, Device or AMOLED (true black), plus TJ Mode where you pick any accent color and the app rebuilds its palette. You can also set Display/Widget size and customize navigation and tabs.</div></details>
+    <details open><summary>Can I change the app's theme and colors?</summary><div class="body">Yes - Light, Dark, Device or AMOLED (true black), plus Color Theme where you pick any accent color and the app rebuilds its palette. Use the wheel or type a hex code (<code>#FF8C00</code>, or the three-character shorthand). If the code is wrong the app tells you what is wrong with it rather than just refusing. You can also set Display/Widget size and customize navigation and tabs.</div></details>
     <details><summary>Can I back up my setup?</summary><div class="body">Yes - Settings, Backup exports every receiver, preset and preference to a .zip file that also bundles your custom input icons; import to restore on a new phone. Older .json backups still import fine. No credentials in the file, so it's safe to share.</div></details>
     <details><summary>Do volume presets jump straight to the target, or ramp there?</summary><div class="body">Your call - Settings, Audio has a Gradual / Direct switch. Gradual (the default) ramps smoothly toward a preset's target so a tap can never slam your speakers with a sudden jump. Direct applies it instantly. Works on the main zone and Zone 2/3.</div></details>
     <details><summary>Can I lock the receiver's physical remote from the app?</summary><div class="body">Yes, on receivers that support it - Settings, Receiver has a Remote Lock switch to lock or unlock the receiver's own IR remote.</div></details>
