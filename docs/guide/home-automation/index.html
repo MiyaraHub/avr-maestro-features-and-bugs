@@ -14,10 +14,10 @@
 <meta property="og:description" content="Your scenes become native Home Assistant scripts that run without your phone. Voice control through whatever assistant you already use." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://avrmaestro.com/guide/home-automation/" />
-<meta property="og:image" content="https://avrmaestro.com/screenshots/4.25.0/14_home_automation.png" />
+<meta property="og:image" content="https://avrmaestro.com/screenshots/home-assistant.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Home Automation - Home Assistant, Hubitat and Webhooks | AVR Maestro" />
-<meta name="twitter:image" content="https://avrmaestro.com/screenshots/4.25.0/14_home_automation.png" />
+<meta name="twitter:image" content="https://avrmaestro.com/screenshots/home-assistant.png" />
 <link rel="icon" href="../../assets/favicon.ico" />
 <link rel="stylesheet" href="../../assets/site.css" />
 <script type="application/ld+json">
@@ -90,7 +90,8 @@
 <section>
   <div class="wrap">
     <div class="gallery">
-      <figure><img alt="The Home Automation hub in AVR Maestro settings" src="../../screenshots/4.25.0/14_home_automation.png" /><figcaption>One hub for Home Assistant, Hubitat and webhooks</figcaption></figure>
+      <figure><img alt="The AVR Maestro Home Automation hub with Home Assistant, Hubitat and Webhooks" src="../../screenshots/home-automation.png" /><figcaption>One hub, three ways out</figcaption></figure>
+      <figure><img alt="AVR Maestro linked to Home Assistant with the receiver entity auto-discovered" src="../../screenshots/home-assistant.png" /><figcaption>Linked, with your receiver entity found for you</figcaption></figure>
     </div>
 
     <div class="section-head" style="margin-top:36px">
@@ -122,10 +123,10 @@
 
     <div class="lockrow" style="margin-top:28px">
       <div>
-        <div class="eyebrow">Upgrading from an earlier version</div>
-        <h2>Your script IDs change once, in 4.25.0</h2>
-        <p>Earlier versions named each script after the scene <em>and</em> the receiver, so renaming either one left the old script behind and quietly created a second. Scripts are now named after the scene and the receiver's MAC address, which is what makes a rename update the same script instead of forking it.</p>
-        <p>The first sync after updating replaces the old scripts with the new ones. <b>Anything you built on the old IDs needs repointing once</b> - a dashboard button, an automation, a voice alias. Open the script in Home Assistant to find its new entity ID.</p>
+        <div class="eyebrow">If you synced with an older build</div>
+        <h2>Your script IDs change once</h2>
+        <p>Scripts used to be named after the scene <em>and</em> the receiver, so renaming either one left the old script behind and quietly created a second. They are now named after the scene and the receiver's MAC address, which is what makes a rename update the same script instead of forking it.</p>
+        <p>The first sync after that change replaces the old scripts with the new ones. <b>Anything you built on the old IDs needs repointing once</b> - a dashboard button, an automation, a voice alias. Open the script in Home Assistant to find its new entity ID.</p>
       </div>
     </div>
   </div>
