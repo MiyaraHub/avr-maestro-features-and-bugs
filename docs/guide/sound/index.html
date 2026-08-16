@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Sound Tab - Every Audio Control on Your Denon or Marantz | AVR Maestro</title>
+<meta name="description" content="A complete walkthrough of AVR Maestro's Sound tab: surround modes and audio features, Dialog Enhancer and Dynamic Range Compression, Audyssey MultEQ, Dirac Live filter slots, the 9-band Graphic EQ, per-channel trims, Bass and Treble, the DAC filter, M-DAX, IMAX Enhanced and Auro-3D - with what each one does and when your receiver locks it." />
+<meta name="keywords" content="Denon sound modes app, Marantz surround mode app, Audyssey MultEQ app, Dirac Live app control, Dolby Surround DTS Neural X app, IMAX Enhanced settings app, Auro-3D app, dialog enhancer Denon, dynamic range compression AVR, M-DAX audio restorer" />
+<meta name="author" content="MiyaraHub Technologies LLC" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<meta name="theme-color" content="#ff6e40" />
+<link rel="canonical" href="https://avrmaestro.com/guide/sound/" />
+<meta property="og:title" content="The Sound Tab - Every Audio Control on Your Denon or Marantz | AVR Maestro" />
+<meta property="og:description" content="Surround modes, Audyssey, Dirac, Graphic EQ, per-channel trims, Tone, IMAX and Auro-3D - the whole Sound tab explained." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://avrmaestro.com/guide/sound/" />
+<meta property="og:site_name" content="AVR Maestro" />
+<meta property="og:image" content="https://avrmaestro.com/screenshots/sound-surround.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="The Sound Tab - AVR Maestro" />
+<meta name="twitter:description" content="Every audio control your Denon or Marantz exposes, in one tab." />
+<meta name="twitter:image" content="https://avrmaestro.com/screenshots/sound-surround.png" />
+<link rel="icon" type="image/png" sizes="48x48" href="../../assets/favicon-48.png" />
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+<link rel="stylesheet" href="../../assets/site.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Which sound modes can I pick from the app?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Whichever ones your receiver offers for the signal it is currently decoding. AVR Maestro reads the available list from the receiver instead of hard-coding one, so a Dolby Atmos track shows the Atmos-capable modes and a stereo track shows the upmixers. Modes are grouped as Movie, Music, Game and Pure, matching the receiver's own grouping."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is Dynamic Range Compression greyed out?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "DRC only exists on Dolby bitstreams. On a PCM, DTS or network stereo source the receiver has no DRC to set, so AVR Maestro greys the row and says so rather than sending a command the receiver would ignore."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I control both Audyssey and Dirac Live?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, but not at the same time - and that is the receiver's rule, not the app's. Each Speaker Preset is owned by one system. On a preset with a Dirac filter loaded, the Audyssey page tells you Dirac owns it; on a preset without one, the Dirac page tells you Audyssey owns it. Switch Speaker Preset to switch systems."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are Bass Sync and the DAC filter?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Bass Sync sits on the Channels page and time-aligns the LFE channel against the main speakers. The DAC filter sits on the Tone page: Filter 1 is a warmer, slower roll-off and Filter 2 is a sharper reference response. Both are receiver features that AVR Maestro exposes only when your chassis reports them."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/"><img src="../../assets/avr-maestro-icon.png" alt="AVR Maestro icon" /> AVR Maestro</a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('m').classList.toggle('open')">&#9776;</button>
+    <nav id="m">
+      <a href="/">Home</a>
+      <a href="/guide/">User Guide</a>
+      <a href="/receivers/">Receivers</a>
+      <a href="/audyssey-dirac-control/">Audyssey &amp; Dirac</a>
+      <a href="/best-denon-marantz-app/">Why switch</a>
+      <a href="/#top" class="cta">Download</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="crumb"><a href="/">Home</a> &rsaquo; <a href="/guide/">User Guide</a> &rsaquo; Sound</div>
+    <div class="eyebrow">The Sound tab</div>
+    <h1>Every audio control your receiver has, <span class="g">in one tab</span></h1>
+    <p>The Sound tab is nine pages deep, and it mirrors your receiver's own audio menu rather than a simplified version of it. This page walks all nine: what each control does, what it expects, and why the receiver sometimes refuses to let you touch it.</p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">What is in here</div>
+      <h2>The nine pages</h2>
+    </div>
+    <table class="t">
+      <thead><tr><th>Page</th><th>What it controls</th></tr></thead>
+      <tbody>
+        <tr><td><a href="#surround">Surround</a></td><td>The sound mode, grouped Movie / Music / Game / Pure, plus the audio feature readout</td></tr>
+        <tr><td><a href="#dialog">Dialog &amp; DRC</a></td><td>Dialog Enhancer strength and Dynamic Range Compression</td></tr>
+        <tr><td><a href="#audyssey">Audyssey</a></td><td>MultEQ, Dynamic EQ, Reference Level Offset, Dynamic Volume, Surround Level Compensation</td></tr>
+        <tr><td><a href="#dirac">Dirac Live</a></td><td>Your loaded filter slots by name, and Off</td></tr>
+        <tr><td><a href="#geq">Graphic EQ</a></td><td>A 9-band curve per speaker, 63Hz to 16kHz</td></tr>
+        <tr><td><a href="#channels">Channels</a></td><td>Per-channel trim in dB for every speaker in the current signal, plus Bass Sync</td></tr>
+        <tr><td><a href="#tone">Tone</a></td><td>Tone Control, Bass, Treble, DAC filter, Audio Restorer (M-DAX)</td></tr>
+        <tr><td><a href="#imax">IMAX</a></td><td>IMAX Enhanced mode and its own HPF, LPF and subwoofer routing</td></tr>
+        <tr><td><a href="#auro">Auro-3D</a></td><td>Auromatic preset, Strength and Auro 3D Mode</td></tr>
+      </tbody>
+    </table>
+    <div class="note">Your receiver decides which of these appear. A chassis without Auro-3D licensing simply has no Auro-3D page, and one without an IMAX Enhanced decoder has no IMAX page. AVR Maestro asks the receiver what it has rather than assuming a model.</div>
+  </div>
+</section>
+
+<section id="surround">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Page one</div>
+      <h2>Surround: the mode, and what the receiver is actually doing</h2>
+    </div>
+    <div class="lockrow">
+      <div>
+        <p class="lead">The top card shows the <b>current mode</b> exactly as the receiver reports it. Below it, the modes are grouped into <b>Movie</b>, <b>Music</b>, <b>Game</b> and <b>Pure</b>, and only the modes the receiver will accept for the signal it is decoding right now are offered.</p>
+        <ul class="plain">
+          <li><b>Stereo, Dolby Surround, DTS Neural:X, Auro-3D, Auro Surround, Multi Ch Stereo</b> and the rest appear as your chassis and the incoming stream allow.</li>
+          <li><b>Audio Features</b> underneath is a live readout, not a wish list: Neural:X, IMAX Enhanced, Cinema EQ, Center Spread, Loudness Management, Speaker Virtualizer and friends each show <b>Active</b>, <b>Inactive</b> or <b>N/A</b>.</li>
+          <li><b>N/A</b> means the current signal cannot use that feature. Tap the question mark beside it and the app explains which signal would.</li>
+        </ul>
+      </div>
+      <img alt="The Surround page showing the current mode and the audio features readout" src="../../screenshots/sound-surround.png" />
+    </div>
+  </div>
+</section>
+
+<section id="dialog">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Page two</div>
+      <h2>Dialog &amp; DRC: intelligibility and night listening</h2>
+    </div>
+    <div class="lockrow">
+      <div>
+        <ul class="plain">
+          <li><b>Dialog Enhancer</b> - Off, Low, Medium or High. Lifts the centre-channel intelligibility without touching your calibration.</li>
+          <li><b>Dynamic Range Compression</b> - Off, Low, Mid, High or Auto. Squeezes the gap between whispers and explosions, which is what you want late at night.</li>
+        </ul>
+        <p class="lead">DRC is the clearest example of how AVR Maestro handles a control the receiver will not accept. Compression data is carried <b>inside a Dolby bitstream</b>, so on a PCM, DTS or network stereo source there is nothing to compress. Rather than let you press a button that does nothing, the app greys the row and prints the reason: switch to Dolby Digital, Dolby Digital Plus, Dolby TrueHD or Dolby Atmos content to use it.</p>
+      </div>
+      <img alt="Dialog and DRC, with Dynamic Range Compression greyed out and explained" src="../../screenshots/sound-dialog-drc.png" />
+    </div>
+  </div>
+</section>
+
+<section id="audyssey">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Page three</div>
+      <h2>Audyssey: the whole calibration menu, not just MultEQ</h2>
+    </div>
+    <div class="gallery" style="grid-template-columns:repeat(2,1fr);max-width:640px">
+      <figure><img alt="The Audyssey page with MultEQ, Dynamic EQ, Reference Level Offset, Dynamic Volume and Surround Level Compensation" src="../../screenshots/sound-audyssey.png" /><figcaption>Every Audyssey control, live</figcaption></figure>
+      <figure><img alt="The Audyssey page reporting that Dirac owns this Speaker Preset" src="../../screenshots/sound-audyssey-locked.png" /><figcaption>On a Dirac preset, it says so</figcaption></figure>
+    </div>
+    <ul class="plain" style="margin-top:26px">
+      <li><b>MultEQ</b> - Reference, Bypass LR, Flat or Off. Reference is the calibrated house curve; Flat removes the high-frequency roll-off; Bypass LR leaves the front pair uncorrected; Off hands the EQ back to you.</li>
+      <li><b>Dynamic EQ</b> - On or Off. Keeps the tonal balance right as you turn the volume down, instead of the bass thinning out.</li>
+      <li><b>Reference Level Offset</b> - 0, 5, 10 or 15 dB. Tells Dynamic EQ how far below reference level your content was mastered. 0 dB suits film; the higher offsets suit music and TV.</li>
+      <li><b>Dynamic Volume</b> - Off, Light, Medium or Heavy. Levels loud adverts against quiet dialogue.</li>
+      <li><b>Surround Level Compensation</b> - Off, Light, Medium or Heavy.</li>
+    </ul>
+    <div class="note">Whether this page is editable depends on which system owns the current Speaker Preset. See <a href="/guide/locked-controls/">why a control is locked</a>.</div>
+  </div>
+</section>
+
+<section id="dirac">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Page four</div>
+      <h2>Dirac Live: your filters, by the names you gave them</h2>
+    </div>
+    <div class="lockrow">
+      <div>
+        <p class="lead">If you have run Dirac Live, the filters you exported sit in numbered slots on the receiver. AVR Maestro lists them <b>by the name you saved them under</b>, with the slot number underneath, plus an <b>Off</b> entry to run the preset with no filter at all. One tap swaps filters.</p>
+        <p class="lead">On a Speaker Preset that has no Dirac filter loaded, the page says so plainly instead of showing an empty list.</p>
+      </div>
+      <img alt="The Dirac Live page listing filter slots by their saved names" src="../../screenshots/sound-dirac.png" />
+    </div>
+  </div>
+</section>
+
+<section id="geq">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Page five</div>
+      <h2>Graphic EQ: nine bands, per speaker</h2>
+    </div>
+    <div class="lockrow">
+      <div>
+        <p class="lead">A real editor, not a toggle: nine bands from 63Hz to 16kHz, -20 to +6 dB, dragged on the graph. Choose <b>All</b>, <b>Left/Right</b> or <b>Each</b> speaker, use <b>Copy</b> to start from your measured Audyssey curve, <b>Reset</b> to flatten, and the pending-changes bar to apply.</p>
+        <p class="lead">The receiver runs room correction <b>or</b> the manual EQ, never both, so this page is locked whenever MultEQ or Dirac is running - and it names which one.</p>
+        <p class="lead"><a href="/guide/graphic-eq/">The full Graphic EQ guide &rarr;</a></p>
+      </div>
+      <img alt="The Graphic EQ editor with a 9-band curve per speaker" src="../../screenshots/graphic-eq.png" />
+    </div>
+  </div>
+</section>
+
+<section id="channels">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Page six</div>
+      <h2>Channels: trim any speaker while the film is running</h2>
+    </div>
+    <div class="lockrow">
+      <div>
+        <p class="lead">Per-channel trim in dB for every speaker present in the <b>current signal</b> - Front Left, Front Right, Center, the surrounds, the surround backs, both subwoofers and the height layer, each with its short name underneath so there is no guessing which is which.</p>
+        <ul class="plain">
+          <li><b>Plus and minus</b> nudge a single channel while you listen.</li>
+          <li><b>Reset All</b> puts every channel back to 0 dB.</li>
+          <li><b>Bass Sync</b> at the bottom time-aligns the LFE channel against the mains.</li>
+        </ul>
+        <p class="lead">These are the live per-signal trims. The per-speaker <b>reference levels</b> stored on the Speaker Preset live on the <a href="/guide/speakers/">Speakers tab</a> instead, and the app explains the difference in the page's own info card.</p>
+      </div>
+      <img alt="The Channels page with per-channel dB trim for every speaker" src="../../screenshots/sound-channels.png" />
+    </div>
+  </div>
+</section>
+
+<section id="tone">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Page seven</div>
+      <h2>Tone: bass, treble, the DAC filter and M-DAX</h2>
+    </div>
+    <div class="gallery" style="grid-template-columns:repeat(2,1fr);max-width:640px">
+      <figure><img alt="The Tone page with Bass, Treble, DAC Filter and Audio Restorer" src="../../screenshots/sound-tone.png" /><figcaption>Tone, free to edit</figcaption></figure>
+      <figure><img alt="The Tone page with the controls locked by Dynamic EQ" src="../../screenshots/sound-tone-locked.png" /><figcaption>Dynamic EQ takes the tone controls</figcaption></figure>
+    </div>
+    <ul class="plain" style="margin-top:26px">
+      <li><b>Tone Control</b> - the master switch. Bass and Treble only reach the receiver while this is active.</li>
+      <li><b>Bass</b> and <b>Treble</b> - -6 dB to +6 dB in 1 dB steps.</li>
+      <li><b>DAC Filter</b> - Filter 1 is warmer with a slow roll-off, Filter 2 is a sharper reference response.</li>
+      <li><b>Audio Restorer (M-DAX)</b> - Off, Low, Med or High. Rebuilds detail lost to compressed or streaming audio, which is what you want on a 128k radio stream and not what you want on a lossless disc.</li>
+    </ul>
+    <div class="note">Audyssey Dynamic EQ owns the tone controls while it is running: the receiver takes them over, and AVR Maestro shows a banner saying so rather than leaving you to wonder why Bass does nothing.</div>
+  </div>
+</section>
+
+<section id="imax">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Page eight</div>
+      <h2>IMAX: the full Enhanced settings menu</h2>
+    </div>
+    <div class="lockrow">
+      <div>
+        <p class="lead">On a chassis with IMAX Enhanced, the app exposes the whole menu rather than just the on/off:</p>
+        <ul class="plain">
+          <li><b>IMAX Mode</b> - Auto or Off.</li>
+          <li><b>Audio Settings</b> - Auto follows the IMAX recommendation; Manual opens the four controls below.</li>
+          <li><b>High Pass Filter</b> - 40Hz through 250Hz.</li>
+          <li><b>Low Pass Filter</b> - 70Hz through 250Hz.</li>
+          <li><b>Subwoofer</b> - On or Off, and <b>Subwoofer Output</b> - LFE+Main or LFE.</li>
+        </ul>
+      </div>
+      <img alt="The IMAX page with mode, filters and subwoofer routing" src="../../screenshots/sound-imax.png" />
+    </div>
+  </div>
+</section>
+
+<section id="auro">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Page nine</div>
+      <h2>Auro-3D: upmixing with a shape</h2>
+    </div>
+    <div class="lockrow">
+      <div>
+        <ul class="plain">
+          <li><b>Auromatic 3D Preset</b> - Small, Medium, Large, Speech or Movie. Picks the room and content character the upmixer aims at.</li>
+          <li><b>Strength</b> - 0 to 15, for how much height information Auromatic generates.</li>
+          <li><b>Auro 3D Mode</b> - Direct, or Channel Expansion.</li>
+        </ul>
+        <p class="lead">These only apply while an Auro mode is selected on the Surround page, and the page is only present on a chassis that carries the Auro-3D decoder.</p>
+      </div>
+      <img alt="The Auro-3D page with preset, strength and mode" src="../../screenshots/sound-auro3d.png" />
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Common questions</div>
+      <h2>Sound tab FAQ</h2>
+    </div>
+    <details open><summary>Why does the list of sound modes change?</summary><div class="body">Because the receiver's list changes. The modes a Denon or Marantz will accept depend on what it is decoding: a two-channel stream offers the upmixers, an Atmos stream offers the Atmos-capable modes. AVR Maestro reads the current list off the receiver each time rather than showing a fixed menu that would be wrong half the time.</div></details>
+    <details><summary>Why is a control greyed out with N/A?</summary><div class="body">N/A means the receiver has no value for it in the current state - usually because the incoming signal does not carry the feature. Tap the question mark next to the row and the app explains which signal would enable it. A grey control is never a bug being hidden; it is the receiver's own answer.</div></details>
+    <details><summary>What is the difference between Channels and Levels?</summary><div class="body">Channels (Sound tab) is the live per-channel trim for the signal playing right now. Levels (Speakers tab) is the per-speaker reference level stored on the Speaker Preset by your calibration. Adjusting Channels does not rewrite your calibration.</div></details>
+    <details><summary>Can I use Tone Control and Audyssey together?</summary><div class="body">Not while Dynamic EQ is on - the receiver takes ownership of the tone controls. Turn Dynamic EQ off on the Audyssey page and Bass and Treble become editable again.</div></details>
+    <details><summary>Do I need to be on the same network?</summary><div class="body">Yes. AVR Maestro talks to your receiver directly over your LAN, with no cloud account and no relay server in between. See <a href="/guide/getting-started/">Getting started</a>.</div></details>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <h2>The whole audio menu, from the couch</h2>
+    <p class="lead" style="margin:0 auto 24px">One-time purchase, no ads, no subscriptions. Connect in under a minute.</p>
+    <div class="badges">
+      <a href="https://play.google.com/store/apps/details?id=com.miyarahub.avr_maestro"><img alt="Get it on Google Play" src="https://img.shields.io/badge/Google%20Play-Download-414141?logo=google-play&logoColor=white&style=for-the-badge" /></a>
+      <a href="https://apps.apple.com/us/app/avr-maestro-for-denon-marantz/id6762881597"><img alt="Download on the App Store" src="https://img.shields.io/badge/App%20Store-Download-0D96F6?logo=app-store&logoColor=white&style=for-the-badge" /></a>
+      <a href="https://apps.apple.com/us/app/avr-maestro-for-denon-marantz/id6762881597"><img alt="Download on the Mac App Store" src="https://img.shields.io/badge/Mac%20App%20Store-Download-1D1D1F?logo=apple&logoColor=white&style=for-the-badge" /></a>
+      <a href="https://apps.microsoft.com/detail/9P4M7W4J5106"><img alt="Get it on the Microsoft Store" src="https://img.shields.io/badge/Microsoft%20Store-Download-0078D4?logo=windows&logoColor=white&style=for-the-badge" /></a>
+    </div>
+    <p class="lead" style="margin:18px auto 0;font-size:.92rem"><a href="/guide/">Back to the full User Guide &rarr;</a></p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="flinks">
+      <a href="/">Home</a>
+      <a href="/guide/">User Guide</a>
+      <a href="/receivers/">Receivers</a>
+      <a href="/best-denon-marantz-app/">Why switch</a>
+      <a href="https://play.google.com/store/apps/details?id=com.miyarahub.avr_maestro">Google Play</a>
+      <a href="https://apps.apple.com/us/app/avr-maestro-for-denon-marantz/id6762881597">App Store</a>
+      <a href="https://apps.microsoft.com/detail/9P4M7W4J5106">Microsoft Store</a>
+      <a href="https://discord.gg/UmVtxE5fXN">Discord</a>
+      <a href="https://www.facebook.com/groups/avrmaestro">Facebook</a>
+      <a href="https://miyarahub.com">MiyaraHub</a>
+    </div>
+    <p class="legal">AVR Maestro is an independent app by MiyaraHub Technologies LLC and is not affiliated with, endorsed by, or sponsored by Denon, Marantz, D&amp;M Holdings or Sound United. Denon, Marantz, HEOS, Audyssey, Dirac Live, IMAX and Auro-3D are trademarks of their respective owners.</p>
+  </div>
+</footer>
+
+<script defer src="/assets/search.js"></script>
+</body>
+</html>

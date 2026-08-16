@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Why a Control Is Locked - Dirac, Audyssey and Speaker Presets Explained | AVR Maestro</title>
+<meta name="description" content="Speaker Layout locked, Levels locked, Graphic EQ locked, Audyssey unavailable - none of it is the app. Your Denon or Marantz locks these menus itself, and which ones depend on whether the active Speaker Preset is owned by Dirac Live or Audyssey. Here is the full map, and how to unlock any of them." />
+<meta name="keywords" content="Denon speaker layout locked, Marantz levels locked Dirac, Audyssey unavailable Dirac, graphic EQ locked receiver, Dirac Live speaker preset lock, why is distance greyed out Denon, AVR Maestro locked control" />
+<meta name="author" content="MiyaraHub Technologies LLC" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<meta name="theme-color" content="#ff6e40" />
+<link rel="canonical" href="https://avrmaestro.com/guide/locked-controls/" />
+<meta property="og:title" content="Why a Control Is Locked - Dirac, Audyssey and Speaker Presets | AVR Maestro" />
+<meta property="og:description" content="Your receiver locks these menus, not the app. Here is which ones, why, and how to unlock them." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://avrmaestro.com/guide/locked-controls/" />
+<meta property="og:site_name" content="AVR Maestro" />
+<meta property="og:image" content="https://avrmaestro.com/screenshots/speakers-layout-locked.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Why a Control Is Locked - AVR Maestro" />
+<meta name="twitter:description" content="Dirac, Audyssey and Speaker Presets: the full lock map." />
+<meta name="twitter:image" content="https://avrmaestro.com/screenshots/speakers-layout-locked.png" />
+<link rel="icon" type="image/png" sizes="48x48" href="../../assets/favicon-48.png" />
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+<link rel="stylesheet" href="../../assets/site.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why is Speaker Layout locked in AVR Maestro?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Because Dirac Live is active on the Speaker Preset you are on, and the receiver itself locks the speaker layout while a Dirac filter is loaded. A Dirac filter is measured against a specific set of speakers, so changing the layout underneath it would invalidate the calibration. Switch to a Speaker Preset without an active Dirac filter and the page unlocks."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does the Audyssey page say Dirac owns this Speaker Preset?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Each Speaker Preset on your receiver is calibrated by one system, not both. If the preset you are on carries a Dirac Live filter, Audyssey has nothing to show for it, and AVR Maestro says so rather than showing an empty page. The reverse is also true: on an Audyssey preset the Dirac page reports that Audyssey owns it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I unlock Levels, Distances and Crossovers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Go to Speakers, then Preset, and switch to a Speaker Preset that has no active Dirac filter. Levels, Distances, Crossovers, Speaker Layout and Subwoofer Output all become editable immediately. Switch back when you are done and your Dirac calibration is untouched."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is AVR Maestro blocking these controls?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The receiver reports each menu entry as available, disabled or hidden, and AVR Maestro renders exactly what it is told. When something is locked the app shows the receiver's reason instead of letting you send a command that would be silently ignored."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/"><img src="../../assets/avr-maestro-icon.png" alt="AVR Maestro icon" /> AVR Maestro</a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('m').classList.toggle('open')">&#9776;</button>
+    <nav id="m">
+      <a href="/">Home</a>
+      <a href="/guide/">User Guide</a>
+      <a href="/receivers/">Receivers</a>
+      <a href="/audyssey-dirac-control/">Audyssey &amp; Dirac</a>
+      <a href="/best-denon-marantz-app/">Why switch</a>
+      <a href="/#top" class="cta">Download</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="crumb"><a href="/">Home</a> &rsaquo; <a href="/guide/">User Guide</a> &rsaquo; Why a control is locked</div>
+    <div class="eyebrow">Troubleshooting</div>
+    <h1>"Speaker Layout is locked" - <span class="g">and that is correct</span></h1>
+    <p>Sooner or later you will open a page and find it will not let you edit anything. It is almost never a bug and it is never the app being cautious: your receiver locks these menus itself, and it locks a different set depending on which system calibrated the Speaker Preset you are on. This page is the whole map.</p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">The one rule</div>
+      <h2>A Speaker Preset belongs to one calibration system</h2>
+    </div>
+    <p class="lead">Modern Denon and Marantz receivers store two <b>Speaker Presets</b>, and each one is a complete snapshot: layout, distances, levels, crossovers, and the room correction that measured them. A preset is calibrated by <b>Audyssey</b> or by <b>Dirac Live</b>. Never both.</p>
+    <p class="lead">That is why the two pages mirror each other. On a preset carrying a Dirac filter, the Audyssey page has nothing to show. On a preset calibrated by Audyssey, the Dirac page has nothing to show. In both cases AVR Maestro prints which system owns the preset instead of leaving you staring at an empty screen.</p>
+    <div class="gallery" style="grid-template-columns:repeat(2,1fr);max-width:640px;margin-top:26px">
+      <figure><img alt="The Audyssey page reporting that Dirac owns this Speaker Preset" src="../../screenshots/sound-audyssey-locked.png" /><figcaption>On a Dirac preset</figcaption></figure>
+      <figure><img alt="The Dirac Live page reporting that Audyssey owns this Speaker Preset" src="../../screenshots/sound-dirac-locked.png" /><figcaption>On an Audyssey preset</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">The map</div>
+      <h2>What locks what</h2>
+    </div>
+    <table class="t">
+      <thead><tr><th>Page</th><th>Locked when</th><th>To unlock</th></tr></thead>
+      <tbody>
+        <tr><td>Speaker Layout</td><td>A Dirac filter is active on this preset</td><td>Switch Speaker Preset</td></tr>
+        <tr><td>Distances</td><td>A Dirac filter is active on this preset</td><td>Switch Speaker Preset</td></tr>
+        <tr><td>Levels</td><td>A Dirac filter is active on this preset</td><td>Switch Speaker Preset</td></tr>
+        <tr><td>Crossovers</td><td>A Dirac filter is active on this preset</td><td>Switch Speaker Preset</td></tr>
+        <tr><td>Subwoofer Output</td><td>A Dirac filter is active on this preset</td><td>Switch Speaker Preset</td></tr>
+        <tr><td>Audyssey</td><td>Dirac owns this preset</td><td>Switch to the Audyssey preset</td></tr>
+        <tr><td>Dirac Live</td><td>Audyssey owns this preset</td><td>Switch to the Dirac preset</td></tr>
+        <tr><td>Graphic EQ</td><td>Either Dirac <b>or</b> Audyssey MultEQ is running</td><td>Switch preset, or set MultEQ to Off</td></tr>
+        <tr><td>Tone, Bass, Treble</td><td>Audyssey Dynamic EQ is on</td><td>Turn Dynamic EQ off</td></tr>
+        <tr><td>LFE Distribution</td><td>No speaker is set to Full Range</td><td>Set a speaker to Full Range in Crossovers</td></tr>
+        <tr><td>Dynamic Range Compression</td><td>The source is not a Dolby bitstream</td><td>Play Dolby content</td></tr>
+      </tbody>
+    </table>
+    <div class="note">Individual rows lock too, not just whole pages. On the Speaker Layout page a single row such as Front Speaker can carry its own lock note while the rest of the page stays editable - because that is exactly what the receiver reported.</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Worked example</div>
+      <h2>The Graphic EQ locks for two different reasons</h2>
+    </div>
+    <p class="lead">The Graphic EQ is the clearest case of why a generic "this is unavailable" message is not good enough. Your receiver runs <b>room correction or the manual EQ, never both</b> - but there are two different room-correction systems that can be holding it, and the fix is different for each. So AVR Maestro names the one that is actually running.</p>
+    <div class="gallery" style="grid-template-columns:repeat(2,1fr);max-width:640px;margin-top:22px">
+      <figure><img alt="Graphic EQ locked because Dirac Live is active" src="../../screenshots/graphic-eq-locked.png" /><figcaption>Held by Dirac: switch preset</figcaption></figure>
+      <figure><img alt="The unlocked Graphic EQ editor" src="../../screenshots/graphic-eq.png" /><figcaption>Freed: the 9-band editor</figcaption></figure>
+    </div>
+    <ul class="plain" style="margin-top:26px">
+      <li><b>Held by Dirac Live</b> - the message tells you to switch to a Speaker Preset without a Dirac filter.</li>
+      <li><b>Held by Audyssey MultEQ</b> - the message tells you to set MultEQ to Off on the Audyssey page, which hands the EQ to the manual Graphic EQ.</li>
+    </ul>
+    <p class="lead">Once it is free, the toggle at the top turns the EQ on and the nine bands become editable. <a href="/guide/graphic-eq/">Full Graphic EQ guide &rarr;</a></p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Not a lock</div>
+      <h2>"Unavailable" and "N/A" mean something different</h2>
+    </div>
+    <ul class="plain">
+      <li><b>A padlock</b> means the receiver is refusing edits and told the app why. The message names the cause.</li>
+      <li><b>N/A</b> on a Surround audio-feature row means the current signal cannot use that feature. Tap the question mark for which signal would.</li>
+      <li><b>"Unavailable - the receiver did not report a value"</b> means the app asked and got nothing back. That is not the same as a value of zero or off, and AVR Maestro will not invent one. Tapping <b>Retry</b> re-asks. If the receiver's own web control page is open in a browser somewhere, close it - a Denon or Marantz will only hold so many control sessions at once, and that is the usual cause.</li>
+    </ul>
+    <div class="note">This distinction is deliberate. A control that reads "Off" when the app actually has no idea is worse than one that admits it does not know, because you would have no way to tell the difference.</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">How to switch</div>
+      <h2>Changing Speaker Preset takes two taps</h2>
+    </div>
+    <div class="lockrow">
+      <div>
+        <ol class="plain">
+          <li>Open the <b>Speakers</b> tab.</li>
+          <li>Stay on the first page, <b>Preset</b>.</li>
+          <li>Tap the other preset.</li>
+        </ol>
+        <p class="lead">The layout, distances, levels and crossovers all reload for that preset, and everything Dirac was holding becomes editable. Your Dirac calibration is stored on its own preset and is not touched by switching away from it - switch back and it is exactly as you left it.</p>
+      </div>
+      <img alt="The Speaker Preset page with Preset 1 and Preset 2" src="../../screenshots/speakers-preset.png" />
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Common questions</div>
+      <h2>Locked controls FAQ</h2>
+    </div>
+    <details open><summary>Is the app blocking me?</summary><div class="body">No. Your receiver reports every menu entry as available, disabled or hidden, and AVR Maestro renders what it is told. When an entry comes back disabled, the app shows the reason rather than letting you press a control the receiver would ignore in silence - which is what happens on the receiver's own web page.</div></details>
+    <details><summary>Will switching Speaker Preset lose my Dirac calibration?</summary><div class="body">No. Each preset stores its own calibration on the receiver. Switching to the other preset leaves the Dirac one exactly as it was; switch back and it is there.</div></details>
+    <details><summary>Why can I edit Levels on one preset and not the other?</summary><div class="body">Because only one of them has a Dirac filter loaded. A Dirac filter is measured against specific levels and distances, so the receiver freezes them while it is active. The Audyssey preset has no such freeze.</div></details>
+    <details><summary>The page says the receiver did not report a value. What now?</summary><div class="body">Tap Retry. If it persists, close the receiver's web control page if you have it open in a browser, and close any other control app - the receiver limits how many control sessions it will serve at once. Some settings genuinely do not exist on some presets or some chassis, in which case the app will keep reporting it as unknown rather than guessing.</div></details>
+    <details><summary>Why is Dynamic Range Compression always greyed out for me?</summary><div class="body">Because you are probably listening to something that is not a Dolby bitstream. DRC data is carried inside Dolby Digital, Dolby Digital Plus, Dolby TrueHD and Dolby Atmos streams. On PCM, DTS or a network stereo source there is no compression data to apply.</div></details>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <h2>Controls that explain themselves</h2>
+    <p class="lead" style="margin:0 auto 24px">One-time purchase, no ads, no subscriptions. Connect in under a minute.</p>
+    <div class="badges">
+      <a href="https://play.google.com/store/apps/details?id=com.miyarahub.avr_maestro"><img alt="Get it on Google Play" src="https://img.shields.io/badge/Google%20Play-Download-414141?logo=google-play&logoColor=white&style=for-the-badge" /></a>
+      <a href="https://apps.apple.com/us/app/avr-maestro-for-denon-marantz/id6762881597"><img alt="Download on the App Store" src="https://img.shields.io/badge/App%20Store-Download-0D96F6?logo=app-store&logoColor=white&style=for-the-badge" /></a>
+      <a href="https://apps.apple.com/us/app/avr-maestro-for-denon-marantz/id6762881597"><img alt="Download on the Mac App Store" src="https://img.shields.io/badge/Mac%20App%20Store-Download-1D1D1F?logo=apple&logoColor=white&style=for-the-badge" /></a>
+      <a href="https://apps.microsoft.com/detail/9P4M7W4J5106"><img alt="Get it on the Microsoft Store" src="https://img.shields.io/badge/Microsoft%20Store-Download-0078D4?logo=windows&logoColor=white&style=for-the-badge" /></a>
+    </div>
+    <p class="lead" style="margin:18px auto 0;font-size:.92rem"><a href="/guide/">Back to the full User Guide &rarr;</a></p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="flinks">
+      <a href="/">Home</a>
+      <a href="/guide/">User Guide</a>
+      <a href="/receivers/">Receivers</a>
+      <a href="/best-denon-marantz-app/">Why switch</a>
+      <a href="https://play.google.com/store/apps/details?id=com.miyarahub.avr_maestro">Google Play</a>
+      <a href="https://apps.apple.com/us/app/avr-maestro-for-denon-marantz/id6762881597">App Store</a>
+      <a href="https://apps.microsoft.com/detail/9P4M7W4J5106">Microsoft Store</a>
+      <a href="https://discord.gg/UmVtxE5fXN">Discord</a>
+      <a href="https://www.facebook.com/groups/avrmaestro">Facebook</a>
+      <a href="https://miyarahub.com">MiyaraHub</a>
+    </div>
+    <p class="legal">AVR Maestro is an independent app by MiyaraHub Technologies LLC and is not affiliated with, endorsed by, or sponsored by Denon, Marantz, D&amp;M Holdings or Sound United. Denon, Marantz, HEOS, Audyssey and Dirac Live are trademarks of their respective owners.</p>
+  </div>
+</footer>
+
+<script defer src="/assets/search.js"></script>
+</body>
+</html>
