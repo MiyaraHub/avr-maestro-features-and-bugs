@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Home Automation - Home Assistant, Hubitat and Webhooks | AVR Maestro</title>
+<meta name="description" content="Link AVR Maestro to Home Assistant or Hubitat and your scenes become native scripts that run without your phone. Control your Denon or Marantz receiver by voice through Alexa, Google or Siri, push live receiver state to your dashboard, and fire outbound webhooks when the receiver changes. Local-first, no cloud middleman." />
+<meta name="keywords" content="Denon Home Assistant, Marantz Home Assistant, AV receiver Alexa, receiver Google Assistant, receiver Siri Shortcuts, Hubitat AV receiver, receiver webhooks, Denon voice control" />
+<meta name="author" content="MiyaraHub Technologies LLC" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<meta name="theme-color" content="#ff6e40" />
+<link rel="canonical" href="https://avrmaestro.com/guide/home-automation/" />
+<meta property="og:title" content="Home Automation - Home Assistant, Hubitat and Webhooks | AVR Maestro" />
+<meta property="og:description" content="Your scenes become native Home Assistant scripts that run without your phone. Voice control through whatever assistant you already use." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://avrmaestro.com/guide/home-automation/" />
+<meta property="og:image" content="https://avrmaestro.com/screenshots/4.25.0/14_home_automation.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Home Automation - Home Assistant, Hubitat and Webhooks | AVR Maestro" />
+<meta name="twitter:image" content="https://avrmaestro.com/screenshots/4.25.0/14_home_automation.png" />
+<link rel="icon" href="../../assets/favicon.ico" />
+<link rel="stylesheet" href="../../assets/site.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does my phone need to be on for voice control to work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. AVR Maestro compiles your scenes into native Home Assistant scripts. Home Assistant talks to the receiver on your local network directly, so your phone can be off, asleep or in another country."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which voice assistants can control my receiver?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Whichever one you already use. AVR Maestro does not add its own voice layer - it publishes scripts to Home Assistant or Hubitat, and those are exposed to Alexa, Google Assistant or Siri Shortcuts by the hub you already trust."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the AI assistant part of the paid unlock?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The on-device AI assistant is free. Home Automation - Home Assistant, Hubitat and outbound webhooks - is the one paid unlock in AVR Maestro."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does anything leave my home network?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not for control. The app talks to your receiver and to your hub over your own network. Nothing is routed through a MiyaraHub server. A webhook goes wherever you point it, which is your choice."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/"><img src="../../assets/avr-maestro-icon.png" alt="AVR Maestro icon" /> AVR Maestro</a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('m').classList.toggle('open')">&#9776;</button>
+    <nav id="m">
+      <a href="/">Home</a>
+      <a href="/guide/">User Guide</a>
+      <a href="/receivers/">Receivers</a>
+      <a href="/audyssey-dirac-control/">Audyssey &amp; Dirac</a>
+      <a href="/best-denon-marantz-app/">Why switch</a>
+      <a href="/#top" class="cta">Download</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="crumb"><a href="/">Home</a> &rsaquo; <a href="/guide/">User Guide</a> &rsaquo; Home Automation</div>
+    <div class="eyebrow">Home Assistant &middot; Hubitat &middot; Webhooks</div>
+    <h1>Your scenes, running <span class="g">without your phone</span></h1>
+    <p>Link AVR Maestro to Home Assistant or Hubitat and every scene you have built becomes a native script on your hub. From then on the hub talks to the receiver directly, on your own network - so "Alexa, movie night" works with your phone off, asleep, or in another country.</p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="gallery">
+      <figure><img alt="The Home Automation hub in AVR Maestro settings" src="../../screenshots/4.25.0/14_home_automation.png" /><figcaption>One hub for Home Assistant, Hubitat and webhooks</figcaption></figure>
+    </div>
+
+    <div class="section-head" style="margin-top:36px">
+      <h2>Why it runs without the app</h2>
+    </div>
+    <p class="lead">Most integrations make your phone the middleman: the phone hears the command, the phone sends it, and the automation only works while the phone is awake and on the network.</p>
+    <p class="lead">AVR Maestro does not do that. It <b>compiles</b> your scenes into scripts that live on your hub, and the hub sends the commands to your receiver's local IP. The app's job ends when the sync finishes.</p>
+    <ul class="plain">
+      <li><b>Local-first:</b> nothing is routed through a MiyaraHub server. Your hub and your receiver talk to each other.</li>
+      <li><b>Phone-independent:</b> once a scene is published it runs whether or not the app is installed on the phone that made it.</li>
+      <li><b>Your assistant, not ours:</b> Alexa, Google Assistant and Siri Shortcuts all reach these scripts through the hub you already trust. AVR Maestro adds no voice layer of its own.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Home Assistant, start to finish</h2>
+    </div>
+    <ul class="plain">
+      <li><b>1. Add your receiver to Home Assistant first.</b> Settings &rsaquo; Devices &amp; Services &rsaquo; Add Integration &rsaquo; <b>Denon AVR</b> (or <b>HEOS</b>), then your receiver's local IP. Home Assistant creates a media player entity for it.</li>
+      <li><b>2. Open Settings &rsaquo; Home Automation in AVR Maestro</b> and tap the Home Assistant card.</li>
+      <li><b>3. Enter your Home Assistant address</b> - a local one like <code>http://192.168.1.150:8123</code>, or your external Nabu Casa URL.</li>
+      <li><b>4. Log in and authorize.</b> A secure in-app browser opens Home Assistant's own login. Your credentials go to Home Assistant, never to us.</li>
+      <li><b>5. It finds your receiver by itself.</b> The app scans your media player entities and scores them on model, name and surround capability, then fills in the right entity for you.</li>
+      <li><b>6. Sync.</b> Your scenes are built into scripts and uploaded. After that, editing a scene updates its script in the background - there is no button to remember.</li>
+    </ul>
+
+    <div class="lockrow" style="margin-top:28px">
+      <div>
+        <div class="eyebrow">Upgrading from an earlier version</div>
+        <h2>Your script IDs change once, in 4.25.0</h2>
+        <p>Earlier versions named each script after the scene <em>and</em> the receiver, so renaming either one left the old script behind and quietly created a second. Scripts are now named after the scene and the receiver's MAC address, which is what makes a rename update the same script instead of forking it.</p>
+        <p>The first sync after updating replaces the old scripts with the new ones. <b>Anything you built on the old IDs needs repointing once</b> - a dashboard button, an automation, a voice alias. Open the script in Home Assistant to find its new entity ID.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Hubitat</h2>
+    </div>
+    <p class="lead">Hubitat is supported through its Maker API, in beta. Point AVR Maestro at your Maker API endpoint and it discovers your receiver, publishes command sequences, and pushes live state back so your Hubitat dashboard reflects what the receiver is actually doing.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Webhooks</h2>
+    </div>
+    <p class="lead">Webhooks are the escape hatch: when the receiver does something, tell anything else about it. Choose an event and where to send it, and AVR Maestro posts a small JSON payload when it happens.</p>
+    <ul class="plain">
+      <li><b>The receiver turns on</b> or <b>turns off</b></li>
+      <li><b>The input changes</b> - optionally only for one input</li>
+      <li><b>A scene is recalled</b> - optionally only for one scene</li>
+    </ul>
+    <p class="lead">Point one at a Home Assistant webhook trigger to dim the lights when the projector source comes up, or at any other service that accepts a POST.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="lockrow">
+      <div>
+        <div class="eyebrow">What is paid and what is not</div>
+        <h2>Home Automation is the one unlock. The AI assistant is free.</h2>
+        <p><b>Home Automation (Pro)</b> - Home Assistant, Hubitat and outbound webhooks - is a one-time unlock. Everything else in AVR Maestro, including the on-device AI assistant, is included in the app.</p>
+        <p>Voice control reaches your receiver <em>through</em> Home Automation, by way of your hub. AVR Maestro does not run its own voice recognition.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><a href="/">Home</a> &middot; <a href="/guide/">User Guide</a> &middot; <a href="/receivers/">Receivers</a> &middot; <a href="/best-denon-marantz-app/">Why switch</a></p>
+    <p class="mut">AVR Maestro by <a href="https://miyarahub.com">MiyaraHub Technologies LLC</a>. Denon and Marantz are trademarks of their respective owners; AVR Maestro is not affiliated with either.</p>
+  </div>
+</footer>
+
+</body>
+</html>

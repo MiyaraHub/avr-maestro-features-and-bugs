@@ -4,15 +4,15 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>AVR Maestro - The premium controller for Denon &amp; Marantz</title>
-<meta name="description" content="AVR Maestro is the premium network controller for Denon and Marantz AV receivers: one-tap Scenes, full speaker preset control, Audyssey and Dirac Live, multi-zone, FM/AM tuner, and a deep virtual remote. No ads, no subscriptions, no cloud." />
-<meta name="keywords" content="Denon receiver app, Marantz receiver app, Denon remote app, Marantz remote app, AV receiver controller app, AVR Maestro, HEOS controller, Audyssey app, Dirac Live controller, Marantz Cinema 30 app, Denon X3800H app, Denon AVR-A1H app, multi-zone receiver control, FM AM tuner app, Dolby Atmos receiver control, home theater remote app" />
+<meta name="description" content="AVR Maestro is the premium network controller for Denon and Marantz AV receivers: one-tap Scenes, Home Assistant and Hubitat automation, full speaker preset control, Audyssey and Dirac Live, on-screen display control, multi-zone, FM/AM tuner, and a deep virtual remote. No ads, no subscriptions, no cloud." />
+<meta name="keywords" content="Denon receiver app, Marantz receiver app, Denon remote app, Marantz remote app, AV receiver controller app, AVR Maestro, HEOS controller, Audyssey app, Dirac Live controller, Marantz Cinema 30 app, Denon X3800H app, Denon AVR-A1H app, multi-zone receiver control, FM AM tuner app, Dolby Atmos receiver control, home theater remote app, Denon Home Assistant, Marantz Home Assistant, AV receiver Alexa, receiver Google Assistant, Hubitat AV receiver, Denon on screen display app, receiver speaker layout app" />
 <meta name="author" content="MiyaraHub Technologies LLC" />
 <meta name="robots" content="index, follow, max-image-preview:large" />
 <meta name="theme-color" content="#ff6e40" />
 <link rel="canonical" href="https://avrmaestro.com/" />
 <meta name="google-site-verification" content="0j6Y0o69x3vb30RFuNJrwDbqHm-0GrulYeQNMb5X_kM" />
 <meta property="og:title" content="AVR Maestro for Denon &amp; Marantz" />
-<meta property="og:description" content="One-tap Scenes, full speaker preset control, Audyssey and Dirac Live, multi-zone control, FM/AM tuner and a deep remote. The control your receiver always deserved." />
+<meta property="og:description" content="One-tap Scenes that become Home Assistant scripts, full speaker preset control, Audyssey and Dirac Live, on-screen display control, multi-zone and a deep remote. The control your receiver always deserved." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://avrmaestro.com/" />
 <meta property="og:site_name" content="AVR Maestro" />
@@ -20,7 +20,7 @@
 <meta property="og:image:alt" content="AVR Maestro Home screen for Denon and Marantz receivers" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="AVR Maestro for Denon &amp; Marantz" />
-<meta name="twitter:description" content="One-tap Scenes, speaker preset control, Audyssey and Dirac Live, multi-zone, tuner and a deep remote. No ads, no subscriptions." />
+<meta name="twitter:description" content="One-tap Scenes that become Home Assistant scripts, speaker preset control, Audyssey and Dirac Live, on-screen display, multi-zone and a deep remote. No ads, no subscriptions." />
 <meta name="twitter:image" content="https://avrmaestro.com/screenshots/dashboard.png" />
 <link rel="icon" href="assets/favicon.ico" sizes="any" />
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png" />
@@ -165,13 +165,15 @@
     </div>
     <div class="grid">
       <a class="gcard link" href="/guide/scenes/"><div class="ic">&#127917;</div><h3>One-tap Scenes &rsaquo;</h3><p>Capture your whole setup - input, mode, calibration, levels, zones, tuner - and recall it in a tap. No official app has it.</p></a>
+      <a class="gcard link" href="/guide/home-automation/"><div class="ic">&#127968;&#65039;</div><h3>Home Automation &rsaquo;</h3><p>Your Scenes become native Home Assistant or Hubitat scripts - so "Alexa, movie night" works with your phone off.</p></a>
       <a class="gcard link" href="/audyssey-dirac-control/"><div class="ic">&#127925;</div><h3>Sound, Audyssey &amp; Dirac &rsaquo;</h3><p>Every surround mode plus MultEQ, Dynamic EQ/Volume, LFC and Dirac Live filter switching.</p></a>
       <a class="gcard link" href="/guide/speakers/"><div class="ic">&#128266;</div><h3>Speaker workshop &rsaquo;</h3><p>Layout, distances, levels, crossovers, subwoofer and presets - read live from the receiver.</p></a>
       <a class="gcard link" href="/guide/multi-zone/"><div class="ic">&#127968;</div><h3>Multi-zone &rsaquo;</h3><p>Independent Zone 2 / Zone 3 power, input and volume - run the whole house.</p></a>
       <a class="gcard link" href="/guide/remote/"><div class="ic">&#127918;</div><h3>The remote &rsaquo;</h3><p>D-pad, transport, renamable inputs with custom icons, and a live header showing the channels in use.</p></a>
+      <a class="gcard link" href="/guide/on-screen-display/"><div class="ic">&#128250;</div><h3>On-Screen Display &rsaquo;</h3><p>Move the volume readout, or turn it off mid-film. Info banner, now playing, 21:9 and the screen saver.</p></a>
       <a class="gcard link" href="/guide/radio/"><div class="ic">&#128251;</div><h3>FM/AM tuner &rsaquo;</h3><p>Tune by frequency and recall named station presets, on receivers with a tuner.</p></a>
     </div>
-    <div class="note" style="margin-top:26px"><b>New in 4.24.0:</b> a full <a href="/guide/graphic-eq/">Graphic EQ editor</a> - shape a 9-band curve per speaker (All, Left/Right, or Each) when Audyssey and Dirac are off, with a one-tap copy of your measured Audyssey curve as a starting point. Plus <a href="/guide/custom-icons/">custom icons</a> for Scenes as well as inputs, <a href="/guide/scenes/">Scenes</a> that sync both ways with the home-screen widgets and keep the active scene highlighted across relaunches, a high-contrast greyscale widget option, <a href="/guide/now-playing/">HEOS Favorites</a> on the Now Playing card, a true-black AMOLED theme, and a Remote-tab volume readout that follows your Absolute (dB) / Relative setting. On desktop, Windows and macOS now remember their window position and size.</div>
+    <div class="note" style="margin-top:26px"><b>New in 4.25.0:</b> <a href="/guide/home-automation/">Home Automation</a> - link Home Assistant or Hubitat and your Scenes become native hub scripts, so "Alexa, movie night" works with your phone off. Plus <a href="/guide/on-screen-display/">On-Screen Display</a> control (move the volume readout, or turn it off mid-film), a live <a href="/guide/speakers/">speaker grid</a> showing what is coming in beside what your receiver is driving, <a href="/guide/remote/">press-and-hold volume ramping</a>, <a href="/guide/speakers/">Front Speaker</a> A/B selection, and <a href="/guide/settings/">Color Theme</a> by typed hex code. Throughout, the app now honours what your receiver has locked: a setting your chassis is refusing says so instead of failing silently.</div>
   </div>
 </section>
 
@@ -183,15 +185,18 @@
       <p class="lead">The current app - dashboard, remote, sound modes, Audyssey &amp; Dirac, speaker setup, scenes, multi-zone and the tuner.</p>
     </div>
     <div class="shots-grid">
-        <button class="shot" onclick="avrLb('screenshots/dashboard.png')" aria-label="AVR Maestro - Dashboard"><img src="screenshots/dashboard.png" loading="lazy" alt="AVR Maestro - Dashboard" /><span class="shot-plat">Dashboard</span></button>
-        <button class="shot" onclick="avrLb('screenshots/remote-main.png')" aria-label="AVR Maestro - Remote"><img src="screenshots/remote-main.png" loading="lazy" alt="AVR Maestro - Remote" /><span class="shot-plat">Remote</span></button>
+        <button class="shot" onclick="avrLb('screenshots/4.25.0/01_dashboard.png')" aria-label="AVR Maestro - Dashboard"><img src="screenshots/4.25.0/01_dashboard.png" loading="lazy" alt="AVR Maestro Home screen showing a Marantz CINEMA 30 playing Dolby Atmos" /><span class="shot-plat">Dashboard</span></button>
+        <button class="shot" onclick="avrLb('screenshots/4.25.0/02_remote.png')" aria-label="AVR Maestro - Remote"><img src="screenshots/4.25.0/02_remote.png" loading="lazy" alt="AVR Maestro Remote showing Dolby Atmos in and a 7.2.4 speaker layout out" /><span class="shot-plat">Remote</span></button>
         <button class="shot" onclick="avrLb('screenshots/sound-audyssey.png')" aria-label="AVR Maestro - Audyssey"><img src="screenshots/sound-audyssey.png" loading="lazy" alt="AVR Maestro - Audyssey" /><span class="shot-plat">Audyssey</span></button>
         <button class="shot" onclick="avrLb('screenshots/sound-dirac.png')" aria-label="AVR Maestro - Dirac Live"><img src="screenshots/sound-dirac.png" loading="lazy" alt="AVR Maestro - Dirac Live" /><span class="shot-plat">Dirac Live</span></button>
-        <button class="shot" onclick="avrLb('screenshots/speakers-layout.png')" aria-label="AVR Maestro - Speaker Layout"><img src="screenshots/speakers-layout.png" loading="lazy" alt="AVR Maestro - Speaker Layout" /><span class="shot-plat">Speaker Layout</span></button>
+        <button class="shot" onclick="avrLb('screenshots/4.25.0/07_speaker_layout.png')" aria-label="AVR Maestro - Speakers"><img src="screenshots/4.25.0/07_speaker_layout.png" loading="lazy" alt="AVR Maestro speaker layout with amp assignment and Front Speaker selection" /><span class="shot-plat">Speakers</span></button>
         <button class="shot" onclick="avrLb('screenshots/scenes-list.png')" aria-label="AVR Maestro - Scenes"><img src="screenshots/scenes-list.png" loading="lazy" alt="AVR Maestro - Scenes" /><span class="shot-plat">Scenes</span></button>
-        <button class="shot" onclick="avrLb('screenshots/zones.png')" aria-label="AVR Maestro - Multi-Zone"><img src="screenshots/zones.png" loading="lazy" alt="AVR Maestro - Multi-Zone" /><span class="shot-plat">Multi-Zone</span></button>
+        <button class="shot" onclick="avrLb('screenshots/4.25.0/04_zones.png')" aria-label="AVR Maestro - Zones"><img src="screenshots/4.25.0/04_zones.png" loading="lazy" alt="AVR Maestro multi-zone control for Zone 2 and Zone 3" /><span class="shot-plat">Zones</span></button>
         <button class="shot" onclick="avrLb('screenshots/radio.png')" aria-label="AVR Maestro - FM/AM Tuner"><img src="screenshots/radio.png" loading="lazy" alt="AVR Maestro - FM/AM Tuner" /><span class="shot-plat">FM/AM Tuner</span></button>
-        <button class="shot" onclick="avrLb('screenshots/settings-main.png')" aria-label="AVR Maestro - Settings"><img src="screenshots/settings-main.png" loading="lazy" alt="AVR Maestro - Settings" /><span class="shot-plat">Settings</span></button>
+        <button class="shot" onclick="avrLb('screenshots/4.25.0/08_settings.png')" aria-label="AVR Maestro - Settings"><img src="screenshots/4.25.0/08_settings.png" loading="lazy" alt="AVR Maestro settings showing theme, Color Theme accent and display options" /><span class="shot-plat">Settings</span></button>
+        <button class="shot" onclick="avrLb('screenshots/4.25.0/14_home_automation.png')" aria-label="AVR Maestro - Home Automation"><img src="screenshots/4.25.0/14_home_automation.png" loading="lazy" alt="AVR Maestro Home Automation for Home Assistant, Hubitat and webhooks" /><span class="shot-plat">Home Automation</span></button>
+        <button class="shot" onclick="avrLb('screenshots/4.25.0/13_osd.png')" aria-label="AVR Maestro - On-Screen Display"><img src="screenshots/4.25.0/13_osd.png" loading="lazy" alt="AVR Maestro on-screen display settings - volume readout, info banner, 21:9 and screen saver" /><span class="shot-plat">On-Screen Display</span></button>
+        <button class="shot" onclick="avrLb('screenshots/4.25.0/16_signal_info.png')" aria-label="AVR Maestro - Signal"><img src="screenshots/4.25.0/16_signal_info.png" loading="lazy" alt="AVR Maestro signal info showing Dolby Atmos audio and 4K60 Dolby Vision video" /><span class="shot-plat">Signal</span></button>
         <button class="shot" onclick="avrLb('screenshots/speakers-distances.png')" aria-label="AVR Maestro - Speaker Distances"><img src="screenshots/speakers-distances.png" loading="lazy" alt="AVR Maestro - Speaker Distances" /><span class="shot-plat">Speaker Distances</span></button>
         <button class="shot" onclick="avrLb('screenshots/remote-inputs.png')" aria-label="AVR Maestro - Inputs"><img src="screenshots/remote-inputs.png" loading="lazy" alt="AVR Maestro - Inputs" /><span class="shot-plat">Inputs</span></button>
         <button class="shot" onclick="avrLb('screenshots/settings-tjmode.png')" aria-label="AVR Maestro - Themes"><img src="screenshots/settings-tjmode.png" loading="lazy" alt="AVR Maestro - Themes" /><span class="shot-plat">Themes</span></button>
