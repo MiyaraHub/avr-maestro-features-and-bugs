@@ -14,10 +14,10 @@
 <meta property="og:description" content="Your scenes become native Home Assistant scripts that run without your phone. Voice control through whatever assistant you already use." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://avrmaestro.com/guide/home-automation/" />
-<meta property="og:image" content="https://avrmaestro.com/screenshots/4.25.0/14_home_automation.png" />
+<meta property="og:image" content="https://avrmaestro.com/screenshots/home-assistant.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Home Automation - Home Assistant, Hubitat and Webhooks | AVR Maestro" />
-<meta name="twitter:image" content="https://avrmaestro.com/screenshots/4.25.0/14_home_automation.png" />
+<meta name="twitter:image" content="https://avrmaestro.com/screenshots/home-assistant.png" />
 <link rel="icon" href="../../assets/favicon.ico" />
 <link rel="stylesheet" href="../../assets/site.css" />
 <script type="application/ld+json">
@@ -90,7 +90,8 @@
 <section>
   <div class="wrap">
     <div class="gallery">
-      <figure><img alt="The Home Automation hub in AVR Maestro settings" src="../../screenshots/4.25.0/14_home_automation.png" /><figcaption>One hub for Home Assistant, Hubitat and webhooks</figcaption></figure>
+      <figure><img alt="The AVR Maestro Home Automation hub with Home Assistant, Hubitat and Webhooks" src="../../screenshots/home-automation.png" /><figcaption>One hub, three ways out</figcaption></figure>
+      <figure><img alt="AVR Maestro linked to Home Assistant with the receiver entity auto-discovered" src="../../screenshots/home-assistant.png" /><figcaption>Linked, with your receiver entity found for you</figcaption></figure>
     </div>
 
     <div class="section-head" style="margin-top:36px">
@@ -122,10 +123,10 @@
 
     <div class="lockrow" style="margin-top:28px">
       <div>
-        <div class="eyebrow">Upgrading from an earlier version</div>
-        <h2>Your script IDs change once, in 4.25.0</h2>
-        <p>Earlier versions named each script after the scene <em>and</em> the receiver, so renaming either one left the old script behind and quietly created a second. Scripts are now named after the scene and the receiver's MAC address, which is what makes a rename update the same script instead of forking it.</p>
-        <p>The first sync after updating replaces the old scripts with the new ones. <b>Anything you built on the old IDs needs repointing once</b> - a dashboard button, an automation, a voice alias. Open the script in Home Assistant to find its new entity ID.</p>
+        <div class="eyebrow">If you synced with an older build</div>
+        <h2>Your script IDs change once</h2>
+        <p>Scripts used to be named after the scene <em>and</em> the receiver, so renaming either one left the old script behind and quietly created a second. They are now named after the scene and the receiver's MAC address, which is what makes a rename update the same script instead of forking it.</p>
+        <p>The first sync after that change replaces the old scripts with the new ones. <b>Anything you built on the old IDs needs repointing once</b> - a dashboard button, an automation, a voice alias. Open the script in Home Assistant to find its new entity ID.</p>
       </div>
     </div>
   </div>
@@ -136,7 +137,18 @@
     <div class="section-head">
       <h2>Hubitat</h2>
     </div>
-    <p class="lead">Hubitat is supported through its Maker API, in beta. Point AVR Maestro at your Maker API endpoint and it discovers your receiver, publishes command sequences, and pushes live state back so your Hubitat dashboard reflects what the receiver is actually doing.</p>
+    <div class="lockrow">
+      <div>
+        <p class="lead">Hubitat is supported through its <b>Maker API</b>, and is marked BETA in the app because it is newer than the Home Assistant route, not because it is unfinished.</p>
+        <ul class="plain">
+          <li><b>Hub IP</b> - your Hubitat's address on the LAN.</li>
+          <li><b>Maker API App ID</b> - the number in the Maker API app's own URL.</li>
+          <li><b>Access Token</b> - issued by Maker API when you enable it.</li>
+        </ul>
+        <p class="lead">Enable Maker API on the hub first (Apps &rsaquo; Add Built-In App &rsaquo; Maker API) and it hands you all three. Paste them in and AVR Maestro discovers your receiver, publishes your scenes as command sequences, and pushes live state back so a Hubitat dashboard reflects what the receiver is actually doing rather than what it was last told.</p>
+      </div>
+      <img alt="The Hubitat setup screen with hub IP, Maker API App ID and access token" src="../../screenshots/hubitat.png" />
+    </div>
   </div>
 </section>
 
@@ -145,13 +157,26 @@
     <div class="section-head">
       <h2>Webhooks</h2>
     </div>
-    <p class="lead">Webhooks are the escape hatch: when the receiver does something, tell anything else about it. Choose an event and where to send it, and AVR Maestro posts a small JSON payload when it happens.</p>
-    <ul class="plain">
-      <li><b>The receiver turns on</b> or <b>turns off</b></li>
-      <li><b>The input changes</b> - optionally only for one input</li>
-      <li><b>A scene is recalled</b> - optionally only for one scene</li>
-    </ul>
-    <p class="lead">Point one at a Home Assistant webhook trigger to dim the lights when the projector source comes up, or at any other service that accepts a POST.</p>
+    <p class="lead">Home Assistant and Hubitat send commands <em>to</em> the receiver. Webhooks go the other way: when the receiver does something, tell anything else about it. Pick a trigger and a URL, and AVR Maestro posts a small JSON payload the moment it happens.</p>
+
+    <div class="gallery" style="grid-template-columns:repeat(2,1fr);max-width:640px;margin-top:22px">
+      <figure><img alt="The Webhooks screen before any are added" src="../../screenshots/webhooks.png" /><figcaption>Empty until you add one</figcaption></figure>
+      <figure><img alt="Choosing a webhook trigger: power on, power off, input change or scene recalled" src="../../screenshots/webhook-trigger.png" /><figcaption>Four triggers, two of them filterable</figcaption></figure>
+    </div>
+
+    <table class="t" style="margin-top:26px">
+      <thead><tr><th>Trigger</th><th>Fires when</th><th>Can be narrowed to</th></tr></thead>
+      <tbody>
+        <tr><td>Power On</td><td>The receiver comes out of standby</td><td>-</td></tr>
+        <tr><td>Power Off</td><td>The receiver goes into standby</td><td>-</td></tr>
+        <tr><td>Input Change</td><td>The selected source changes</td><td>One specific input</td></tr>
+        <tr><td>Scene Recalled</td><td>A Scene is applied</td><td>One specific Scene</td></tr>
+      </tbody>
+    </table>
+
+    <p class="lead" style="margin-top:22px">Narrowing is what makes them useful rather than noisy. "Input Change" on every input is a firehose; "Input Change, but only when it becomes the projector" is a light switch. Point that one at a Home Assistant webhook trigger and the room dims when the projector comes up, without Home Assistant needing to poll anything.</p>
+    <p class="lead">The destination is any URL that accepts a POST, so this is also the route to a service AVR Maestro has never heard of - a Node-RED flow, an IFTTT applet, a script on a NAS.</p>
+    <div class="note">The screen is called <b>Webhooks</b> because that is what they are. If you are looking for the automations that run <em>on</em> your hub, those are the Home Assistant and Hubitat cards above - a synced Scene becomes a script there, not a webhook here.</div>
   </div>
 </section>
 
@@ -168,12 +193,38 @@
   </div>
 </section>
 
+<section class="cta">
+  <div class="wrap">
+    <h2>Your scenes, running without your phone</h2>
+    <p class="lead" style="margin:0 auto 24px">Home Automation is a one-time unlock. Everything else in the app, including the AI assistant, is included.</p>
+    <div class="badges">
+      <a href="https://play.google.com/store/apps/details?id=com.miyarahub.avr_maestro"><img alt="Get it on Google Play" src="https://img.shields.io/badge/Google%20Play-Download-414141?logo=google-play&logoColor=white&style=for-the-badge" /></a>
+      <a href="https://apps.apple.com/us/app/avr-maestro-for-denon-marantz/id6762881597"><img alt="Download on the App Store" src="https://img.shields.io/badge/App%20Store-Download-0D96F6?logo=app-store&logoColor=white&style=for-the-badge" /></a>
+      <a href="https://apps.apple.com/us/app/avr-maestro-for-denon-marantz/id6762881597"><img alt="Download on the Mac App Store" src="https://img.shields.io/badge/Mac%20App%20Store-Download-1D1D1F?logo=apple&logoColor=white&style=for-the-badge" /></a>
+      <a href="https://apps.microsoft.com/detail/9P4M7W4J5106"><img alt="Get it on the Microsoft Store" src="https://img.shields.io/badge/Microsoft%20Store-Download-0078D4?logo=windows&logoColor=white&style=for-the-badge" /></a>
+    </div>
+    <p class="lead" style="margin:18px auto 0;font-size:.92rem"><a href="/guide/">Back to the full User Guide &rarr;</a></p>
+  </div>
+</section>
+
 <footer>
   <div class="wrap">
-    <p><a href="/">Home</a> &middot; <a href="/guide/">User Guide</a> &middot; <a href="/receivers/">Receivers</a> &middot; <a href="/best-denon-marantz-app/">Why switch</a></p>
-    <p class="mut">AVR Maestro by <a href="https://miyarahub.com">MiyaraHub Technologies LLC</a>. Denon and Marantz are trademarks of their respective owners; AVR Maestro is not affiliated with either.</p>
+    <div class="flinks">
+      <a href="/">Home</a>
+      <a href="/guide/">User Guide</a>
+      <a href="/receivers/">Receivers</a>
+      <a href="/best-denon-marantz-app/">Why switch</a>
+      <a href="https://play.google.com/store/apps/details?id=com.miyarahub.avr_maestro">Google Play</a>
+      <a href="https://apps.apple.com/us/app/avr-maestro-for-denon-marantz/id6762881597">App Store</a>
+      <a href="https://apps.microsoft.com/detail/9P4M7W4J5106">Microsoft Store</a>
+      <a href="https://discord.gg/UmVtxE5fXN">Discord</a>
+      <a href="https://www.facebook.com/groups/avrmaestro">Facebook</a>
+      <a href="https://miyarahub.com">MiyaraHub</a>
+    </div>
+    <p class="legal">AVR Maestro is an independent app by MiyaraHub Technologies LLC and is not affiliated with, endorsed by, or sponsored by Denon, Marantz, D&amp;M Holdings or Sound United. Denon, Marantz, HEOS, Home Assistant and Hubitat are trademarks of their respective owners.</p>
   </div>
 </footer>
 
+<script defer src="/assets/search.js"></script>
 </body>
 </html>
