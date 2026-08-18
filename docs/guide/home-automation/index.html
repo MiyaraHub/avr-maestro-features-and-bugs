@@ -157,26 +157,93 @@
     <div class="section-head">
       <h2>Webhooks</h2>
     </div>
-    <p class="lead">Home Assistant and Hubitat send commands <em>to</em> the receiver. Webhooks go the other way: when the receiver does something, tell anything else about it. Pick a trigger and a URL, and AVR Maestro posts a small JSON payload the moment it happens.</p>
+    <p class="lead">Home Assistant and Hubitat send commands <em>to</em> the receiver. Webhooks go the other way: when the receiver does something, tell anything else about it. Turn the receiver on and AVR Maestro posts a small message to an address you choose - that message is the webhook.</p>
+
+    <div class="note"><b>This is the one part that is not phone-independent.</b> Your synced scenes become scripts on your hub and run whether or not the app is anywhere nearby. Webhooks are different: AVR Maestro is the thing watching the receiver, so a trigger fires while the app is open on a device that can see it. If you want something to fire with nothing running, build it on your hub around the receiver entity instead.</div>
 
     <div class="gallery" style="grid-template-columns:repeat(2,1fr);max-width:640px;margin-top:22px">
-      <figure><img alt="The Webhooks screen before any are added" src="../../screenshots/webhooks.png" /><figcaption>Empty until you add one</figcaption></figure>
-      <figure><img alt="Choosing a webhook trigger: power on, power off, input change or scene recalled" src="../../screenshots/webhook-trigger.png" /><figcaption>Four triggers, two of them filterable</figcaption></figure>
+      <figure><img alt="The Webhooks screen with its explanation card and no triggers yet" src="../../screenshots/webhooks.png" /><figcaption>Empty until you add one</figcaption></figure>
+      <figure><img alt="The Add Automation Trigger sheet: trigger event, where to send it, and a webhook ID" src="../../screenshots/webhook-trigger.png" /><figcaption>An event, a destination, an ID</figcaption></figure>
     </div>
 
-    <table class="t" style="margin-top:26px">
-      <thead><tr><th>Trigger</th><th>Fires when</th><th>Can be narrowed to</th></tr></thead>
+    <h3 style="margin-top:34px">The four triggers</h3>
+    <table class="t" style="margin-top:14px">
+      <thead><tr><th>Trigger Event</th><th>Fires when</th><th>Can be narrowed to</th></tr></thead>
       <tbody>
-        <tr><td>Power On</td><td>The receiver comes out of standby</td><td>-</td></tr>
-        <tr><td>Power Off</td><td>The receiver goes into standby</td><td>-</td></tr>
-        <tr><td>Input Change</td><td>The selected source changes</td><td>One specific input</td></tr>
-        <tr><td>Scene Recalled</td><td>A Scene is applied</td><td>One specific Scene</td></tr>
+        <tr><td>Receiver Power ON</td><td>The receiver comes out of standby</td><td>-</td></tr>
+        <tr><td>Receiver Power OFF</td><td>The receiver goes into standby</td><td>-</td></tr>
+        <tr><td>Active Input Changed</td><td>The selected source changes</td><td>One input, under <em>Only trigger for input source</em></td></tr>
+        <tr><td>Scene Recalled</td><td>A Scene is applied</td><td>One scene, under <em>Select Scene</em></td></tr>
       </tbody>
     </table>
 
-    <p class="lead" style="margin-top:22px">Narrowing is what makes them useful rather than noisy. "Input Change" on every input is a firehose; "Input Change, but only when it becomes the projector" is a light switch. Point that one at a Home Assistant webhook trigger and the room dims when the projector comes up, without Home Assistant needing to poll anything.</p>
-    <p class="lead">The destination is any URL that accepts a POST, so this is also the route to a service AVR Maestro has never heard of - a Node-RED flow, an IFTTT applet, a script on a NAS.</p>
+    <p class="lead" style="margin-top:22px">Narrowing is what makes them useful rather than noisy. "Active Input Changed" on every input is a firehose; the same trigger pinned to the one input your projector sits on is a light switch.</p>
+    <p class="lead">The input list is the one your own receiver reports, so it already reflects any source you have renamed or hidden. The scene list is your own scenes.</p>
+
+    <div class="section-head" style="margin-top:44px">
+      <h2>Setting one up, step by step</h2>
+    </div>
+    <p class="lead">This is the Home Assistant route, which is the one most people want. Do the Home Assistant half first - the app needs something to point at.</p>
+
+    <h3 style="margin-top:28px">In Home Assistant</h3>
+    <ul class="plain">
+      <li><b>1. Settings &rsaquo; Automations &amp; Scenes &rsaquo; Create Automation &rsaquo; Create new automation.</b></li>
+      <li><b>2. Add Trigger &rsaquo; Webhook.</b> Home Assistant generates a long random Webhook ID for you.</li>
+      <li><b>3. Replace it with something you will recognise</b> - <code>avr-power-on</code>, <code>avr-movie-night</code>. Any name works as long as it is unique on your Home Assistant. Write it down; you type the same one into AVR Maestro.</li>
+      <li><b>4. Under the webhook's settings, allow <em>POST</em>.</b> That is what AVR Maestro sends. Local-only is fine - the app is on your own network.</li>
+      <li><b>5. Add whatever you want it to do</b> - dim the lights, close the blinds, start a scene - and save the automation.</li>
+    </ul>
+
+    <h3 style="margin-top:28px">In AVR Maestro</h3>
+    <ul class="plain">
+      <li><b>1. Settings &rsaquo; Home Automation &rsaquo; Webhooks</b>, then <b>Add First Trigger</b> - or the <b>+</b> button once you have one.</li>
+      <li><b>2. Trigger Event</b> - pick what should set it off. Choosing <em>Active Input Changed</em> or <em>Scene Recalled</em> adds a second box to narrow it down.</li>
+      <li><b>3. Where to send it</b> - leave it on <b>Home Assistant</b>. The address is already known, because you linked it earlier on this same screen.</li>
+      <li><b>4. Webhook ID</b> - type the same ID you used in Home Assistant. Nothing else has to match. Underneath, the app spells out the exact address it will post to - <code>Sends to http://your-ha:8123/api/webhook/avr-power-on</code> - so you can check it before you save.</li>
+      <li><b>5. Save.</b> Then press <b>Test</b> on the trigger in the list. Your Home Assistant automation should run immediately.</li>
+    </ul>
+
+    <div class="note" style="margin-top:24px"><b>You never type a URL for the Home Assistant route.</b> The app builds it from the Home Assistant you linked, and it looks that address up <em>every time a trigger fires</em>. Move Home Assistant to a new port, a new hostname, or a Nabu Casa address, and every webhook you have already made follows it. There is nothing to re-sync and no button to press.</div>
+
+    <div class="note">If the sheet says <b>Home Assistant is not linked yet</b>, do the Home Assistant card at the top of this page first. The webhook route needs an address to build on.</div>
+
+    <h3 style="margin-top:34px">Sending somewhere that is not Home Assistant</h3>
+    <p class="lead">Switch <b>Where to send it</b> to <b>Other</b> and paste a full URL into <b>Webhook URL</b>. Anything that accepts a POST works - a Node-RED flow, an IFTTT applet, a script on a NAS, a Hubitat Maker API endpoint. That route stores the address exactly as you typed it, so if the destination moves you edit the trigger.</p>
+
+    <div class="section-head" style="margin-top:44px">
+      <h2>What actually gets sent</h2>
+    </div>
+    <p class="lead">A small JSON body. The <b>What it sends</b> card on the same screen says it in plain language for the trigger you picked, so you never have to guess - and these are the field names your automation reads:</p>
+    <table class="t" style="margin-top:14px">
+      <thead><tr><th>Trigger</th><th>Fields in the message</th></tr></thead>
+      <tbody>
+        <tr><td>Receiver Power ON / OFF</td><td><code>event</code>, <code>timestamp</code></td></tr>
+        <tr><td>Active Input Changed</td><td>...plus <code>source</code></td></tr>
+        <tr><td>Scene Recalled</td><td>...plus <code>sceneId</code> and <code>sceneName</code></td></tr>
+      </tbody>
+    </table>
+    <p class="lead" style="margin-top:20px">In a Home Assistant automation those arrive as <code>{{ trigger.json.event }}</code>, <code>{{ trigger.json.source }}</code> and so on. You can read them, or ignore them completely and just act on the fact that it fired. Most people do the second.</p>
+    <p class="lead">If you need a different shape - a service that expects its own format - open <b>Send my own JSON instead</b> under that card and write it there. It is folded away and marked Advanced because almost nobody needs it, not because it is discouraged.</p>
+
     <div class="note">The screen is called <b>Webhooks</b> because that is what they are. If you are looking for the automations that run <em>on</em> your hub, those are the Home Assistant and Hubitat cards above - a synced Scene becomes a script there, not a webhook here.</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <h2>When a webhook does not arrive</h2>
+    </div>
+    <p class="lead">In the order worth checking, because the first two are almost always it:</p>
+    <ul class="plain">
+      <li><b>Press Test first.</b> It sends the same message the real trigger does, to the same address, and tells you which of three things happened: delivered, not delivered, or skipped because the trigger's own switch is off. If Test delivers and the real event does not, the problem is the trigger - most often an <em>Active Input Changed</em> narrowed to an input you are not actually switching to.</li>
+      <li><b>Check the ID matches exactly.</b> Home Assistant webhook IDs are case-sensitive and do not tolerate a stray space. The app prints the full address it will post to underneath the field - compare it with the one in your automation.</li>
+      <li><b>Check the automation allows POST.</b> A Home Assistant webhook trigger that only allows GET silently ignores what AVR Maestro sends.</li>
+      <li><b>Check the trigger's switch is on.</b> Each one has its own toggle in the list, and a switched-off trigger is skipped rather than failed.</li>
+      <li><b>Triggers belong to one receiver.</b> The list you are looking at is the list for the receiver currently selected. Another receiver has its own, so a rule made here does not fire for a different room.</li>
+      <li><b>The app has to be watching.</b> AVR Maestro is what notices the receiver changed, so nothing fires from a phone in your pocket with the app closed. That is the trade-off described at the top of this section, not a fault.</li>
+      <li><b>Webhooks are part of Home Automation.</b> Without that unlock the triggers are visible but nothing is sent, and Test says so rather than pretending it worked.</li>
+    </ul>
   </div>
 </section>
 

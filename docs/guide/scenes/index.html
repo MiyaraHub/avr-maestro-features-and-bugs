@@ -185,6 +185,39 @@
 <section>
   <div class="wrap">
     <div class="section-head">
+      <h2>Changing a Scene after you have made it</h2>
+    </div>
+    <p class="lead">Long-press any Scene for the four things you will actually want:</p>
+    <ul class="plain">
+      <li><b>Apply</b> - the same as tapping it.</li>
+      <li><b>Update with current settings</b> - the one most people are looking for. Get the receiver how you now want it, then update: the Scene keeps its name, its icon and the same set of captured settings, and just takes today's values. You do not delete and re-save.</li>
+      <li><b>Rename</b> - safe at any time. A Scene synced to Home Assistant keeps the same script rather than growing a second one, because the script is tied to the Scene itself and not to its name.</li>
+      <li><b>Delete</b> - removes it here, and the next Home Assistant sync removes the script it created.</li>
+    </ul>
+    <p class="lead" style="margin-top:20px">To put a Scene on your Android home screen, add the AVR Maestro Scene widget from your launcher's widget list and pick the Scene. Tapping it fires the Scene without opening the app.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Troubleshooting</div>
+      <h2>When a Scene does not fully apply</h2>
+    </div>
+    <p class="lead">A Scene is not one command. It is a sequence, sent in a deliberate order and paced so the receiver can keep up, which is why recall takes a moment rather than happening instantly.</p>
+    <ul class="plain">
+      <li><b>Power goes first, and a cold receiver gets two seconds.</b> If the Scene turns the receiver on, everything else waits for it to come up - a receiver still booting rejects settings silently, so the app pauses instead of firing into it.</li>
+      <li><b>Channel levels are checked and re-sent once.</b> Receivers drop the odd channel when a lot arrives at once. The app reads back what landed, re-sends what did not, and tells you which channels it had to retry - so a Scene that reports a retry worked, it just took two passes.</li>
+      <li><b>A locked control cannot be applied, by anything.</b> If your Speaker Preset is owned by Dirac Live, the receiver itself refuses Audyssey changes, and a Scene carrying them is refused the same way the on-screen control is. That is your receiver, not the app - see <a href="/guide/locked-controls/">why a control is locked</a>.</li>
+      <li><b>Only what you captured is replayed.</b> If a Scene is not changing something you expected, it most likely was not ticked when you saved it. Update it with the setting included rather than making a second Scene.</li>
+      <li><b>Scenes belong to one receiver.</b> The list is the list for the receiver currently selected. Another receiver has its own.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
       <div class="eyebrow">Common questions</div>
       <h2>Scenes FAQ</h2>
     </div>

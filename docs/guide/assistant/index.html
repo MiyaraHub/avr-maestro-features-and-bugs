@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Assistant - Ask Your Denon or Marantz Anything, On Device | AVR Maestro</title>
+<meta name="description" content="AVR Maestro's assistant answers questions about your own receiver and can change things for you, using a model that runs on your phone. What it can answer, what it will act on, what it asks before doing, and why it sometimes says it cannot tell." />
+<meta name="keywords" content="Denon AVR assistant, Marantz voice control app, on device AI receiver, ask my receiver, AVR Maestro assistant, Apple Intelligence Denon, Gemini Nano AVR app" />
+<meta name="author" content="MiyaraHub Technologies LLC" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<meta name="theme-color" content="#ff6e40" />
+<link rel="canonical" href="https://avrmaestro.com/guide/assistant/" />
+<meta property="og:title" content="The Assistant - Ask Your Receiver Anything | AVR Maestro" />
+<meta property="og:description" content="A model that runs on your phone, answering from your own receiver's readings." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://avrmaestro.com/guide/assistant/" />
+<meta property="og:site_name" content="AVR Maestro" />
+<meta property="og:image" content="https://avrmaestro.com/screenshots/dashboard.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="The Assistant - AVR Maestro" />
+<meta name="twitter:description" content="Ask your receiver a question. The answer comes from its own readings." />
+<meta name="twitter:image" content="https://avrmaestro.com/screenshots/dashboard.png" />
+<link rel="icon" type="image/png" sizes="48x48" href="../../assets/favicon-48.png" />
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+<link rel="stylesheet" href="../../assets/site.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does the assistant send my data anywhere?",
+      "acceptedAnswer": {"@type": "Answer", "text": "The language model runs on your device and your receiver is on your own network, so a typed question and its answer do not leave your hardware. Voice input is the exception: turning speech into text is done by your phone's own recogniser, and on most phones that means the audio goes to the platform vendor to be transcribed. Typing avoids that entirely."}
+    },
+    {
+      "@type": "Question",
+      "name": "Why does the assistant say my device cannot run it?",
+      "acceptedAnswer": {"@type": "Answer", "text": "The assistant needs an on-device model: Apple Intelligence on iPhone, iPad and Mac, or Gemini Nano through Google AICore on Android. Plenty of otherwise capable devices do not have one. The app reports exactly which state it is in rather than hiding the feature, so you know whether it is a download, a setting, or hardware."}
+    },
+    {
+      "@type": "Question",
+      "name": "Will the assistant change things without asking?",
+      "acceptedAnswer": {"@type": "Answer", "text": "It acts directly on power, mute, input and turning the volume down, because all of those are trivially undone by the person in the room. Turning the volume UP always asks first, because that is the one action whose worst case is a damaged driver."}
+    },
+    {
+      "@type": "Question",
+      "name": "Why does it sometimes say it cannot tell me something?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Because it will not guess. Every figure it gives you comes from a reading taken off your receiver, so if a reading did not arrive it says the subsystem could not be read rather than inventing a plausible number. A wrong answer that sounds right is worse than no answer."}
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/"><img src="../../assets/avr-maestro-icon.png" alt="AVR Maestro icon" /> AVR Maestro</a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('m').classList.toggle('open')">&#9776;</button>
+    <nav id="m">
+      <a href="/">Home</a>
+      <a href="/guide/">User Guide</a>
+      <a href="/receivers/">Receivers</a>
+      <a href="/audyssey-dirac-control/">Audyssey &amp; Dirac</a>
+      <a href="/best-denon-marantz-app/">Why switch</a>
+      <a href="/#top" class="cta">Download</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="crumb"><a href="/">Home</a> &rsaquo; <a href="/guide/">User Guide</a> &rsaquo; The assistant</div>
+    <div class="eyebrow">Ask your receiver</div>
+    <h1>Ask it a question - <span class="g">the answer comes from your receiver</span></h1>
+    <p>Most assistants know a lot about receivers in general. This one knows about yours: the volume it is on right now, the Speaker Preset it is running, whether Dynamic EQ is on, what it is decoding this second. It reads your own receiver and answers from that, using a model that runs on your device rather than a service somewhere else.</p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Where it is</div>
+      <h2>The Assistant tab</h2>
+    </div>
+    <p class="lead">Type a question, or hold the microphone and say it. There is nothing to sign into, no key to paste, and no account. If your device can run an on-device model, the assistant works the moment you open it.</p>
+    <p class="lead">Ask it in your own words. "How loud is it", "what am I watching this on", "which Dirac slot is loaded", "is Dynamic EQ on" - it resolves what you meant against the things your receiver actually reports, so you do not have to know what the setting is called.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <h2>What it can tell you</h2>
+    </div>
+    <p class="lead">Everything the app reads off your receiver, which is everything on the screens in this guide. Not a fixed list: a chassis that reports IMAX gets asked about IMAX, and one that does not is never offered it.</p>
+    <table class="t" style="margin-top:14px">
+      <thead><tr><th>Ask about</th><th>And it knows</th></tr></thead>
+      <tbody>
+        <tr><td>Power and volume</td><td>On or standby, the level in dB, mute, eco mode, and your receiver's own volume limit</td></tr>
+        <tr><td>Source and sound</td><td>The selected input under the name you gave it, the sound mode, and the format being decoded</td></tr>
+        <tr><td>Calibration</td><td>Audyssey MultEQ, Dynamic EQ, Dynamic Volume, reference level offset, LFC, and which Dirac Live slot is loaded</td></tr>
+        <tr><td>Speakers</td><td>The layout, per-channel trims, subwoofer levels and how many subs are configured</td></tr>
+        <tr><td>Video</td><td>Resolution and HDR in and out, picture mode, video processing, input mode, HDMI audio output, auto lip sync</td></tr>
+        <tr><td>Zones</td><td>Each zone's power, input, volume, channel trims, sleep timer and quick select</td></tr>
+        <tr><td>The chassis</td><td>Front panel brightness, auto standby, Bluetooth transmitter, and each trigger by number</td></tr>
+        <tr><td>What is playing</td><td>The track on a network source and its transport state</td></tr>
+      </tbody>
+    </table>
+    <div class="note" style="margin-top:22px">Under each answer it prints <b>what it read</b> to produce it. That line is recorded, not written by the model, so it cannot be invented - and it is the fastest way to tell a real answer from a confident-sounding wrong one.</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <h2>What it will do for you</h2>
+    </div>
+    <p class="lead">Ask it to change something and it changes it. What differs is how much ceremony each action gets, and the asymmetry is deliberate.</p>
+    <table class="t" style="margin-top:14px">
+      <thead><tr><th>Ask for</th><th>What happens</th></tr></thead>
+      <tbody>
+        <tr><td>Power on or off, mute, unmute</td><td>Done immediately, then it tells you what it sent</td></tr>
+        <tr><td>Turn the volume down</td><td>Done immediately. The moment somebody wants it quieter is the moment they least want a dialog</td></tr>
+        <tr><td>Turn the volume up</td><td><b>Asks first.</b> It is the one action whose worst case - a damaged driver - cannot be undone by the person standing in the room</td></tr>
+        <tr><td>Switch the input</td><td>Resolved against your own source list, under the name you renamed it to. Two possible matches and it asks which</td></tr>
+      </tbody>
+    </table>
+    <p class="lead" style="margin-top:22px">The amount is yours to give. "Turn it down by 5 dB" moves 5 dB; "turn it down" with no number moves one step, the same as one press of the button. It will not decide on a figure you did not say.</p>
+    <p class="lead">Changing the sound mode from here is not supported yet. Your receiver organises sound modes by category and selects within the active one, so it is not a single name to send - the Sound tab does it properly.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Asking for an opinion</h2>
+    </div>
+    <p class="lead">"Any calibration recommendation?", "how do I make dialogue clearer?", "should I turn Dynamic EQ on?" - these are different from a lookup, and the assistant treats them differently. It reasons over your readings and comes back with a couple of concrete options, each naming a setting your receiver actually has, and says which it would try first.</p>
+    <p class="lead">What does not change is where the numbers come from. It may reason freely; it may not state a figure it was not given. If your readings do not support a recommendation it says what it would need to see instead of guessing.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Speaking instead of typing</h2>
+    </div>
+    <p class="lead">Hold the microphone button and talk. It fills the box with what you said so you can see it before it is sent.</p>
+    <div class="note"><b>Worth knowing:</b> the language model runs on your device, and your receiver is on your own network - so a typed question and its answer stay on your hardware. Turning speech into text is done by your phone's own recogniser, and on most phones that sends the audio to the platform vendor to be transcribed. That is the OS doing it, not the app, and typing avoids it entirely.</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Troubleshooting</div>
+      <h2>When it says it cannot help</h2>
+    </div>
+    <p class="lead">Each of these is a different sentence on purpose, because each has a different answer.</p>
+    <ul class="plain">
+      <li><b>"This device cannot run the on-device model."</b> The assistant needs Apple Intelligence on iPhone, iPad or Mac, or Gemini Nano through Google AICore on Android. Plenty of otherwise capable devices do not have one, including some current tablets. Nothing you can change.</li>
+      <li><b>The model needs downloading.</b> Android fetches it in the background the first time. It is a one-off, it is large, and it wants Wi-Fi.</li>
+      <li><b>"Your receiver has that, but there is nothing to report on it right now."</b> The feature exists and is simply idle - asking what is playing while nothing plays gets this, not a claim your receiver lacks HEOS.</li>
+      <li><b>"This receiver does not report that."</b> A genuine answer about your hardware: the chassis has no such feature and the app is not pretending otherwise.</li>
+      <li><b>A subsystem could not be read.</b> Unknown, not absent. It will say so rather than treat a failed read as a feature you do not have.</li>
+      <li><b>"I cannot change that one from here yet."</b> The assistant's limitation, not the receiver's - the screen for it can.</li>
+    </ul>
+    <div class="note" style="margin-top:22px">The assistant is free. Home Automation is the paid part, and the two are separate: you do not need Pro to ask your receiver anything.</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="flinks">
+      <a href="/">Home</a>
+      <a href="/guide/">User Guide</a>
+      <a href="/receivers/">Receivers</a>
+      <a href="/best-denon-marantz-app/">Why switch</a>
+      <a href="https://play.google.com/store/apps/details?id=com.miyarahub.avr_maestro">Google Play</a>
+      <a href="https://apps.apple.com/us/app/avr-maestro-for-denon-marantz/id6762881597">App Store</a>
+      <a href="https://apps.microsoft.com/detail/9P4M7W4J5106">Microsoft Store</a>
+      <a href="https://discord.gg/UmVtxE5fXN">Discord</a>
+      <a href="https://www.facebook.com/groups/avrmaestro">Facebook</a>
+      <a href="https://miyarahub.com">MiyaraHub</a>
+    </div>
+    <p class="legal">AVR Maestro is an independent app by MiyaraHub Technologies LLC and is not affiliated with, endorsed by, or sponsored by Denon, Marantz, D&amp;M Holdings or Sound United. Denon, Marantz, HEOS, Audyssey and Dirac Live are trademarks of their respective owners.</p>
+  </div>
+</footer>
+
+<script defer src="/assets/search.js"></script>
+</body>
+</html>
