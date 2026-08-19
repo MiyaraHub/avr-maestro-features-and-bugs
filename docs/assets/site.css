@@ -240,10 +240,12 @@ footer .legal{max-width:66ch;margin:0 auto;font-size:.76rem;color:var(--steel-2)
 
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
 
-/* Enlarge-on-click for screenshots. */
-figure img,
-.hero-shot img,
-.gallery img { cursor: zoom-in; }
+/* Enlarge-on-click for screenshots.
+ *
+ * By src, matching lightbox.js. A class list missed 34 of 87 - every shot in
+ * .shots-grid, .lockrow, .with-shot and .shots - and the cursor is the only
+ * thing that tells a reader the image can be enlarged at all. */
+img[src*="screenshots/"] { cursor: zoom-in; }
 
 .lb {
   position: fixed;

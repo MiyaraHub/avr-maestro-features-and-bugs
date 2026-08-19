@@ -15,11 +15,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://avrmaestro.com/guide/assistant/" />
 <meta property="og:site_name" content="AVR Maestro" />
-<meta property="og:image" content="https://avrmaestro.com/screenshots/4.25.0/16_signal_info.png" />
+<meta property="og:image" content="https://avrmaestro.com/screenshots/assistant-answers.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="The Assistant - AVR Maestro" />
 <meta name="twitter:description" content="Ask your receiver a question. The answer comes from its own readings." />
-<meta name="twitter:image" content="https://avrmaestro.com/screenshots/4.25.0/16_signal_info.png" />
+<meta name="twitter:image" content="https://avrmaestro.com/screenshots/assistant-answers.png" />
 <link rel="icon" type="image/png" sizes="48x48" href="../../assets/favicon-48.png" />
 <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
 <link rel="stylesheet" href="../../assets/site.css" />
@@ -86,6 +86,10 @@
     </div>
     <p class="lead">Type a question, or hold the microphone and say it. There is nothing to sign into, no key to paste, and no account. If your device can run an on-device model, the assistant works the moment you open it.</p>
     <p class="lead">Ask it in your own words. "How loud is it", "what am I watching this on", "which Dirac slot is loaded", "is Dynamic EQ on" - it resolves what you meant against the things your receiver actually reports, so you do not have to know what the setting is called.</p>
+    <div class="gallery" style="grid-template-columns:repeat(2,1fr);max-width:640px;margin:30px auto 0">
+      <figure><img alt="The assistant's opening screen with suggested questions and a microphone button" src="../../screenshots/assistant.png" /><figcaption>Open it and ask, or tap one of the suggestions</figcaption></figure>
+      <figure><img alt="Four questions answered: the volume in dB, the sound mode, the loaded Dirac filter and the speaker count, each with the subsystems it read underneath" src="../../screenshots/assistant-answers.png" /><figcaption>Every answer prints what it read to produce it</figcaption></figure>
+    </div>
   </div>
 </section>
 
@@ -109,7 +113,7 @@
       </tbody>
     </table>
     <div class="gallery" style="grid-template-columns:repeat(1,1fr);max-width:320px;margin:26px 0 0">
-      <figure><img alt="The Signal Info card showing audio in, audio out, video in and video out" src="../../screenshots/4.25.0/16_signal_info.png" /><figcaption>The readings it answers from are the ones on your screens</figcaption></figure>
+      <figure><img alt="The Signal Info card showing audio in, audio out, video in and video out" src="../../screenshots/signal-info.png" /><figcaption>The readings it answers from are the ones on your screens</figcaption></figure>
     </div>
 
     <div class="note" style="margin-top:22px">Under each answer it prints <b>what it read</b> to produce it. That line is recorded, not written by the model, so it cannot be invented - and it is the fastest way to tell a real answer from a confident-sounding wrong one.</div>
