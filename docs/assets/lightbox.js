@@ -53,9 +53,27 @@
     if (lastFocused && lastFocused.focus) lastFocused.focus();
   }
 
+  // Matched by WHAT THE IMAGE IS, not by the box somebody put it in.
+  //
+  // This was a list of three container classes - figure, .hero-shot, .gallery -
+  // and the site has seven. 34 of 87 screenshots were not clickable: every one
+  // in .shots-grid, .lockrow, .with-shot and .shots, which is most of the
+  // /guide manual and the pages a reader most needs to enlarge, because the
+  // detail they came for is a setting name at 250px wide. Reported by Meir on
+  // 2026-08-19: "old screenshots are not clickable".
+  //
+  // A class list has to be extended every time a page gains a layout, and
+  // nothing tells you when it was not. Every screenshot on this site lives
+  // under /screenshots/, so that is the rule - a new page cannot miss it, and
+  // an icon or a badge is still left alone.
+  function isScreenshot(img) {
+    var src = img.getAttribute('src') || '';
+    return src.indexOf('/screenshots/') !== -1 || src.indexOf('screenshots/') === 0;
+  }
+
   document.addEventListener('click', function (e) {
-    var img = e.target.closest('figure img, .hero-shot img, .gallery img');
-    if (!img) return;
+    var img = e.target.closest('img');
+    if (!img || !isScreenshot(img)) return;
     // A screenshot inside a link is a navigation the author meant.
     if (img.closest('a')) return;
     e.preventDefault();
