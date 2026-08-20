@@ -31,7 +31,7 @@
     {
       "@type": "Question",
       "name": "Does the assistant send my data anywhere?",
-      "acceptedAnswer": {"@type": "Answer", "text": "The language model runs on your device and your receiver is on your own network, so a typed question and its answer do not leave your hardware. Voice input is the exception: turning speech into text is done by your phone's own recogniser, and on most phones that means the audio goes to the platform vendor to be transcribed. Typing avoids that entirely."}
+      "acceptedAnswer": {"@type": "Answer", "text": "The language model runs on your device and your receiver is on your own network, so a typed question and its answer do not leave your hardware. Voice input is the exception: turning speech into text is done by your phone's own recognizer, and on most phones that means the audio goes to the platform vendor to be transcribed. Typing avoids that entirely."}
     },
     {
       "@type": "Question",
@@ -136,7 +136,7 @@
       </tbody>
     </table>
     <p class="lead" style="margin-top:22px">The amount is yours to give. "Turn it down by 5 dB" moves 5 dB; "turn it down" with no number moves one step, the same as one press of the button. It will not decide on a figure you did not say.</p>
-    <p class="lead">Changing the sound mode from here is not supported yet. Your receiver organises sound modes by category and selects within the active one, so it is not a single name to send - the Sound tab does it properly.</p>
+    <p class="lead">Changing the sound mode from here is not supported yet. Your receiver organizes sound modes by category and selects within the active one, so it is not a single name to send - the Sound tab does it properly.</p>
   </div>
 </section>
 
@@ -156,7 +156,50 @@
       <h2>Speaking instead of typing</h2>
     </div>
     <p class="lead">Hold the microphone button and talk. It fills the box with what you said so you can see it before it is sent.</p>
-    <div class="note"><b>Worth knowing:</b> the language model runs on your device, and your receiver is on your own network - so a typed question and its answer stay on your hardware. Turning speech into text is done by your phone's own recogniser, and on most phones that sends the audio to the platform vendor to be transcribed. That is the OS doing it, not the app, and typing avoids it entirely.</div>
+    <div class="note"><b>Worth knowing:</b> the language model runs on your device, and your receiver is on your own network - so a typed question and its answer stay on your hardware. Turning speech into text is done by your phone's own recognizer, and on most phones that sends the audio to the platform vendor to be transcribed. That is the OS doing it, not the app, and typing avoids it entirely.</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Device requirements</div>
+      <h2 id="device-requirements">Which devices can run it</h2>
+    </div>
+    <p class="lead">The assistant runs a language model on your own device. No account, no server, nothing to sign into - which also means the device has to have a model on it. That is not something the app can install for you, and it is the one requirement we cannot work around.</p>
+
+    <table class="t">
+      <thead><tr><th>Platform</th><th>What it needs</th></tr></thead>
+      <tbody>
+        <tr><td>iPhone, iPad, Mac</td><td>iOS 26 or macOS 26, on a device where Apple Intelligence is available and switched on. If it is off, the app says so and points you at Settings rather than hiding the feature.</td></tr>
+        <tr><td>Android</td><td>Gemini Nano, through Google AICore. The app reaches it with Google's ML Kit Prompt API, and that API has its own supported-device list - see below.</td></tr>
+        <tr><td>Windows, Linux</td><td>No on-device model exists to run, so the assistant is not shown. The rest of the app is unaffected.</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top:34px">Android: Google's supported devices</h3>
+    <p class="lead">This is Google's list, not ours. It is reproduced here because it is the single thing that decides whether the assistant appears on an Android phone, and because Google publish it in a place most people never look.</p>
+
+    <table class="t">
+      <thead><tr><th>Model</th><th>Devices</th></tr></thead>
+      <tbody>
+        <tr><td>Gemini Nano v3</td><td><b>Google</b> Pixel 10, 10 Pro, 10 Pro XL, 10 Pro Fold, Pixel 9, 9 Pro, 9 Pro XL, 9 Pro Fold &middot; <b>Samsung</b> Galaxy S26, S26+, S26 Ultra &middot; <b>Honor</b> Magic 8 Pro &middot; <b>iQOO</b> 15 &middot; <b>Lenovo</b> Idea Tab Pro Gen 2, Legion Tab Gen 5 &middot; <b>Motorola</b> Signature &middot; <b>OnePlus</b> 15, 15R &middot; <b>OPPO</b> Find X9, X9 Pro, Find X8, X8 Pro, Reno 14 Pro 5G, Reno 15 Pro 5G, Reno 15 Pro Mini 5G, Reno 15 Pro Max 5G &middot; <b>realme</b> GT 7T &middot; <b>Sharp</b> AQUOS R11 &middot; <b>Sony</b> Xperia 1 VIII &middot; <b>vivo</b> X200T, X200, X200 Pro, X300, X300 Pro</td></tr>
+        <tr><td>Gemini Nano v2</td><td><b>Samsung</b> Galaxy Z Fold7, Z TriFold &middot; <b>Honor</b> Magic V5, Magic 7, Magic 7 Pro &middot; <b>iQOO</b> 13 &middot; <b>Motorola</b> Razr 60 Ultra, Razr Ultra 2025 &middot; <b>OnePlus</b> 13, 13s &middot; <b>OPPO</b> Find N5 &middot; <b>POCO</b> F7 Ultra, F8 Pro, F8 Ultra, X7 Pro, X8 Pro &middot; <b>realme</b> GT 7 Pro &middot; <b>vivo</b> X200 FE, T4 Ultra &middot; <b>Xiaomi</b> 14T Pro, 15, 15T, 15T Pro, 15 Ultra, 17, 17 Ultra, Pad Mini</td></tr>
+      </tbody>
+    </table>
+    <p class="legal" style="margin-top:-4px">Google's published support list for the ML Kit GenAI Prompt API, read on 20 August 2026. Google add devices over time and this page is a copy, so <a href="https://developers.google.com/ml-kit/genai" rel="nofollow">check theirs</a> if your device is newer than this list.</p>
+
+    <div class="note" style="margin-top:22px"><b>If your phone is not on that list but you were sure it was supported:</b> Google publish more than one list. The Galaxy S25 and S25 Ultra, for instance, run Gemini Nano perfectly well and appear on Google's list for their other on-device features - summarizing, proofreading, rewriting. The assistant needs the <i>Prompt</i> API, which is what lets it ask a free-form question about your receiver rather than reshape text you already have, and that API reaches fewer devices. The S25 is not on it yet; the S26 is. There is an open request with Google to add the S25 series, and if they do, the assistant will appear on it with no update from us.</div>
+
+    <h3 style="margin-top:34px">What we have run it on ourselves</h3>
+    <p class="lead">Separate from Google's list, and shorter, because it only contains hardware we have actually held.</p>
+    <table class="t">
+      <thead><tr><th>Device</th><th>Result</th></tr></thead>
+      <tbody>
+        <tr><td>Pixel 10 Pro XL</td><td class="yes">Tested against a Marantz Cinema 30, on the receiver's own readings</td></tr>
+      </tbody>
+    </table>
+    <p class="legal" style="margin-top:-4px">If your device is on Google's list above, the assistant will appear and work; this second table is only about what has passed through our hands. We would rather name one device honestly than imply we have a lab.</p>
   </div>
 </section>
 
@@ -168,7 +211,7 @@
     </div>
     <p class="lead">Each of these is a different sentence on purpose, because each has a different answer.</p>
     <ul class="plain">
-      <li><b>"This device cannot run the on-device model."</b> The assistant needs Apple Intelligence on iPhone, iPad or Mac, or Gemini Nano through Google AICore on Android. Plenty of otherwise capable devices do not have one, including some current tablets. Nothing you can change.</li>
+      <li><b>"This device cannot run the on-device model."</b> The assistant needs Apple Intelligence on iPhone, iPad or Mac, or Gemini Nano through Google AICore on Android. Plenty of otherwise capable devices are not covered, including some current tablets and some flagship phones that run Gemini Nano for other things. See <a href="#device-requirements">which devices can run it</a> above. Nothing you can change from the app.</li>
       <li><b>The model needs downloading.</b> Android fetches it in the background the first time. It is a one-off, it is large, and it wants Wi-Fi.</li>
       <li><b>"Your receiver has that, but there is nothing to report on it right now."</b> The feature exists and is simply idle - asking what is playing while nothing plays gets this, not a claim your receiver lacks HEOS.</li>
       <li><b>"This receiver does not report that."</b> A genuine answer about your hardware: the chassis has no such feature and the app is not pretending otherwise.</li>
