@@ -1,10 +1,11 @@
 type: sections
-path: avr-maestro-demo
 title: AVR Maestro Demo
+path: avr-maestro-demo
 icon: mdi:audio-video
-show_icon_and_title: true
 max_columns: 3
 dense_section_placement: true
+show_icon_and_title: true
+cards: []
 sections:
 - type: grid
   column_span: 3
@@ -80,8 +81,8 @@ sections:
     card:
       type: custom:mushroom-template-card
       entity: media_player.YOUR_RECEIVER
-      icon: '{% set s = (state_attr(''media_player.YOUR_RECEIVER'',''source'') or '''')|lower %}{%
-        if s == ''blu-ray'' %}mdi:movie-open{% endif %}{% if s == ''cbl/sat'' %}mdi:television-classic{%
+      icon: '{% set s = (state_attr(''media_player.YOUR_RECEIVER'',''source'') or '''')|lower %}{% if
+        s == ''blu-ray'' %}mdi:movie-open{% endif %}{% if s == ''cbl/sat'' %}mdi:television-classic{%
         endif %}{% if s == ''nvidia shield'' %}mdi:television-play{% endif %}{% if s == ''xbox'' %}mdi:microsoft-xbox{%
         endif %}{% if s == ''ps5'' %}mdi:sony-playstation{% endif %}{% if s == ''tv audio'' %}mdi:television{%
         endif %}{% if s == ''cd'' %}mdi:disc{% endif %}{% if s == ''phono'' %}mdi:record-player{% endif
@@ -93,8 +94,8 @@ sections:
       icon_color: orange
       primary: '{{ state_attr(''media_player.YOUR_RECEIVER'',''media_title'') or state_attr(''media_player.YOUR_RECEIVER'',''source'')
         or ''Nothing playing'' }}'
-      secondary: '{% set r = state_attr(''media_player.YOUR_RECEIVER'',''sound_mode_raw'') %}{% set
-        m = state_attr(''media_player.YOUR_RECEIVER'',''sound_mode'') %}{% set v = state_attr(''media_player.YOUR_RECEIVER'',''volume_level'')
+      secondary: '{% set r = state_attr(''media_player.YOUR_RECEIVER'',''sound_mode_raw'') %}{% set m
+        = state_attr(''media_player.YOUR_RECEIVER'',''sound_mode'') %}{% set v = state_attr(''media_player.YOUR_RECEIVER'',''volume_level'')
         %}{{ r or m or ''Unknown decoder'' }}{% if m and r and m != r %} in {{ m }}{% endif %}{% if v
         is not none %} at {{ (v * 100 - 80) | round(1) }} dB{% endif %}'
       layout: horizontal
@@ -137,7 +138,7 @@ sections:
     double_tap_action:
       action: none
     grid_options:
-      columns: 3
+      columns: 9
       rows: auto
     card_mod:
       style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
@@ -165,7 +166,7 @@ sections:
     double_tap_action:
       action: none
     grid_options:
-      columns: 3
+      columns: 9
       rows: auto
     card_mod:
       style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
@@ -180,14 +181,12 @@ sections:
   - type: custom:mushroom-template-card
     entity: media_player.YOUR_RECEIVER
     icon: mdi:volume-high
-    icon_color: '{% if state_attr(''media_player.YOUR_RECEIVER'',''is_volume_muted'') %}grey{% elif
-      states(''media_player.YOUR_RECEIVER'') not in [''off'',''unavailable'',''unknown''] %}orange{%
-      else %}grey{% endif %}'
-    primary: '{% set v = state_attr(''media_player.YOUR_RECEIVER'',''volume_level'') %}{% if v is
-      not none %}{{ (v * 100 - 80) | round(1) }} dB{% else %}Standby{% endif %}'
-    secondary: '{% set v = state_attr(''media_player.YOUR_RECEIVER'',''volume_level'') %}{% if v is
-      not none %}Master volume step {{ (v * 100) | round(0) | int }}{% else %}Receiver asleep{% endif
-      %}'
+    icon_color: '{% if state_attr(''media_player.YOUR_RECEIVER'',''is_volume_muted'') %}grey{% elif states(''media_player.YOUR_RECEIVER'')
+      not in [''off'',''unavailable'',''unknown''] %}orange{% else %}grey{% endif %}'
+    primary: '{% set v = state_attr(''media_player.YOUR_RECEIVER'',''volume_level'') %}{% if v is not
+      none %}{{ (v * 100 - 80) | round(1) }} dB{% else %}Standby{% endif %}'
+    secondary: '{% set v = state_attr(''media_player.YOUR_RECEIVER'',''volume_level'') %}{% if v is not
+      none %}Step {{ (v * 100) | round(0) | int }}{% else %}Receiver asleep{% endif %}'
     layout: vertical
     fill_container: true
     tap_action:
@@ -197,7 +196,7 @@ sections:
     double_tap_action:
       action: none
     grid_options:
-      columns: 3
+      columns: 9
       rows: auto
     card_mod:
       style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
@@ -216,8 +215,9 @@ sections:
       else ''grey'' }}'
     primary: '{{ state_attr(''media_player.YOUR_RECEIVER'',''sound_mode_raw'') or state_attr(''media_player.YOUR_RECEIVER'',''sound_mode'')
       or ''Standby'' }}'
-    secondary: '{{ state_attr(''media_player.YOUR_RECEIVER'',''sound_mode'') or ''Surround mode''
-      }}'
+    secondary: '{% set r = state_attr(''media_player.YOUR_RECEIVER'',''sound_mode_raw'') %}{% set m =
+      state_attr(''media_player.YOUR_RECEIVER'',''sound_mode'') %}{% if m and r and m != r %}{{ m }}{%
+      else %}Surround mode{% endif %}'
     layout: vertical
     fill_container: true
     tap_action:
@@ -227,7 +227,7 @@ sections:
     double_tap_action:
       action: none
     grid_options:
-      columns: 3
+      columns: 9
       rows: auto
     card_mod:
       style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
@@ -286,9 +286,9 @@ sections:
       - padding-top: 2px
     entity: media_player.YOUR_RECEIVER
     show_label: true
-    label: '[[[ var v = states["media_player.YOUR_RECEIVER"].attributes.volume_level; return (v ===
-      undefined || v === null) ? "Receiver in standby" : ((v * 100 - 80).toFixed(1) + " dB   |   step
-      " + Math.round(v * 100)); ]]]'
+    label: '[[[ var v = states["media_player.YOUR_RECEIVER"].attributes.volume_level; return (v === undefined
+      || v === null) ? "Receiver in standby" : ((v * 100 - 80).toFixed(1) + " dB   |   step " + Math.round(v
+      * 100)); ]]]'
   - type: custom:mushroom-media-player-card
     entity: media_player.YOUR_RECEIVER
     name: Master Volume
@@ -296,11 +296,10 @@ sections:
     use_media_info: false
     use_media_artwork: false
     show_volume_level: true
-    media_controls:
-    - on_off
+    media_controls: []
     volume_controls:
-    - volume_mute
     - volume_set
+    - volume_mute
     collapsible_controls: false
     fill_container: true
     tap_action:
@@ -315,7 +314,9 @@ sections:
         \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
         \ 36px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
         \  --control-height: 44px;\n  --control-border-radius: 12px;\n  --mush-rgb-state-media-player:\
-        \ 255, 122, 24;\n  --rgb-state-media-player: 255, 122, 24;\n{% if states('media_player.YOUR_RECEIVER')\
+        \ 255, 122, 24;\n  --rgb-state-media-player: 255, 122, 24;\n  --slider-color: #FF7A18;\n  --slider-bg-color:\
+        \ rgba(255, 122, 24, 0.18);\n  --slider-outline-color: rgba(255, 122, 24, 0.35);\n  --main-color:\
+        \ #FF7A18;\n  --bg-color: rgba(255, 122, 24, 0.18);\n{% if states('media_player.YOUR_RECEIVER')\
         \ not in ['off','unavailable','unknown'] %}\n  background: linear-gradient(150deg, rgba(226, 86,\
         \ 10, 0.20), rgba(15, 15, 17, 0.90));\n  border: 1px solid rgba(255, 122, 24, 0.42);\n{% else\
         \ %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n{%\
@@ -324,7 +325,7 @@ sections:
     entity: script.avr_maestro_YOURMAC_volume_down
     icon: mdi:volume-minus
     icon_color: orange
-    primary: Volume Down
+    primary: Vol Down
     layout: vertical
     fill_container: true
     tap_action:
@@ -337,7 +338,7 @@ sections:
     double_tap_action:
       action: none
     grid_options:
-      columns: 3
+      columns: 9
       rows: auto
     card_mod:
       style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
@@ -350,7 +351,7 @@ sections:
     entity: script.avr_maestro_YOURMAC_volume_up
     icon: mdi:volume-plus
     icon_color: orange
-    primary: Volume Up
+    primary: Vol Up
     layout: vertical
     fill_container: true
     tap_action:
@@ -363,7 +364,7 @@ sections:
     double_tap_action:
       action: none
     grid_options:
-      columns: 3
+      columns: 9
       rows: auto
     card_mod:
       style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
@@ -375,8 +376,8 @@ sections:
   - type: custom:mushroom-template-card
     entity: script.avr_maestro_YOURMAC_mute_on
     icon: mdi:volume-mute
-    icon_color: '{{ ''orange'' if state_attr(''media_player.YOUR_RECEIVER'',''is_volume_muted'') ==
-      true else ''grey'' }}'
+    icon_color: '{{ ''orange'' if state_attr(''media_player.YOUR_RECEIVER'',''is_volume_muted'') == true
+      else ''grey'' }}'
     primary: Mute
     layout: vertical
     fill_container: true
@@ -390,7 +391,7 @@ sections:
     double_tap_action:
       action: none
     grid_options:
-      columns: 3
+      columns: 9
       rows: auto
     card_mod:
       style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
@@ -398,15 +399,15 @@ sections:
         \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
         \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
         \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
-        {% if state_attr('media_player.YOUR_RECEIVER','is_volume_muted') == true %}\n  background:\
-        \ linear-gradient(160deg, rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border: 1px solid\
-        \ rgba(255, 122, 24, 0.80);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px\
-        \ solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
+        {% if state_attr('media_player.YOUR_RECEIVER','is_volume_muted') == true %}\n  background: linear-gradient(160deg,\
+        \ rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border: 1px solid rgba(255, 122, 24, 0.80);\n\
+        {% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n\
+        {% endif %}\n}\n"
   - type: custom:mushroom-template-card
     entity: script.avr_maestro_YOURMAC_mute_off
     icon: mdi:volume-high
-    icon_color: '{{ ''orange'' if state_attr(''media_player.YOUR_RECEIVER'',''is_volume_muted'') ==
-      false else ''grey'' }}'
+    icon_color: '{{ ''orange'' if state_attr(''media_player.YOUR_RECEIVER'',''is_volume_muted'') == false
+      else ''grey'' }}'
     primary: Unmute
     layout: vertical
     fill_container: true
@@ -420,7 +421,7 @@ sections:
     double_tap_action:
       action: none
     grid_options:
-      columns: 3
+      columns: 9
       rows: auto
     card_mod:
       style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
@@ -428,10 +429,10 @@ sections:
         \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
         \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
         \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
-        {% if state_attr('media_player.YOUR_RECEIVER','is_volume_muted') == false %}\n  background:\
-        \ linear-gradient(160deg, rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border: 1px solid\
-        \ rgba(255, 122, 24, 0.80);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px\
-        \ solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
+        {% if state_attr('media_player.YOUR_RECEIVER','is_volume_muted') == false %}\n  background: linear-gradient(160deg,\
+        \ rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border: 1px solid rgba(255, 122, 24, 0.80);\n\
+        {% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n\
+        {% endif %}\n}\n"
   - type: custom:button-card
     name: Quick Levels
     color_type: label-card
@@ -462,8 +463,8 @@ sections:
   - type: custom:mushroom-template-card
     entity: media_player.YOUR_RECEIVER
     icon: mdi:weather-night
-    icon_color: '{{ ''orange'' if (state_attr(''media_player.YOUR_RECEIVER'',''volume_level'') or
-      -1) == 0.5 else ''grey'' }}'
+    icon_color: '{{ ''orange'' if (state_attr(''media_player.YOUR_RECEIVER'',''volume_level'') or -1)
+      == 0.5 else ''grey'' }}'
     primary: Night
     secondary: -30 dB
     layout: vertical
@@ -480,7 +481,7 @@ sections:
     double_tap_action:
       action: none
     grid_options:
-      columns: 3
+      columns: 9
       rows: auto
     card_mod:
       style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
@@ -495,8 +496,8 @@ sections:
   - type: custom:mushroom-template-card
     entity: media_player.YOUR_RECEIVER
     icon: mdi:account-voice
-    icon_color: '{{ ''orange'' if (state_attr(''media_player.YOUR_RECEIVER'',''volume_level'') or
-      -1) == 0.6 else ''grey'' }}'
+    icon_color: '{{ ''orange'' if (state_attr(''media_player.YOUR_RECEIVER'',''volume_level'') or -1)
+      == 0.6 else ''grey'' }}'
     primary: Dialog
     secondary: -20 dB
     layout: vertical
@@ -513,7 +514,7 @@ sections:
     double_tap_action:
       action: none
     grid_options:
-      columns: 3
+      columns: 9
       rows: auto
     card_mod:
       style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
@@ -528,8 +529,8 @@ sections:
   - type: custom:mushroom-template-card
     entity: media_player.YOUR_RECEIVER
     icon: mdi:movie-open
-    icon_color: '{{ ''orange'' if (state_attr(''media_player.YOUR_RECEIVER'',''volume_level'') or
-      -1) == 0.65 else ''grey'' }}'
+    icon_color: '{{ ''orange'' if (state_attr(''media_player.YOUR_RECEIVER'',''volume_level'') or -1)
+      == 0.65 else ''grey'' }}'
     primary: Movie
     secondary: -15 dB
     layout: vertical
@@ -546,7 +547,7 @@ sections:
     double_tap_action:
       action: none
     grid_options:
-      columns: 3
+      columns: 9
       rows: auto
     card_mod:
       style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
@@ -561,8 +562,8 @@ sections:
   - type: custom:mushroom-template-card
     entity: media_player.YOUR_RECEIVER
     icon: mdi:volume-high
-    icon_color: '{{ ''orange'' if (state_attr(''media_player.YOUR_RECEIVER'',''volume_level'') or
-      -1) == 0.7 else ''grey'' }}'
+    icon_color: '{{ ''orange'' if (state_attr(''media_player.YOUR_RECEIVER'',''volume_level'') or -1)
+      == 0.7 else ''grey'' }}'
     primary: Loud
     secondary: -10 dB
     layout: vertical
@@ -579,7 +580,7 @@ sections:
     double_tap_action:
       action: none
     grid_options:
-      columns: 3
+      columns: 9
       rows: auto
     card_mod:
       style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
@@ -638,8 +639,8 @@ sections:
       - padding-top: 2px
     entity: media_player.YOUR_RECEIVER
     show_label: true
-    label: '[[[ var v = states["media_player.YOUR_RECEIVER"].attributes.source; return v ? ("Now on
-      " + v) : "Receiver in standby"; ]]]'
+    label: '[[[ var v = states["media_player.YOUR_RECEIVER"].attributes.source; return v ? ("Now on "
+      + v) : "Receiver in standby"; ]]]'
   - type: custom:mushroom-template-card
     entity: script.avr_maestro_YOURMAC_input_network
     icon: mdi:volume-source
@@ -666,10 +667,10 @@ sections:
         \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
         \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
         \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
-        {% if (state_attr('media_player.YOUR_RECEIVER','source') or '')|lower == 'heos music' %}\n\
-        \  background: linear-gradient(160deg, rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border:\
-        \ 1px solid rgba(255, 122, 24, 0.80);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border:\
-        \ 1px solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
+        {% if (state_attr('media_player.YOUR_RECEIVER','source') or '')|lower == 'heos music' %}\n  background:\
+        \ linear-gradient(160deg, rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border: 1px solid\
+        \ rgba(255, 122, 24, 0.80);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px\
+        \ solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
     secondary: Network streaming, HEOS built in
   - type: custom:mushroom-template-card
     entity: script.avr_maestro_YOURMAC_input_blu_ray
@@ -689,7 +690,7 @@ sections:
     double_tap_action:
       action: none
     grid_options:
-      columns: 3
+      columns: 6
       rows: auto
     card_mod:
       style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
@@ -719,7 +720,7 @@ sections:
     double_tap_action:
       action: none
     grid_options:
-      columns: 3
+      columns: 6
       rows: auto
     card_mod:
       style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
@@ -749,7 +750,7 @@ sections:
     double_tap_action:
       action: none
     grid_options:
-      columns: 3
+      columns: 6
       rows: auto
     card_mod:
       style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
@@ -779,7 +780,7 @@ sections:
     double_tap_action:
       action: none
     grid_options:
-      columns: 3
+      columns: 6
       rows: auto
     card_mod:
       style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
@@ -809,7 +810,7 @@ sections:
     double_tap_action:
       action: none
     grid_options:
-      columns: 3
+      columns: 6
       rows: auto
     card_mod:
       style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
@@ -839,7 +840,7 @@ sections:
     double_tap_action:
       action: none
     grid_options:
-      columns: 3
+      columns: 6
       rows: auto
     card_mod:
       style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
@@ -847,10 +848,10 @@ sections:
         \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
         \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
         \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
-        {% if (state_attr('media_player.YOUR_RECEIVER','source') or '')|lower == 'tv audio' %}\n \
-        \ background: linear-gradient(160deg, rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border:\
-        \ 1px solid rgba(255, 122, 24, 0.80);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border:\
-        \ 1px solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
+        {% if (state_attr('media_player.YOUR_RECEIVER','source') or '')|lower == 'tv audio' %}\n  background:\
+        \ linear-gradient(160deg, rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border: 1px solid\
+        \ rgba(255, 122, 24, 0.80);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px\
+        \ solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
   - type: custom:mushroom-template-card
     entity: script.avr_maestro_YOURMAC_input_cd
     icon: mdi:disc
@@ -869,7 +870,7 @@ sections:
     double_tap_action:
       action: none
     grid_options:
-      columns: 3
+      columns: 6
       rows: auto
     card_mod:
       style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
@@ -899,7 +900,7 @@ sections:
     double_tap_action:
       action: none
     grid_options:
-      columns: 3
+      columns: 6
       rows: auto
     card_mod:
       style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
@@ -929,7 +930,7 @@ sections:
     double_tap_action:
       action: none
     grid_options:
-      columns: 3
+      columns: 6
       rows: auto
     card_mod:
       style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
@@ -959,7 +960,7 @@ sections:
     double_tap_action:
       action: none
     grid_options:
-      columns: 3
+      columns: 6
       rows: auto
     card_mod:
       style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
@@ -989,7 +990,7 @@ sections:
     double_tap_action:
       action: none
     grid_options:
-      columns: 3
+      columns: 6
       rows: auto
     card_mod:
       style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
@@ -1019,7 +1020,7 @@ sections:
     double_tap_action:
       action: none
     grid_options:
-      columns: 3
+      columns: 6
       rows: auto
     card_mod:
       style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
@@ -1027,10 +1028,10 @@ sections:
         \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
         \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
         \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
-        {% if (state_attr('media_player.YOUR_RECEIVER','source') or '')|lower == 'bluetooth' %}\n\
-        \  background: linear-gradient(160deg, rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border:\
-        \ 1px solid rgba(255, 122, 24, 0.80);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border:\
-        \ 1px solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
+        {% if (state_attr('media_player.YOUR_RECEIVER','source') or '')|lower == 'bluetooth' %}\n  background:\
+        \ linear-gradient(160deg, rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border: 1px solid\
+        \ rgba(255, 122, 24, 0.80);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px\
+        \ solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
 - type: grid
   column_span: 1
   cards:
@@ -1078,19 +1079,18 @@ sections:
       - padding-top: 2px
     entity: media_player.YOUR_RECEIVER
     show_label: true
-    label: '[[[ var a = states["media_player.YOUR_RECEIVER"].attributes; return a.sound_mode_raw ?
-      ("Now in " + a.sound_mode_raw) : (a.sound_mode ? ("Now in " + a.sound_mode) : "Receiver in standby");
+    label: '[[[ var a = states["media_player.YOUR_RECEIVER"].attributes; return a.sound_mode_raw ? ("Now
+      in " + a.sound_mode_raw) : (a.sound_mode ? ("Now in " + a.sound_mode) : "Receiver in standby");
       ]]]'
   - type: custom:mushroom-template-card
     entity: script.avr_maestro_YOURMAC_soundmode_stereo
     icon: mdi:speaker
     icon_color: '{{ ''orange'' if ''STEREO'' in ((state_attr(''media_player.YOUR_RECEIVER'',''sound_mode'')
       or '''') ~ '' '' ~ (state_attr(''media_player.YOUR_RECEIVER'',''sound_mode_raw'') or ''''))|upper
-      and ''MCH'' not in ((state_attr(''media_player.YOUR_RECEIVER'',''sound_mode'') or '''') ~ ''
-      '' ~ (state_attr(''media_player.YOUR_RECEIVER'',''sound_mode_raw'') or ''''))|upper and ''ALL
-      ZONE'' not in ((state_attr(''media_player.YOUR_RECEIVER'',''sound_mode'') or '''') ~ '' '' ~
-      (state_attr(''media_player.YOUR_RECEIVER'',''sound_mode_raw'') or ''''))|upper else ''grey''
-      }}'
+      and ''MCH'' not in ((state_attr(''media_player.YOUR_RECEIVER'',''sound_mode'') or '''') ~ '' ''
+      ~ (state_attr(''media_player.YOUR_RECEIVER'',''sound_mode_raw'') or ''''))|upper and ''ALL ZONE''
+      not in ((state_attr(''media_player.YOUR_RECEIVER'',''sound_mode'') or '''') ~ '' '' ~ (state_attr(''media_player.YOUR_RECEIVER'',''sound_mode_raw'')
+      or ''''))|upper else ''grey'' }}'
     primary: Stereo
     layout: vertical
     fill_container: true
@@ -1113,13 +1113,12 @@ sections:
         \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
         \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
         {% if 'STEREO' in ((state_attr('media_player.YOUR_RECEIVER','sound_mode') or '') ~ ' ' ~ (state_attr('media_player.YOUR_RECEIVER','sound_mode_raw')\
-        \ or ''))|upper and 'MCH' not in ((state_attr('media_player.YOUR_RECEIVER','sound_mode') or\
-        \ '') ~ ' ' ~ (state_attr('media_player.YOUR_RECEIVER','sound_mode_raw') or ''))|upper and\
-        \ 'ALL ZONE' not in ((state_attr('media_player.YOUR_RECEIVER','sound_mode') or '') ~ ' ' ~\
-        \ (state_attr('media_player.YOUR_RECEIVER','sound_mode_raw') or ''))|upper %}\n  background:\
-        \ linear-gradient(160deg, rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border: 1px solid\
-        \ rgba(255, 122, 24, 0.80);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px\
-        \ solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
+        \ or ''))|upper and 'MCH' not in ((state_attr('media_player.YOUR_RECEIVER','sound_mode') or '')\
+        \ ~ ' ' ~ (state_attr('media_player.YOUR_RECEIVER','sound_mode_raw') or ''))|upper and 'ALL ZONE'\
+        \ not in ((state_attr('media_player.YOUR_RECEIVER','sound_mode') or '') ~ ' ' ~ (state_attr('media_player.YOUR_RECEIVER','sound_mode_raw')\
+        \ or ''))|upper %}\n  background: linear-gradient(160deg, rgba(226, 86, 10, 0.34), rgba(15, 15,\
+        \ 17, 0.88));\n  border: 1px solid rgba(255, 122, 24, 0.80);\n{% else %}\n  background: rgba(15,\
+        \ 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
   - type: custom:mushroom-template-card
     entity: script.avr_maestro_YOURMAC_soundmode_dolby
     icon: mdi:surround-sound
@@ -1178,11 +1177,10 @@ sections:
         \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
         \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
         \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
-        {% if 'MCH STEREO' in ((state_attr('media_player.YOUR_RECEIVER','sound_mode') or '') ~ ' '\
-        \ ~ (state_attr('media_player.YOUR_RECEIVER','sound_mode_raw') or ''))|upper %}\n  background:\
-        \ linear-gradient(160deg, rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border: 1px solid\
-        \ rgba(255, 122, 24, 0.80);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px\
-        \ solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
+        {% if 'MCH STEREO' in ((state_attr('media_player.YOUR_RECEIVER','sound_mode') or '') ~ ' ' ~ (state_attr('media_player.YOUR_RECEIVER','sound_mode_raw')\
+        \ or ''))|upper %}\n  background: linear-gradient(160deg, rgba(226, 86, 10, 0.34), rgba(15, 15,\
+        \ 17, 0.88));\n  border: 1px solid rgba(255, 122, 24, 0.80);\n{% else %}\n  background: rgba(15,\
+        \ 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
   - type: custom:mushroom-template-card
     entity: script.avr_maestro_YOURMAC_soundmode_pure_direct
     icon: mdi:sine-wave
@@ -1210,11 +1208,11 @@ sections:
         \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
         \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
         \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
-        {% if 'PURE DIRECT' in ((state_attr('media_player.YOUR_RECEIVER','sound_mode') or '') ~ '\
-        \ ' ~ (state_attr('media_player.YOUR_RECEIVER','sound_mode_raw') or ''))|upper %}\n  background:\
-        \ linear-gradient(160deg, rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border: 1px solid\
-        \ rgba(255, 122, 24, 0.80);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px\
-        \ solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
+        {% if 'PURE DIRECT' in ((state_attr('media_player.YOUR_RECEIVER','sound_mode') or '') ~ ' ' ~\
+        \ (state_attr('media_player.YOUR_RECEIVER','sound_mode_raw') or ''))|upper %}\n  background: linear-gradient(160deg,\
+        \ rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border: 1px solid rgba(255, 122, 24, 0.80);\n\
+        {% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n\
+        {% endif %}\n}\n"
 - type: grid
   column_span: 1
   cards:
@@ -1425,8 +1423,8 @@ sections:
   - type: custom:mushroom-template-card
     entity: script.avr_maestro_YOURMAC_dyneq_on
     icon: mdi:brightness-percent
-    icon_color: '{{ ''orange'' if state_attr(''media_player.YOUR_RECEIVER'',''dynamic_eq'') == true
-      else ''grey'' }}'
+    icon_color: '{{ ''orange'' if state_attr(''media_player.YOUR_RECEIVER'',''dynamic_eq'') == true else
+      ''grey'' }}'
     primary: Dynamic EQ On
     layout: vertical
     fill_container: true
@@ -1455,9 +1453,8 @@ sections:
   - type: custom:mushroom-template-card
     entity: script.avr_maestro_YOURMAC_dyneq_off
     icon: mdi:brightness-percent
-    icon_color: '{% if state_attr(''media_player.YOUR_RECEIVER'',''dynamic_eq'') is none %}grey{%
-      elif not state_attr(''media_player.YOUR_RECEIVER'',''dynamic_eq'') %}orange{% else %}grey{%
-      endif %}'
+    icon_color: '{% if state_attr(''media_player.YOUR_RECEIVER'',''dynamic_eq'') is none %}grey{% elif
+      not state_attr(''media_player.YOUR_RECEIVER'',''dynamic_eq'') %}orange{% else %}grey{% endif %}'
     primary: Dynamic EQ Off
     layout: vertical
     fill_container: true
@@ -1889,6 +1886,7 @@ sections:
     secondary: powers on, Speaker Preset 2, Nvidia Shield, Movie mode, Dirac slot 3, 13 channel levels,
       subwoofer level adjust, -20.0 dB{% set lt = state_attr('script.avr_maestro_YOURMAC_scene_1782176461993','last_triggered')
       %}{% if lt %} | recalled {{ relative_time(lt) }} ago{% endif %}
+    multiline_secondary: true
   - type: custom:mushroom-template-card
     entity: script.avr_maestro_YOURMAC_scene_1782814855171
     icon: mdi:tune
@@ -1917,6 +1915,7 @@ sections:
         \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
     secondary: 11 channel levels, subwoofer level adjust{% set lt = state_attr('script.avr_maestro_YOURMAC_scene_1782814855171','last_triggered')
       %}{% if lt %} | recalled {{ relative_time(lt) }} ago{% endif %}
+    multiline_secondary: true
   - type: custom:mushroom-template-card
     entity: script.avr_maestro_YOURMAC_scene_1782865214972
     icon: mdi:speaker-multiple
@@ -1945,6 +1944,7 @@ sections:
         \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
     secondary: 13 channel levels{% set lt = state_attr('script.avr_maestro_YOURMAC_scene_1782865214972','last_triggered')
       %}{% if lt %} | recalled {{ relative_time(lt) }} ago{% endif %}
+    multiline_secondary: true
   - type: custom:mushroom-template-card
     entity: script.avr_maestro_YOURMAC_scene_1782865221344
     icon: mdi:equalizer
@@ -1973,6 +1973,7 @@ sections:
         \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
     secondary: 13 channel levels, subwoofer level adjust{% set lt = state_attr('script.avr_maestro_YOURMAC_scene_1782865221344','last_triggered')
       %}{% if lt %} | recalled {{ relative_time(lt) }} ago{% endif %}
+    multiline_secondary: true
 - type: grid
   column_span: 1
   cards:
@@ -2203,8 +2204,8 @@ sections:
         \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
         \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
         \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
-        {% if 'ALL ZONE STEREO' in ((state_attr('media_player.YOUR_RECEIVER','sound_mode') or '')\
-        \ ~ ' ' ~ (state_attr('media_player.YOUR_RECEIVER','sound_mode_raw') or ''))|upper %}\n  background:\
+        {% if 'ALL ZONE STEREO' in ((state_attr('media_player.YOUR_RECEIVER','sound_mode') or '') ~ '\
+        \ ' ~ (state_attr('media_player.YOUR_RECEIVER','sound_mode_raw') or ''))|upper %}\n  background:\
         \ linear-gradient(160deg, rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border: 1px solid\
         \ rgba(255, 122, 24, 0.80);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px\
         \ solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
@@ -2720,8 +2721,8 @@ sections:
   column_span: 3
   cards:
   - type: custom:button-card
-    name: Master Volume History
-    icon: mdi:chart-line
+    name: History and Insights
+    icon: mdi:chart-timeline-variant
     color_type: label-card
     tap_action:
       action: none
@@ -2746,17 +2747,39 @@ sections:
       - margin-right: 12px
       name:
       - font-size: 13px
-      - font-weight: 700
+      - font-weight: '700'
       - letter-spacing: 3px
       - color: '#FF7A18'
       - text-align: left
       - justify-self: start
       - text-transform: uppercase
-  - type: custom:apexcharts-card
+  - type: history-graph
+    title: Power and activity, last 7 days
+    hours_to_show: 168
+    show_names: false
+    entities:
+    - entity: media_player.YOUR_RECEIVER
+      name: Receiver
     grid_options:
       columns: full
       rows: auto
+    card_mod:
+      style: "ha-card {\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24,\
+        \ 0.14);\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n  --state-media_player-on-color:\
+        \ #FF7A18;\n  --state-media_player-playing-color: #FFB24C;\n  --state-media_player-paused-color:\
+        \ #A85F16;\n  --state-media_player-idle-color: #7A3E10;\n  --state-media_player-standby-color:\
+        \ #33231A;\n  --state-media_player-off-color: #33231A;\n  --state-active-color: #FF7A18;\n  --state-inactive-color:\
+        \ #33231A;\n  --state-unavailable-color: #55555C;\n}\nha-card .card-header {\n  font-size: 16px\
+        \ !important;\n  font-weight: 500 !important;\n  line-height: 20px !important;\n  padding: 14px\
+        \ 16px 2px 16px !important;\n}\nha-card .card-header ha-icon-next,\nha-card .card-header ha-svg-icon,\n\
+        ha-card .card-header ha-icon-button {\n  display: none !important;\n}\n"
+  - type: custom:apexcharts-card
+    grid_options:
+      columns: full
+      rows: 6
     graph_span: 7d
+    span:
+      end: day
     header:
       show: true
       title: Master volume in dB, last 7 days
@@ -2765,44 +2788,325 @@ sections:
     series:
     - entity: media_player.YOUR_RECEIVER
       attribute: volume_level
-      name: Master volume
-      type: area
-      curve: stepline
+      name: 2 hour mean
+      type: line
+      curve: smooth
       color: '#FF7A18'
-      stroke_width: 2
-      opacity: 0.22
+      stroke_width: 2.5
       unit: ' dB'
       float_precision: 1
       transform: 'return x == null ? null : Number(x) * 100 - 80;'
       extend_to: now
       group_by:
-        duration: 1h
-        func: last
+        duration: 2h
+        func: avg
         fill: last
     apex_config:
       chart:
-        height: 240
+        height: 268
+        animations:
+          enabled: false
+        zoom:
+          enabled: false
+        toolbar:
+          show: false
       grid:
         borderColor: rgba(255,122,24,0.12)
         strokeDashArray: 3
-      yaxis:
-        min: -60
-        max: 0
-        tickAmount: 4
-        labels:
-          style:
-            colors: '#A6A6AD'
-      xaxis:
-        labels:
-          style:
-            colors: '#A6A6AD'
+        padding:
+          left: 6
+          right: 18
+          top: 0
+          bottom: 0
       dataLabels:
         enabled: false
       legend:
         show: false
       tooltip:
         theme: dark
+      xaxis:
+        labels:
+          style:
+            colors: '#A6A6AD'
+          format: ddd
+        tickAmount: 7
+      yaxis:
+        min: -80
+        max: 0
+        tickAmount: 4
+        forceNiceScale: false
+        decimalsInFloat: 0
+        labels:
+          style:
+            colors: '#A6A6AD'
     card_mod:
       style: "ha-card {\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24,\
         \ 0.14);\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n}\n"
-cards: []
+  - type: custom:apexcharts-card
+    grid_options:
+      columns: full
+      rows: 5
+    graph_span: 7d
+    span:
+      end: day
+    header:
+      show: true
+      title: Master volume by day in dB, average and peak
+      show_states: false
+      colorize_states: false
+    series:
+    - entity: media_player.YOUR_RECEIVER
+      attribute: volume_level
+      name: Day average
+      type: column
+      color: '#CC5200'
+      float_precision: 1
+      transform: 'return x == null ? null : Number(x) * 100;'
+      group_by:
+        duration: 1d
+        func: avg
+        fill: 'null'
+    - entity: media_player.YOUR_RECEIVER
+      attribute: volume_level
+      name: Day peak
+      type: line
+      curve: smooth
+      color: '#FFB24C'
+      stroke_width: 2
+      extend_to: false
+      float_precision: 1
+      transform: 'return x == null ? null : Number(x) * 100;'
+      group_by:
+        duration: 1d
+        func: max
+        fill: 'null'
+    apex_config:
+      chart:
+        height: 254
+        animations:
+          enabled: false
+        zoom:
+          enabled: false
+        toolbar:
+          show: false
+      grid:
+        borderColor: rgba(255,122,24,0.12)
+        strokeDashArray: 3
+        padding:
+          left: 6
+          right: 14
+          top: 0
+          bottom: 0
+      dataLabels:
+        enabled: true
+        enabledOnSeries:
+        - 0
+        formatter: 'EVAL:function (v, o) { if (v == null) { return ''''; } var d = ''''; try { var ts
+          = o.w.globals.seriesX[o.seriesIndex][o.dataPointIndex]; d = new Date(ts).toLocaleDateString(''en-US'',
+          { weekday: ''short'' }); } catch (e) {} return d + ''  '' + (v - 80).toFixed(0); }'
+        offsetY: 15
+        background:
+          enabled: false
+        style:
+          fontSize: 11px
+          fontWeight: 700
+          colors:
+          - '#FFE0BD'
+      legend:
+        show: true
+        position: top
+        horizontalAlign: right
+        fontSize: 11px
+        labels:
+          colors: '#A6A6AD'
+        markers:
+          width: 9
+          height: 9
+        formatter: 'EVAL:function (name, o) { try { var d = o.w.globals.series[o.seriesIndex]; for (var
+          i = d.length - 1; i >= 0; i--) { if (d[i] != null) { return name + '': '' + (d[i] - 80).toFixed(1)
+          + '' dB''; } } } catch (e) {} return name; }'
+      tooltip:
+        theme: dark
+        y:
+          formatter: 'EVAL:function (v) { return v == null ? '''' : (v - 80).toFixed(1) + '' dB''; }'
+      xaxis:
+        labels:
+          show: false
+        axisTicks:
+          show: false
+      plotOptions:
+        bar:
+          columnWidth: 44%
+          borderRadius: 3
+          dataLabels:
+            position: top
+      markers:
+        size: 4
+        strokeWidth: 0
+      yaxis:
+        min: 0
+        max: 80
+        tickAmount: 4
+        forceNiceScale: false
+        decimalsInFloat: 0
+        labels:
+          style:
+            colors: '#A6A6AD'
+          formatter: EVAL:function (v) { return (v - 80).toFixed(0); }
+    card_mod:
+      style: "ha-card {\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24,\
+        \ 0.14);\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n}\n"
+  - type: custom:apexcharts-card
+    grid_options:
+      columns: full
+      rows: 5
+    graph_span: 7d
+    span:
+      end: day
+    header:
+      show: true
+      title: Source in use, last 7 days
+      show_states: false
+      colorize_states: false
+    series:
+    - entity: media_player.YOUR_RECEIVER
+      attribute: source
+      name: Source in use, last 7 days
+      type: line
+      curve: stepline
+      stroke_width: 3
+      extend_to: now
+      float_precision: 0
+      transform: 'if (x == null) return null;
+
+        var m = ["Phono", "NET", "Xbox", "Nvidia Shield"];
+
+        var i = m.indexOf(x);
+
+        return i < 0 ? 0 : i + 1;
+
+        '
+      color: '#FF7A18'
+    apex_config:
+      chart:
+        height: 240
+        animations:
+          enabled: false
+        zoom:
+          enabled: false
+        toolbar:
+          show: false
+      grid:
+        borderColor: rgba(255,122,24,0.12)
+        strokeDashArray: 3
+        padding:
+          left: 6
+          right: 18
+          top: 0
+          bottom: 0
+      dataLabels:
+        enabled: false
+      legend:
+        show: false
+      tooltip:
+        theme: dark
+        y:
+          formatter: 'EVAL:function (v) { return v == null ? ''off'' : (["Other", "Phono", "HEOS Net",
+            "Xbox", "Shield"][Math.round(v)] || ''Other''); }'
+      xaxis:
+        labels:
+          style:
+            colors: '#A6A6AD'
+          format: ddd
+        tickAmount: 7
+      yaxis:
+        min: 0
+        max: 4
+        tickAmount: 4
+        forceNiceScale: false
+        decimalsInFloat: 0
+        labels:
+          style:
+            colors: '#A6A6AD'
+          formatter: EVAL:function (v) { return ["Other", "Phono", "HEOS Net", "Xbox", "Shield"][Math.round(v)]
+            || ''; }
+    card_mod:
+      style: "ha-card {\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24,\
+        \ 0.14);\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n}\n"
+  - type: custom:apexcharts-card
+    grid_options:
+      columns: full
+      rows: 5
+    graph_span: 7d
+    span:
+      end: day
+    header:
+      show: true
+      title: Surround mode, last 7 days
+      show_states: false
+      colorize_states: false
+    series:
+    - entity: media_player.YOUR_RECEIVER
+      attribute: sound_mode
+      name: Surround mode, last 7 days
+      type: line
+      curve: stepline
+      stroke_width: 3
+      extend_to: now
+      float_precision: 0
+      transform: 'if (x == null) return null;
+
+        var m = ["STEREO", "PURE DIRECT", "DOLBY DIGITAL", "DTS SURROUND"];
+
+        var i = m.indexOf(x);
+
+        return i < 0 ? 0 : i + 1;
+
+        '
+      color: '#FFB24C'
+    apex_config:
+      chart:
+        height: 240
+        animations:
+          enabled: false
+        zoom:
+          enabled: false
+        toolbar:
+          show: false
+      grid:
+        borderColor: rgba(255,122,24,0.12)
+        strokeDashArray: 3
+        padding:
+          left: 6
+          right: 18
+          top: 0
+          bottom: 0
+      dataLabels:
+        enabled: false
+      legend:
+        show: false
+      tooltip:
+        theme: dark
+        y:
+          formatter: 'EVAL:function (v) { return v == null ? ''off'' : (["Other", "Stereo", "Pure Direct",
+            "Dolby Digital", "DTS Surround"][Math.round(v)] || ''Other''); }'
+      xaxis:
+        labels:
+          style:
+            colors: '#A6A6AD'
+          format: ddd
+        tickAmount: 7
+      yaxis:
+        min: 0
+        max: 4
+        tickAmount: 4
+        forceNiceScale: false
+        decimalsInFloat: 0
+        labels:
+          style:
+            colors: '#A6A6AD'
+          formatter: EVAL:function (v) { return ["Other", "Stereo", "Pure Direct", "Dolby Digital", "DTS
+            Surround"][Math.round(v)] || ''; }
+    card_mod:
+      style: "ha-card {\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24,\
+        \ 0.14);\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n}\n"

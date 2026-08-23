@@ -351,7 +351,16 @@ tap_action:
       <div class="eyebrow">Step 9</div>
       <h2>Add history</h2>
     </div>
-    <p class="lead">The receiver's media player entity is recorded by Home Assistant like any other, so you get a listening history for free. Volume in dB uses the same conversion as step 7.</p>
+    <p class="lead">The receiver's media player entity is recorded by Home Assistant like any other, so you get a listening history for free. Everything below comes from that one entity: no extra sensors, no helpers, nothing to configure first.</p>
+    <figure><img alt="Five history graphs: power and activity, master volume in dB, volume by day, source in use and surround mode" src="../../screenshots/ha-dashboard-history.png" /><figcaption>Five graphs, one entity, seven days</figcaption></figure>
+    <p class="lead">The plain state timeline needs no custom cards at all, and is the one most worth having:</p>
+<pre class="code">type: history-graph
+hours_to_show: 168
+entities:
+  - entity: media_player.your_receiver
+    name: Receiver</pre>
+    <p class="capt">On, off, and what it was doing, across a week.</p>
+    <p class="lead">Volume in dB uses the same conversion as step 7:</p>
 <pre class="code">type: custom:apexcharts-card
 graph_span: 7d
 header:
@@ -362,7 +371,7 @@ series:
     attribute: volume_level
     name: Master volume
     type: line
-    curve: stepline
+    curve: smooth
     unit: dB
     float_precision: 1
     transform: "return x == null ? null : Number(x) * 100 - 80;"
@@ -378,12 +387,58 @@ apex_config:
     min: -60
     max: 0</pre>
     <p class="capt">group_by with fill: last turns sparse events into a continuous line. The y-axis has to go in apex_config to take effect.</p>
-    <p class="lead">And a plain state timeline, which needs no custom cards at all:</p>
-<pre class="code">type: history-graph
-hours_to_show: 168
-entities:
+    <p class="lead">A daily average and peak turns a spiky line into something with a shape:</p>
+<pre class="code">type: custom:apexcharts-card
+graph_span: 7d
+header:
+  show: true
+  title: Master volume by day in dB, average and peak
+series:
   - entity: media_player.your_receiver
-    name: Receiver</pre>
+    attribute: volume_level
+    name: Day average
+    type: column
+    unit: dB
+    float_precision: 1
+    transform: "return x == null ? null : Number(x) * 100 - 80;"
+    group_by:
+      duration: 1d
+      func: avg
+  - entity: media_player.your_receiver
+    attribute: volume_level
+    name: Day peak
+    type: line
+    curve: smooth
+    unit: dB
+    float_precision: 1
+    transform: "return x == null ? null : Number(x) * 100 - 80;"
+    group_by:
+      duration: 1d
+      func: max
+apex_config:
+  yaxis:
+    min: -80
+    max: 0</pre>
+    <p class="capt">Two series off the same attribute, grouped by day.</p>
+    <p class="lead">And the two that answer "what do I actually watch on, and in what": source and surround mode, plotted as a timeline of which one was selected.</p>
+<pre class="code">type: custom:apexcharts-card
+graph_span: 7d
+header:
+  show: true
+  title: Source in use, last 7 days
+series:
+  - entity: media_player.your_receiver
+    attribute: source
+    name: Source
+    type: line
+    curve: stepline
+    extend_to: now
+    group_by:
+      duration: 10min
+      func: last
+      fill: last</pre>
+    <p class="capt">Same shape for sound_mode. apexcharts maps the distinct values onto the axis for you.</p>
+    <div class="note"><b>Keep <code>stepline</code> on those last two.</b> A source or a surround mode is a category, not a number. Smooth the curve and the line swoops between Shield and Xbox through whatever sits between them on the axis, drawing an input that was never selected. Volume is a real quantity and smooths honestly; a category does not.</div>
     <div class="note"><b>Check your recorder retention first.</b> Home Assistant keeps ten days by default, so seven days is about the most you can usefully ask for. A receiver that has been off all week gives you a very short graph.</div>
   </div>
 </section>
