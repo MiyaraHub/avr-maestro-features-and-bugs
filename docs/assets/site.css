@@ -289,3 +289,15 @@ body.lb-lock { overflow: hidden; }
   .lb.open img { animation: lb-in .16s ease-out; }
   @keyframes lb-in { from { transform: scale(.97); opacity: .6; } to { transform: none; opacity: 1; } }
 }
+
+/* Code blocks - used by the Home Assistant dashboard guide. Monospace on the
+   well tone, scrolling on its own rather than widening the page. */
+pre.code{background:var(--well);border:1px solid var(--edge-2);border-radius:var(--radius-sm);
+  padding:16px 18px;margin:14px 0 6px;overflow-x:auto;font-family:var(--mono);font-size:.82rem;
+  line-height:1.62;color:var(--ink);white-space:pre}
+p.capt{color:var(--steel-2);font-size:.84rem;margin:0 0 22px;font-family:var(--mono)}
+details.more{border:1px solid var(--edge-2);border-radius:var(--radius-sm);padding:14px 18px;
+  margin:18px 0;background:var(--panel-2)}
+details.more summary{cursor:pointer;color:var(--signal);font-weight:600;font-family:var(--disp);
+  letter-spacing:.4px}
+details.more[open] summary{margin-bottom:10px}
