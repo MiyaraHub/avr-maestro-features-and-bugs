@@ -390,6 +390,8 @@ apex_config:
     <p class="lead">A daily average and peak turns a spiky line into something with a shape:</p>
 <pre class="code">type: custom:apexcharts-card
 graph_span: 7d
+span:
+  end: day
 header:
   show: true
   title: Master volume by day in dB, average and peak
@@ -398,31 +400,33 @@ series:
     attribute: volume_level
     name: Day average
     type: column
-    unit: dB
     float_precision: 1
-    transform: "return x == null ? null : Number(x) * 100 - 80;"
-    group_by:
-      duration: 1d
-      func: avg
+    transform: "return x == null ? null : Number(x) * 100;"
+    group_by: {duration: 1d, func: avg, fill: 'null'}
   - entity: media_player.your_receiver
     attribute: volume_level
     name: Day peak
     type: line
     curve: smooth
-    unit: dB
     float_precision: 1
-    transform: "return x == null ? null : Number(x) * 100 - 80;"
-    group_by:
-      duration: 1d
-      func: max
+    transform: "return x == null ? null : Number(x) * 100;"
+    group_by: {duration: 1d, func: max, fill: 'null'}
 apex_config:
   yaxis:
-    min: -80
-    max: 0</pre>
+    min: 0
+    max: 80
+    labels:
+      formatter: "EVAL:function (v) { return (v - 80).toFixed(0); }"
+  tooltip:
+    y:
+      formatter: "EVAL:function (v) { return v == null ? '' : (v - 80).toFixed(1) + ' dB'; }"</pre>
     <p class="capt">Two series off the same attribute, grouped by day.</p>
+    <div class="note"><b>Why this one plots 0 to 80 and formats to dB, instead of plotting dB.</b> Bars grow from the axis floor. Plot dB directly and every bar hangs down from 0, so a long bar means quiet, which reads backwards. Plot the raw master volume number and subtract 80 in the axis and tooltip formatters, and the bars grow upward while everything the reader sees is still dB. <code>fill: 'null'</code> means a day with no readings gets no bar rather than yesterday's carried forward.</div>
     <p class="lead">And the two that answer "what do I actually watch on, and in what": source and surround mode, plotted as a timeline of which one was selected.</p>
 <pre class="code">type: custom:apexcharts-card
 graph_span: 7d
+span:
+  end: day
 header:
   show: true
   title: Source in use, last 7 days
@@ -432,12 +436,30 @@ series:
     name: Source
     type: line
     curve: stepline
+    stroke_width: 3
     extend_to: now
-    group_by:
-      duration: 10min
-      func: last
-      fill: last</pre>
-    <p class="capt">Same shape for sound_mode. apexcharts maps the distinct values onto the axis for you.</p>
+    float_precision: 0
+    transform: |
+      if (x == null) return null;
+      var m = ["Phono", "NET", "Xbox", "Nvidia Shield"];
+      var i = m.indexOf(x);
+      return i &lt; 0 ? 0 : i + 1;
+apex_config:
+  yaxis:
+    min: 0
+    max: 4
+    tickAmount: 4
+    labels:
+      formatter: >-
+        EVAL:function (v) { return ["Other", "Phono", "HEOS Net", "Xbox",
+        "Shield"][Math.round(v)] || ''; }
+  tooltip:
+    y:
+      formatter: >-
+        EVAL:function (v) { return v == null ? 'off' : ["Other", "Phono",
+        "HEOS Net", "Xbox", "Shield"][Math.round(v)] || 'Other'; }</pre>
+    <p class="capt">Put your own sources in the transform array and in both formatter arrays. Keep index 0 as "Other".</p>
+    <p class="lead">A chart axis needs numbers, so the <code>transform</code> maps each source name to a position and the formatters map it back for the labels and the tooltip. Make the mapping <b>total</b>: <code>null</code> (receiver off) stays a gap, and anything not in your list falls to "Other", so the two can never be confused. Same card again with <code>sound_mode</code> gives you surround mode, with the strings in upper case exactly as your receiver reports them.</p>
     <div class="note"><b>Keep <code>stepline</code> on those last two.</b> A source or a surround mode is a category, not a number. Smooth the curve and the line swoops between Shield and Xbox through whatever sits between them on the axis, drawing an input that was never selected. Volume is a real quantity and smooths honestly; a category does not.</div>
     <div class="note"><b>Check your recorder retention first.</b> Home Assistant keeps ten days by default, so seven days is about the most you can usefully ask for. A receiver that has been off all week gives you a very short graph.</div>
   </div>
@@ -455,7 +477,8 @@ series:
       <li><b>2.</b> Open it in any text editor and replace two strings, everywhere they appear: <code>YOUR_RECEIVER</code> with your media player entity's name, and <code>YOURMAC</code> with your receiver's twelve characters from step 2.</li>
       <li><b>3.</b> In Home Assistant, open your dashboard, pencil icon, three-dot menu, <b>Raw configuration editor</b>, and paste it in as a view.</li>
     </ol>
-    <div class="note"><b>Your Scene IDs will not match.</b> Scene scripts are named after when the Scene was created, so the four in the file will not exist on your system. Replace those four entity IDs with your own from step 2, or delete the Scenes section and rebuild it with step 8.</div>
+    <div class="note"><b>Your Scene IDs will not match.</b> Scene scripts are named after when the Scene was created, so the four in the file do not exist on your system: those cards will render and do nothing. Replace their entity IDs with your own from step 2, or delete the Scenes section and rebuild it with step 8.</div>
+    <div class="note"><b>Two other things to expect.</b> The source and surround graphs carry the source names from the receiver this was built on, so edit those arrays as step 9 describes. And the tile labels are English; nothing in the file is translated.</div>
   </div>
 </section>
 
@@ -499,6 +522,7 @@ secondary: >-
       <li><b>The volume slider shows a power button instead of a bar.</b> That is <code>media_controls</code> with <code>on_off</code> in it. Set <code>media_controls: []</code>.</li>
       <li><b>Labels truncate.</b> "Volume Down" becomes "Volume Do...". Shorten to "Vol Down", or widen the tile.</li>
       <li><b>Scene descriptions get clipped.</b> Add <code>multiline_secondary: true</code>.</li>
+      <li><b>A steady line disappears from an apexcharts graph.</b> That is <code>experimental.color_threshold</code>. It draws the stroke as a vertical gradient, and a perfectly horizontal segment has zero height to gradient across, so it renders invisible. A 43-hour session at one volume vanished entirely. Use a solid <code>color</code>.</li>
       <li><b>It reflows on a phone by itself.</b> Sections views stack into one column at narrow widths with nothing extra configured.</li>
     </ul>
     <figure><img alt="The same dashboard at phone width, reflowed into a single column" src="../../screenshots/ha-dashboard-narrow.png" /><figcaption>Same dashboard at phone width: the three columns become one, and nothing was configured to make that happen</figcaption></figure>
