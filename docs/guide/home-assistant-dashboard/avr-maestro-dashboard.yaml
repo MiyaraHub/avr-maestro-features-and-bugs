@@ -1,0 +1,2808 @@
+type: sections
+path: avr-maestro-demo
+title: AVR Maestro Demo
+icon: mdi:audio-video
+show_icon_and_title: true
+max_columns: 3
+dense_section_placement: true
+sections:
+- type: grid
+  column_span: 3
+  cards:
+  - type: custom:mushroom-template-card
+    entity: media_player.YOUR_RECEIVER
+    icon: mdi:audio-video
+    icon_color: '{{ ''orange'' if states(''media_player.YOUR_RECEIVER'') not in [''off'',''unavailable'',''unknown'']
+      else ''grey'' }}'
+    primary: AVR MAESTRO
+    secondary: '{{ state_attr(''media_player.YOUR_RECEIVER'',''friendly_name'') }} | {{ states.script
+      | selectattr(''entity_id'',''search'',''avr_maestro_YOURMAC'') | list | count }} controls synced
+      to Home Assistant'
+    tap_action:
+      action: more-info
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: full
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-grey:\
+        \ 110, 110, 118;\n  --mush-rgb-grey: 110, 110, 118;\n  --card-primary-font-size: 26px;\n  --card-primary-font-weight:\
+        \ 800;\n  --card-primary-letter-spacing: 5px;\n  --card-secondary-font-size: 14px;\n  --card-secondary-color:\
+        \ #FFB24C;\n  --icon-size: 48px;\n  --spacing: 14px;\n  background: linear-gradient(115deg, rgba(204,82,0,0.48)\
+        \ 0%, rgba(226,86,10,0.18) 40%, rgba(15,15,17,0.92) 100%);\n  border: 1px solid rgba(255,122,24,0.45);\n\
+        \  border-radius: 18px;\n  box-shadow: 0 0 42px rgba(255,122,24,0.16);\n  backdrop-filter: blur(6px);\n\
+        \  padding: 12px 10px;\n}\n"
+  - type: conditional
+    conditions:
+    - condition: state
+      entity: media_player.YOUR_RECEIVER
+      state: 'off'
+    card:
+      type: custom:mushroom-template-card
+      entity: media_player.YOUR_RECEIVER
+      icon: mdi:power-sleep
+      icon_color: grey
+      primary: Receiver is in standby
+      secondary: Tap to power on the Your Receiver
+      layout: horizontal
+      fill_container: true
+      tap_action:
+        action: perform-action
+        perform_action: media_player.turn_on
+        target:
+          entity_id: media_player.YOUR_RECEIVER
+      hold_action:
+        action: more-info
+      double_tap_action:
+        action: none
+      card_mod:
+        style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+          \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+          \ 110, 110, 118;\n  --card-primary-font-size: 19px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+          \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+          \ 40px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter:\
+          \ blur(6px);\n  background: rgba(15, 15, 17, 0.78);\n  border: 1px dashed rgba(255, 122, 24,\
+          \ 0.30);\n  padding: 8px 6px;\n}\n"
+    grid_options:
+      columns: full
+      rows: auto
+  - type: conditional
+    conditions:
+    - condition: state
+      entity: media_player.YOUR_RECEIVER
+      state_not: 'off'
+    - condition: state
+      entity: media_player.YOUR_RECEIVER
+      state_not: unavailable
+    card:
+      type: custom:mushroom-template-card
+      entity: media_player.YOUR_RECEIVER
+      icon: '{% set s = (state_attr(''media_player.YOUR_RECEIVER'',''source'') or '''')|lower %}{%
+        if s == ''blu-ray'' %}mdi:movie-open{% endif %}{% if s == ''cbl/sat'' %}mdi:television-classic{%
+        endif %}{% if s == ''nvidia shield'' %}mdi:television-play{% endif %}{% if s == ''xbox'' %}mdi:microsoft-xbox{%
+        endif %}{% if s == ''ps5'' %}mdi:sony-playstation{% endif %}{% if s == ''tv audio'' %}mdi:television{%
+        endif %}{% if s == ''cd'' %}mdi:disc{% endif %}{% if s == ''phono'' %}mdi:record-player{% endif
+        %}{% if s == ''tuner'' %}mdi:radio{% endif %}{% if s == ''aux1'' %}mdi:hdmi-port{% endif %}{%
+        if s == ''aux2'' %}mdi:hdmi-port{% endif %}{% if s == ''bluetooth'' %}mdi:bluetooth{% endif %}{%
+        if s == ''heos music'' %}mdi:volume-source{% endif %}{% if s not in [''blu-ray'', ''cbl/sat'',
+        ''nvidia shield'', ''xbox'', ''ps5'', ''tv audio'', ''cd'', ''phono'', ''tuner'', ''aux1'', ''aux2'',
+        ''bluetooth'', ''heos music''] %}mdi:play-circle{% endif %}'
+      icon_color: orange
+      primary: '{{ state_attr(''media_player.YOUR_RECEIVER'',''media_title'') or state_attr(''media_player.YOUR_RECEIVER'',''source'')
+        or ''Nothing playing'' }}'
+      secondary: '{% set r = state_attr(''media_player.YOUR_RECEIVER'',''sound_mode_raw'') %}{% set
+        m = state_attr(''media_player.YOUR_RECEIVER'',''sound_mode'') %}{% set v = state_attr(''media_player.YOUR_RECEIVER'',''volume_level'')
+        %}{{ r or m or ''Unknown decoder'' }}{% if m and r and m != r %} in {{ m }}{% endif %}{% if v
+        is not none %} at {{ (v * 100 - 80) | round(1) }} dB{% endif %}'
+      layout: horizontal
+      fill_container: true
+      tap_action:
+        action: more-info
+      hold_action:
+        action: more-info
+      double_tap_action:
+        action: none
+      card_mod:
+        style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+          \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+          \ 110, 110, 118;\n  --card-primary-font-size: 21px;\n  --card-primary-font-weight: 700;\n  --card-primary-letter-spacing:\
+          \ 0.2px;\n  --card-secondary-font-size: 13px;\n  --card-secondary-color: #FFB24C;\n  --icon-size:\
+          \ 44px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter:\
+          \ blur(6px);\n  background: linear-gradient(120deg, rgba(226,86,10,0.26), rgba(15,15,17,0.92));\n\
+          \  border: 1px solid rgba(255,122,24,0.50);\n  box-shadow: 0 0 30px rgba(255,122,24,0.12);\n\
+          \  padding: 8px 6px;\n}\n"
+    grid_options:
+      columns: full
+      rows: auto
+  - type: custom:mushroom-template-card
+    entity: media_player.YOUR_RECEIVER
+    icon: mdi:power
+    icon_color: '{{ ''orange'' if states(''media_player.YOUR_RECEIVER'') not in [''off'',''unavailable'',''unknown'']
+      else ''grey'' }}'
+    primary: '{{ ''On'' if states(''media_player.YOUR_RECEIVER'') not in [''off'',''unavailable'',''unknown'']
+      else ''Standby'' }}'
+    secondary: Power
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: media_player.toggle
+      target:
+        entity_id: media_player.YOUR_RECEIVER
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 3
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 17px;\n  --card-primary-font-weight: 700;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 34px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        {% if states('media_player.YOUR_RECEIVER') not in ['off','unavailable','unknown'] %}\n  background:\
+        \ linear-gradient(165deg, rgba(226, 86, 10, 0.22), rgba(15, 15, 17, 0.88));\n  border: 1px solid\
+        \ rgba(255, 122, 24, 0.45);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px\
+        \ solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
+  - type: custom:mushroom-template-card
+    entity: media_player.YOUR_RECEIVER
+    icon: mdi:video-input-hdmi
+    icon_color: '{{ ''orange'' if states(''media_player.YOUR_RECEIVER'') not in [''off'',''unavailable'',''unknown'']
+      else ''grey'' }}'
+    primary: '{{ state_attr(''media_player.YOUR_RECEIVER'',''source'') or ''Standby'' }}'
+    secondary: Active source
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: more-info
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 3
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 15px;\n  --card-primary-font-weight: 700;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 34px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        {% if states('media_player.YOUR_RECEIVER') not in ['off','unavailable','unknown'] %}\n  background:\
+        \ linear-gradient(165deg, rgba(226, 86, 10, 0.22), rgba(15, 15, 17, 0.88));\n  border: 1px solid\
+        \ rgba(255, 122, 24, 0.45);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px\
+        \ solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
+  - type: custom:mushroom-template-card
+    entity: media_player.YOUR_RECEIVER
+    icon: mdi:volume-high
+    icon_color: '{% if state_attr(''media_player.YOUR_RECEIVER'',''is_volume_muted'') %}grey{% elif
+      states(''media_player.YOUR_RECEIVER'') not in [''off'',''unavailable'',''unknown''] %}orange{%
+      else %}grey{% endif %}'
+    primary: '{% set v = state_attr(''media_player.YOUR_RECEIVER'',''volume_level'') %}{% if v is
+      not none %}{{ (v * 100 - 80) | round(1) }} dB{% else %}Standby{% endif %}'
+    secondary: '{% set v = state_attr(''media_player.YOUR_RECEIVER'',''volume_level'') %}{% if v is
+      not none %}Master volume step {{ (v * 100) | round(0) | int }}{% else %}Receiver asleep{% endif
+      %}'
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: more-info
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 3
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 17px;\n  --card-primary-font-weight: 700;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 34px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        {% if states('media_player.YOUR_RECEIVER') not in ['off','unavailable','unknown'] %}\n  background:\
+        \ linear-gradient(165deg, rgba(226, 86, 10, 0.22), rgba(15, 15, 17, 0.88));\n  border: 1px solid\
+        \ rgba(255, 122, 24, 0.45);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px\
+        \ solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
+  - type: custom:mushroom-template-card
+    entity: media_player.YOUR_RECEIVER
+    icon: mdi:surround-sound
+    icon_color: '{{ ''orange'' if states(''media_player.YOUR_RECEIVER'') not in [''off'',''unavailable'',''unknown'']
+      else ''grey'' }}'
+    primary: '{{ state_attr(''media_player.YOUR_RECEIVER'',''sound_mode_raw'') or state_attr(''media_player.YOUR_RECEIVER'',''sound_mode'')
+      or ''Standby'' }}'
+    secondary: '{{ state_attr(''media_player.YOUR_RECEIVER'',''sound_mode'') or ''Surround mode''
+      }}'
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: more-info
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 3
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 15px;\n  --card-primary-font-weight: 700;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 34px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        {% if states('media_player.YOUR_RECEIVER') not in ['off','unavailable','unknown'] %}\n  background:\
+        \ linear-gradient(165deg, rgba(226, 86, 10, 0.22), rgba(15, 15, 17, 0.88));\n  border: 1px solid\
+        \ rgba(255, 122, 24, 0.45);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px\
+        \ solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
+- type: grid
+  column_span: 3
+  cards:
+  - type: custom:button-card
+    name: Volume
+    icon: mdi:volume-high
+    color_type: label-card
+    tap_action:
+      action: none
+    hold_action:
+      action: none
+    grid_options:
+      columns: full
+      rows: auto
+    styles:
+      card:
+      - background: linear-gradient(135deg, rgba(204,82,0,0.30), rgba(255,122,24,0.08))
+      - border: 1px solid rgba(255,122,24,0.38)
+      - border-radius: 12px
+      - padding: 11px 15px
+      - box-shadow: none
+      grid:
+      - grid-template-areas: '"i n" "i l"'
+      - grid-template-columns: min-content auto
+      - grid-template-rows: min-content min-content
+      icon:
+      - color: '#FF7A18'
+      - width: 22px
+      - margin-right: 12px
+      name:
+      - font-size: 13px
+      - font-weight: 700
+      - letter-spacing: 3px
+      - color: '#FF7A18'
+      - text-align: left
+      - justify-self: start
+      - text-transform: uppercase
+      label:
+      - font-size: 11px
+      - font-weight: 500
+      - letter-spacing: 0.4px
+      - color: '#A6A6AD'
+      - text-align: left
+      - justify-self: start
+      - padding-top: 2px
+    entity: media_player.YOUR_RECEIVER
+    show_label: true
+    label: '[[[ var v = states["media_player.YOUR_RECEIVER"].attributes.volume_level; return (v ===
+      undefined || v === null) ? "Receiver in standby" : ((v * 100 - 80).toFixed(1) + " dB   |   step
+      " + Math.round(v * 100)); ]]]'
+  - type: custom:mushroom-media-player-card
+    entity: media_player.YOUR_RECEIVER
+    name: Master Volume
+    icon: mdi:speaker-multiple
+    use_media_info: false
+    use_media_artwork: false
+    show_volume_level: true
+    media_controls:
+    - on_off
+    volume_controls:
+    - volume_mute
+    - volume_set
+    collapsible_controls: false
+    fill_container: true
+    tap_action:
+      action: more-info
+    grid_options:
+      columns: full
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 15px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 36px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  --control-height: 44px;\n  --control-border-radius: 12px;\n  --mush-rgb-state-media-player:\
+        \ 255, 122, 24;\n  --rgb-state-media-player: 255, 122, 24;\n{% if states('media_player.YOUR_RECEIVER')\
+        \ not in ['off','unavailable','unknown'] %}\n  background: linear-gradient(150deg, rgba(226, 86,\
+        \ 10, 0.20), rgba(15, 15, 17, 0.90));\n  border: 1px solid rgba(255, 122, 24, 0.42);\n{% else\
+        \ %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n{%\
+        \ endif %}\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_volume_down
+    icon: mdi:volume-minus
+    icon_color: orange
+    primary: Volume Down
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_volume_down
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 3
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_volume_up
+    icon: mdi:volume-plus
+    icon_color: orange
+    primary: Volume Up
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_volume_up
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 3
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_mute_on
+    icon: mdi:volume-mute
+    icon_color: '{{ ''orange'' if state_attr(''media_player.YOUR_RECEIVER'',''is_volume_muted'') ==
+      true else ''grey'' }}'
+    primary: Mute
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_mute_on
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 3
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        {% if state_attr('media_player.YOUR_RECEIVER','is_volume_muted') == true %}\n  background:\
+        \ linear-gradient(160deg, rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border: 1px solid\
+        \ rgba(255, 122, 24, 0.80);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px\
+        \ solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_mute_off
+    icon: mdi:volume-high
+    icon_color: '{{ ''orange'' if state_attr(''media_player.YOUR_RECEIVER'',''is_volume_muted'') ==
+      false else ''grey'' }}'
+    primary: Unmute
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_mute_off
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 3
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        {% if state_attr('media_player.YOUR_RECEIVER','is_volume_muted') == false %}\n  background:\
+        \ linear-gradient(160deg, rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border: 1px solid\
+        \ rgba(255, 122, 24, 0.80);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px\
+        \ solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
+  - type: custom:button-card
+    name: Quick Levels
+    color_type: label-card
+    show_icon: false
+    tap_action:
+      action: none
+    hold_action:
+      action: none
+    grid_options:
+      columns: full
+      rows: auto
+    styles:
+      card:
+      - background: transparent
+      - border: none
+      - border-left: 3px solid rgba(255,122,24,0.55)
+      - border-radius: '0'
+      - padding: 2px 0 2px 10px
+      - box-shadow: none
+      name:
+      - font-size: 11px
+      - font-weight: 700
+      - letter-spacing: 2px
+      - color: '#FFB24C'
+      - text-align: left
+      - justify-self: start
+      - text-transform: uppercase
+  - type: custom:mushroom-template-card
+    entity: media_player.YOUR_RECEIVER
+    icon: mdi:weather-night
+    icon_color: '{{ ''orange'' if (state_attr(''media_player.YOUR_RECEIVER'',''volume_level'') or
+      -1) == 0.5 else ''grey'' }}'
+    primary: Night
+    secondary: -30 dB
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: media_player.volume_set
+      target:
+        entity_id: media_player.YOUR_RECEIVER
+      data:
+        volume_level: 0.5
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 3
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        {% if (state_attr('media_player.YOUR_RECEIVER','volume_level') or -1) == 0.5 %}\n  background:\
+        \ linear-gradient(160deg, rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border: 1px solid\
+        \ rgba(255, 122, 24, 0.80);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px\
+        \ solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
+  - type: custom:mushroom-template-card
+    entity: media_player.YOUR_RECEIVER
+    icon: mdi:account-voice
+    icon_color: '{{ ''orange'' if (state_attr(''media_player.YOUR_RECEIVER'',''volume_level'') or
+      -1) == 0.6 else ''grey'' }}'
+    primary: Dialog
+    secondary: -20 dB
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: media_player.volume_set
+      target:
+        entity_id: media_player.YOUR_RECEIVER
+      data:
+        volume_level: 0.6
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 3
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        {% if (state_attr('media_player.YOUR_RECEIVER','volume_level') or -1) == 0.6 %}\n  background:\
+        \ linear-gradient(160deg, rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border: 1px solid\
+        \ rgba(255, 122, 24, 0.80);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px\
+        \ solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
+  - type: custom:mushroom-template-card
+    entity: media_player.YOUR_RECEIVER
+    icon: mdi:movie-open
+    icon_color: '{{ ''orange'' if (state_attr(''media_player.YOUR_RECEIVER'',''volume_level'') or
+      -1) == 0.65 else ''grey'' }}'
+    primary: Movie
+    secondary: -15 dB
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: media_player.volume_set
+      target:
+        entity_id: media_player.YOUR_RECEIVER
+      data:
+        volume_level: 0.65
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 3
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        {% if (state_attr('media_player.YOUR_RECEIVER','volume_level') or -1) == 0.65 %}\n  background:\
+        \ linear-gradient(160deg, rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border: 1px solid\
+        \ rgba(255, 122, 24, 0.80);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px\
+        \ solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
+  - type: custom:mushroom-template-card
+    entity: media_player.YOUR_RECEIVER
+    icon: mdi:volume-high
+    icon_color: '{{ ''orange'' if (state_attr(''media_player.YOUR_RECEIVER'',''volume_level'') or
+      -1) == 0.7 else ''grey'' }}'
+    primary: Loud
+    secondary: -10 dB
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: media_player.volume_set
+      target:
+        entity_id: media_player.YOUR_RECEIVER
+      data:
+        volume_level: 0.7
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 3
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        {% if (state_attr('media_player.YOUR_RECEIVER','volume_level') or -1) == 0.7 %}\n  background:\
+        \ linear-gradient(160deg, rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border: 1px solid\
+        \ rgba(255, 122, 24, 0.80);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px\
+        \ solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
+- type: grid
+  column_span: 3
+  cards:
+  - type: custom:button-card
+    name: Sources
+    icon: mdi:video-input-hdmi
+    color_type: label-card
+    tap_action:
+      action: none
+    hold_action:
+      action: none
+    grid_options:
+      columns: full
+      rows: auto
+    styles:
+      card:
+      - background: linear-gradient(135deg, rgba(204,82,0,0.30), rgba(255,122,24,0.08))
+      - border: 1px solid rgba(255,122,24,0.38)
+      - border-radius: 12px
+      - padding: 11px 15px
+      - box-shadow: none
+      grid:
+      - grid-template-areas: '"i n" "i l"'
+      - grid-template-columns: min-content auto
+      - grid-template-rows: min-content min-content
+      icon:
+      - color: '#FF7A18'
+      - width: 22px
+      - margin-right: 12px
+      name:
+      - font-size: 13px
+      - font-weight: 700
+      - letter-spacing: 3px
+      - color: '#FF7A18'
+      - text-align: left
+      - justify-self: start
+      - text-transform: uppercase
+      label:
+      - font-size: 11px
+      - font-weight: 500
+      - letter-spacing: 0.4px
+      - color: '#A6A6AD'
+      - text-align: left
+      - justify-self: start
+      - padding-top: 2px
+    entity: media_player.YOUR_RECEIVER
+    show_label: true
+    label: '[[[ var v = states["media_player.YOUR_RECEIVER"].attributes.source; return v ? ("Now on
+      " + v) : "Receiver in standby"; ]]]'
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_input_network
+    icon: mdi:volume-source
+    icon_color: '{{ ''orange'' if (state_attr(''media_player.YOUR_RECEIVER'',''source'') or '''')|lower
+      == ''heos music'' else ''grey'' }}'
+    primary: HEOS Music
+    layout: horizontal
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_input_network
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: full
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        {% if (state_attr('media_player.YOUR_RECEIVER','source') or '')|lower == 'heos music' %}\n\
+        \  background: linear-gradient(160deg, rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border:\
+        \ 1px solid rgba(255, 122, 24, 0.80);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border:\
+        \ 1px solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
+    secondary: Network streaming, HEOS built in
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_input_blu_ray
+    icon: mdi:movie-open
+    icon_color: '{{ ''orange'' if (state_attr(''media_player.YOUR_RECEIVER'',''source'') or '''')|lower
+      == ''blu-ray'' else ''grey'' }}'
+    primary: Blu-ray
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_input_blu_ray
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 3
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        {% if (state_attr('media_player.YOUR_RECEIVER','source') or '')|lower == 'blu-ray' %}\n  background:\
+        \ linear-gradient(160deg, rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border: 1px solid\
+        \ rgba(255, 122, 24, 0.80);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px\
+        \ solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_input_cbl_sat
+    icon: mdi:television-classic
+    icon_color: '{{ ''orange'' if (state_attr(''media_player.YOUR_RECEIVER'',''source'') or '''')|lower
+      == ''cbl/sat'' else ''grey'' }}'
+    primary: CBL/SAT
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_input_cbl_sat
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 3
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        {% if (state_attr('media_player.YOUR_RECEIVER','source') or '')|lower == 'cbl/sat' %}\n  background:\
+        \ linear-gradient(160deg, rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border: 1px solid\
+        \ rgba(255, 122, 24, 0.80);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px\
+        \ solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_input_media_player
+    icon: mdi:television-play
+    icon_color: '{{ ''orange'' if (state_attr(''media_player.YOUR_RECEIVER'',''source'') or '''')|lower
+      == ''nvidia shield'' else ''grey'' }}'
+    primary: Nvidia Shield
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_input_media_player
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 3
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        {% if (state_attr('media_player.YOUR_RECEIVER','source') or '')|lower == 'nvidia shield' %}\n\
+        \  background: linear-gradient(160deg, rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border:\
+        \ 1px solid rgba(255, 122, 24, 0.80);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border:\
+        \ 1px solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_input_game1
+    icon: mdi:microsoft-xbox
+    icon_color: '{{ ''orange'' if (state_attr(''media_player.YOUR_RECEIVER'',''source'') or '''')|lower
+      == ''xbox'' else ''grey'' }}'
+    primary: Xbox
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_input_game1
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 3
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        {% if (state_attr('media_player.YOUR_RECEIVER','source') or '')|lower == 'xbox' %}\n  background:\
+        \ linear-gradient(160deg, rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border: 1px solid\
+        \ rgba(255, 122, 24, 0.80);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px\
+        \ solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_input_game2
+    icon: mdi:sony-playstation
+    icon_color: '{{ ''orange'' if (state_attr(''media_player.YOUR_RECEIVER'',''source'') or '''')|lower
+      == ''ps5'' else ''grey'' }}'
+    primary: PS5
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_input_game2
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 3
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        {% if (state_attr('media_player.YOUR_RECEIVER','source') or '')|lower == 'ps5' %}\n  background:\
+        \ linear-gradient(160deg, rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border: 1px solid\
+        \ rgba(255, 122, 24, 0.80);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px\
+        \ solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_input_tv_audio
+    icon: mdi:television
+    icon_color: '{{ ''orange'' if (state_attr(''media_player.YOUR_RECEIVER'',''source'') or '''')|lower
+      == ''tv audio'' else ''grey'' }}'
+    primary: TV Audio
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_input_tv_audio
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 3
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        {% if (state_attr('media_player.YOUR_RECEIVER','source') or '')|lower == 'tv audio' %}\n \
+        \ background: linear-gradient(160deg, rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border:\
+        \ 1px solid rgba(255, 122, 24, 0.80);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border:\
+        \ 1px solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_input_cd
+    icon: mdi:disc
+    icon_color: '{{ ''orange'' if (state_attr(''media_player.YOUR_RECEIVER'',''source'') or '''')|lower
+      == ''cd'' else ''grey'' }}'
+    primary: CD
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_input_cd
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 3
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        {% if (state_attr('media_player.YOUR_RECEIVER','source') or '')|lower == 'cd' %}\n  background:\
+        \ linear-gradient(160deg, rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border: 1px solid\
+        \ rgba(255, 122, 24, 0.80);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px\
+        \ solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_input_phono
+    icon: mdi:record-player
+    icon_color: '{{ ''orange'' if (state_attr(''media_player.YOUR_RECEIVER'',''source'') or '''')|lower
+      == ''phono'' else ''grey'' }}'
+    primary: Phono
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_input_phono
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 3
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        {% if (state_attr('media_player.YOUR_RECEIVER','source') or '')|lower == 'phono' %}\n  background:\
+        \ linear-gradient(160deg, rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border: 1px solid\
+        \ rgba(255, 122, 24, 0.80);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px\
+        \ solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_input_tuner
+    icon: mdi:radio
+    icon_color: '{{ ''orange'' if (state_attr(''media_player.YOUR_RECEIVER'',''source'') or '''')|lower
+      == ''tuner'' else ''grey'' }}'
+    primary: Tuner
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_input_tuner
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 3
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        {% if (state_attr('media_player.YOUR_RECEIVER','source') or '')|lower == 'tuner' %}\n  background:\
+        \ linear-gradient(160deg, rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border: 1px solid\
+        \ rgba(255, 122, 24, 0.80);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px\
+        \ solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_input_aux1
+    icon: mdi:hdmi-port
+    icon_color: '{{ ''orange'' if (state_attr(''media_player.YOUR_RECEIVER'',''source'') or '''')|lower
+      == ''aux1'' else ''grey'' }}'
+    primary: AUX1
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_input_aux1
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 3
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        {% if (state_attr('media_player.YOUR_RECEIVER','source') or '')|lower == 'aux1' %}\n  background:\
+        \ linear-gradient(160deg, rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border: 1px solid\
+        \ rgba(255, 122, 24, 0.80);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px\
+        \ solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_input_aux2
+    icon: mdi:hdmi-port
+    icon_color: '{{ ''orange'' if (state_attr(''media_player.YOUR_RECEIVER'',''source'') or '''')|lower
+      == ''aux2'' else ''grey'' }}'
+    primary: AUX2
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_input_aux2
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 3
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        {% if (state_attr('media_player.YOUR_RECEIVER','source') or '')|lower == 'aux2' %}\n  background:\
+        \ linear-gradient(160deg, rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border: 1px solid\
+        \ rgba(255, 122, 24, 0.80);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px\
+        \ solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_input_bluetooth
+    icon: mdi:bluetooth
+    icon_color: '{{ ''orange'' if (state_attr(''media_player.YOUR_RECEIVER'',''source'') or '''')|lower
+      == ''bluetooth'' else ''grey'' }}'
+    primary: Bluetooth
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_input_bluetooth
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 3
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        {% if (state_attr('media_player.YOUR_RECEIVER','source') or '')|lower == 'bluetooth' %}\n\
+        \  background: linear-gradient(160deg, rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border:\
+        \ 1px solid rgba(255, 122, 24, 0.80);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border:\
+        \ 1px solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
+- type: grid
+  column_span: 1
+  cards:
+  - type: custom:button-card
+    name: Surround Sound
+    icon: mdi:surround-sound
+    color_type: label-card
+    tap_action:
+      action: none
+    hold_action:
+      action: none
+    grid_options:
+      columns: full
+      rows: auto
+    styles:
+      card:
+      - background: linear-gradient(135deg, rgba(204,82,0,0.30), rgba(255,122,24,0.08))
+      - border: 1px solid rgba(255,122,24,0.38)
+      - border-radius: 12px
+      - padding: 11px 15px
+      - box-shadow: none
+      grid:
+      - grid-template-areas: '"i n" "i l"'
+      - grid-template-columns: min-content auto
+      - grid-template-rows: min-content min-content
+      icon:
+      - color: '#FF7A18'
+      - width: 22px
+      - margin-right: 12px
+      name:
+      - font-size: 13px
+      - font-weight: 700
+      - letter-spacing: 3px
+      - color: '#FF7A18'
+      - text-align: left
+      - justify-self: start
+      - text-transform: uppercase
+      label:
+      - font-size: 11px
+      - font-weight: 500
+      - letter-spacing: 0.4px
+      - color: '#A6A6AD'
+      - text-align: left
+      - justify-self: start
+      - padding-top: 2px
+    entity: media_player.YOUR_RECEIVER
+    show_label: true
+    label: '[[[ var a = states["media_player.YOUR_RECEIVER"].attributes; return a.sound_mode_raw ?
+      ("Now in " + a.sound_mode_raw) : (a.sound_mode ? ("Now in " + a.sound_mode) : "Receiver in standby");
+      ]]]'
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_soundmode_stereo
+    icon: mdi:speaker
+    icon_color: '{{ ''orange'' if ''STEREO'' in ((state_attr(''media_player.YOUR_RECEIVER'',''sound_mode'')
+      or '''') ~ '' '' ~ (state_attr(''media_player.YOUR_RECEIVER'',''sound_mode_raw'') or ''''))|upper
+      and ''MCH'' not in ((state_attr(''media_player.YOUR_RECEIVER'',''sound_mode'') or '''') ~ ''
+      '' ~ (state_attr(''media_player.YOUR_RECEIVER'',''sound_mode_raw'') or ''''))|upper and ''ALL
+      ZONE'' not in ((state_attr(''media_player.YOUR_RECEIVER'',''sound_mode'') or '''') ~ '' '' ~
+      (state_attr(''media_player.YOUR_RECEIVER'',''sound_mode_raw'') or ''''))|upper else ''grey''
+      }}'
+    primary: Stereo
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_soundmode_stereo
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 6
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        {% if 'STEREO' in ((state_attr('media_player.YOUR_RECEIVER','sound_mode') or '') ~ ' ' ~ (state_attr('media_player.YOUR_RECEIVER','sound_mode_raw')\
+        \ or ''))|upper and 'MCH' not in ((state_attr('media_player.YOUR_RECEIVER','sound_mode') or\
+        \ '') ~ ' ' ~ (state_attr('media_player.YOUR_RECEIVER','sound_mode_raw') or ''))|upper and\
+        \ 'ALL ZONE' not in ((state_attr('media_player.YOUR_RECEIVER','sound_mode') or '') ~ ' ' ~\
+        \ (state_attr('media_player.YOUR_RECEIVER','sound_mode_raw') or ''))|upper %}\n  background:\
+        \ linear-gradient(160deg, rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border: 1px solid\
+        \ rgba(255, 122, 24, 0.80);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px\
+        \ solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_soundmode_dolby
+    icon: mdi:surround-sound
+    icon_color: '{{ ''orange'' if ''DOLBY'' in ((state_attr(''media_player.YOUR_RECEIVER'',''sound_mode'')
+      or '''') ~ '' '' ~ (state_attr(''media_player.YOUR_RECEIVER'',''sound_mode_raw'') or ''''))|upper
+      else ''grey'' }}'
+    primary: Dolby Surround
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_soundmode_dolby
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 6
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        {% if 'DOLBY' in ((state_attr('media_player.YOUR_RECEIVER','sound_mode') or '') ~ ' ' ~ (state_attr('media_player.YOUR_RECEIVER','sound_mode_raw')\
+        \ or ''))|upper %}\n  background: linear-gradient(160deg, rgba(226, 86, 10, 0.34), rgba(15, 15,\
+        \ 17, 0.88));\n  border: 1px solid rgba(255, 122, 24, 0.80);\n{% else %}\n  background: rgba(15,\
+        \ 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_soundmode_mch_stereo
+    icon: mdi:surround-sound-7-1
+    icon_color: '{{ ''orange'' if ''MCH STEREO'' in ((state_attr(''media_player.YOUR_RECEIVER'',''sound_mode'')
+      or '''') ~ '' '' ~ (state_attr(''media_player.YOUR_RECEIVER'',''sound_mode_raw'') or ''''))|upper
+      else ''grey'' }}'
+    primary: Multi-Ch Stereo
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_soundmode_mch_stereo
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 6
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        {% if 'MCH STEREO' in ((state_attr('media_player.YOUR_RECEIVER','sound_mode') or '') ~ ' '\
+        \ ~ (state_attr('media_player.YOUR_RECEIVER','sound_mode_raw') or ''))|upper %}\n  background:\
+        \ linear-gradient(160deg, rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border: 1px solid\
+        \ rgba(255, 122, 24, 0.80);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px\
+        \ solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_soundmode_pure_direct
+    icon: mdi:sine-wave
+    icon_color: '{{ ''orange'' if ''PURE DIRECT'' in ((state_attr(''media_player.YOUR_RECEIVER'',''sound_mode'')
+      or '''') ~ '' '' ~ (state_attr(''media_player.YOUR_RECEIVER'',''sound_mode_raw'') or ''''))|upper
+      else ''grey'' }}'
+    primary: Pure Direct
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_soundmode_pure_direct
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 6
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        {% if 'PURE DIRECT' in ((state_attr('media_player.YOUR_RECEIVER','sound_mode') or '') ~ '\
+        \ ' ~ (state_attr('media_player.YOUR_RECEIVER','sound_mode_raw') or ''))|upper %}\n  background:\
+        \ linear-gradient(160deg, rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border: 1px solid\
+        \ rgba(255, 122, 24, 0.80);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px\
+        \ solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
+- type: grid
+  column_span: 1
+  cards:
+  - type: custom:button-card
+    name: Room Correction
+    icon: mdi:equalizer
+    color_type: label-card
+    tap_action:
+      action: none
+    hold_action:
+      action: none
+    grid_options:
+      columns: full
+      rows: auto
+    styles:
+      card:
+      - background: linear-gradient(135deg, rgba(204,82,0,0.30), rgba(255,122,24,0.08))
+      - border: 1px solid rgba(255,122,24,0.38)
+      - border-radius: 12px
+      - padding: 11px 15px
+      - box-shadow: none
+      grid:
+      - grid-template-areas: '"i n" "i l"'
+      - grid-template-columns: min-content auto
+      - grid-template-rows: min-content min-content
+      icon:
+      - color: '#FF7A18'
+      - width: 22px
+      - margin-right: 12px
+      name:
+      - font-size: 13px
+      - font-weight: 700
+      - letter-spacing: 3px
+      - color: '#FF7A18'
+      - text-align: left
+      - justify-self: start
+      - text-transform: uppercase
+      label:
+      - font-size: 11px
+      - font-weight: 500
+      - letter-spacing: 0.4px
+      - color: '#A6A6AD'
+      - text-align: left
+      - justify-self: start
+      - padding-top: 2px
+    entity: media_player.YOUR_RECEIVER
+    show_label: true
+    label: '[[[ var d = states["media_player.YOUR_RECEIVER"].attributes.dynamic_eq; return d === undefined
+      || d === null ? "Dynamic EQ state not published" : ("Dynamic EQ is " + (d ? "on" : "off")); ]]]'
+  - type: custom:button-card
+    name: Audyssey MultEQ XT32
+    color_type: label-card
+    show_icon: false
+    tap_action:
+      action: none
+    hold_action:
+      action: none
+    grid_options:
+      columns: full
+      rows: auto
+    styles:
+      card:
+      - background: transparent
+      - border: none
+      - border-left: 3px solid rgba(255,122,24,0.55)
+      - border-radius: '0'
+      - padding: 2px 0 2px 10px
+      - box-shadow: none
+      name:
+      - font-size: 11px
+      - font-weight: 700
+      - letter-spacing: 2px
+      - color: '#FFB24C'
+      - text-align: left
+      - justify-self: start
+      - text-transform: uppercase
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_multeq_reference
+    icon: mdi:equalizer
+    icon_color: orange
+    primary: Reference
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_multeq_reference
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 6
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_multeq_flat
+    icon: mdi:waveform
+    icon_color: orange
+    primary: Flat
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_multeq_flat
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 6
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_multeq_bypass
+    icon: mdi:sine-wave
+    icon_color: orange
+    primary: Bypass L / R
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_multeq_bypass
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 6
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_multeq_off
+    icon: mdi:equalizer
+    icon_color: grey
+    primary: MultEQ Off
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_multeq_off
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 6
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
+  - type: custom:button-card
+    name: Dynamic EQ
+    color_type: label-card
+    show_icon: false
+    tap_action:
+      action: none
+    hold_action:
+      action: none
+    grid_options:
+      columns: full
+      rows: auto
+    styles:
+      card:
+      - background: transparent
+      - border: none
+      - border-left: 3px solid rgba(255,122,24,0.55)
+      - border-radius: '0'
+      - padding: 2px 0 2px 10px
+      - box-shadow: none
+      name:
+      - font-size: 11px
+      - font-weight: 700
+      - letter-spacing: 2px
+      - color: '#FFB24C'
+      - text-align: left
+      - justify-self: start
+      - text-transform: uppercase
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_dyneq_on
+    icon: mdi:brightness-percent
+    icon_color: '{{ ''orange'' if state_attr(''media_player.YOUR_RECEIVER'',''dynamic_eq'') == true
+      else ''grey'' }}'
+    primary: Dynamic EQ On
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_dyneq_on
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 6
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        {% if state_attr('media_player.YOUR_RECEIVER','dynamic_eq') == true %}\n  background: linear-gradient(160deg,\
+        \ rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border: 1px solid rgba(255, 122, 24, 0.80);\n\
+        {% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n\
+        {% endif %}\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_dyneq_off
+    icon: mdi:brightness-percent
+    icon_color: '{% if state_attr(''media_player.YOUR_RECEIVER'',''dynamic_eq'') is none %}grey{%
+      elif not state_attr(''media_player.YOUR_RECEIVER'',''dynamic_eq'') %}orange{% else %}grey{%
+      endif %}'
+    primary: Dynamic EQ Off
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_dyneq_off
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 6
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        {% if state_attr('media_player.YOUR_RECEIVER','dynamic_eq') == false %}\n  background: linear-gradient(160deg,\
+        \ rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border: 1px solid rgba(255, 122, 24, 0.80);\n\
+        {% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n\
+        {% endif %}\n}\n"
+  - type: custom:button-card
+    name: Dynamic Volume
+    color_type: label-card
+    show_icon: false
+    tap_action:
+      action: none
+    hold_action:
+      action: none
+    grid_options:
+      columns: full
+      rows: auto
+    styles:
+      card:
+      - background: transparent
+      - border: none
+      - border-left: 3px solid rgba(255,122,24,0.55)
+      - border-radius: '0'
+      - padding: 2px 0 2px 10px
+      - box-shadow: none
+      name:
+      - font-size: 11px
+      - font-weight: 700
+      - letter-spacing: 2px
+      - color: '#FFB24C'
+      - text-align: left
+      - justify-self: start
+      - text-transform: uppercase
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_dynvol_light
+    icon: mdi:volume-low
+    icon_color: orange
+    primary: Light
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_dynvol_light
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 6
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_dynvol_medium
+    icon: mdi:volume-medium
+    icon_color: orange
+    primary: Medium
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_dynvol_medium
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 6
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_dynvol_heavy
+    icon: mdi:volume-high
+    icon_color: orange
+    primary: Heavy
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_dynvol_heavy
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 6
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_dynvol_off
+    icon: mdi:volume-mute
+    icon_color: grey
+    primary: Dyn Vol Off
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_dynvol_off
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 6
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
+  - type: custom:button-card
+    name: Low Frequency Containment
+    color_type: label-card
+    show_icon: false
+    tap_action:
+      action: none
+    hold_action:
+      action: none
+    grid_options:
+      columns: full
+      rows: auto
+    styles:
+      card:
+      - background: transparent
+      - border: none
+      - border-left: 3px solid rgba(255,122,24,0.55)
+      - border-radius: '0'
+      - padding: 2px 0 2px 10px
+      - box-shadow: none
+      name:
+      - font-size: 11px
+      - font-weight: 700
+      - letter-spacing: 2px
+      - color: '#FFB24C'
+      - text-align: left
+      - justify-self: start
+      - text-transform: uppercase
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_lfc_on
+    icon: mdi:waves
+    icon_color: orange
+    primary: LFC On
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_lfc_on
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 6
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_lfc_off
+    icon: mdi:waves
+    icon_color: grey
+    primary: LFC Off
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_lfc_off
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 6
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
+  - type: custom:button-card
+    name: Dirac Live
+    color_type: label-card
+    show_icon: false
+    tap_action:
+      action: none
+    hold_action:
+      action: none
+    grid_options:
+      columns: full
+      rows: auto
+    styles:
+      card:
+      - background: transparent
+      - border: none
+      - border-left: 3px solid rgba(255,122,24,0.55)
+      - border-radius: '0'
+      - padding: 2px 0 2px 10px
+      - box-shadow: none
+      name:
+      - font-size: 11px
+      - font-weight: 700
+      - letter-spacing: 2px
+      - color: '#FFB24C'
+      - text-align: left
+      - justify-self: start
+      - text-transform: uppercase
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_dirac_slot_1
+    icon: mdi:tune-variant
+    icon_color: orange
+    primary: Slot 1
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_dirac_slot_1
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 6
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_dirac_slot_2
+    icon: mdi:tune-variant
+    icon_color: orange
+    primary: Slot 2
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_dirac_slot_2
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 6
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_dirac_slot_3
+    icon: mdi:tune-variant
+    icon_color: orange
+    primary: Slot 3
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_dirac_slot_3
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 6
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_dirac_off
+    icon: mdi:tune-variant
+    icon_color: grey
+    primary: Dirac Off
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_dirac_off
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 6
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
+- type: grid
+  column_span: 1
+  cards:
+  - type: custom:button-card
+    name: Scenes
+    icon: mdi:theater
+    color_type: label-card
+    tap_action:
+      action: none
+    hold_action:
+      action: none
+    grid_options:
+      columns: full
+      rows: auto
+    styles:
+      card:
+      - background: linear-gradient(135deg, rgba(204,82,0,0.30), rgba(255,122,24,0.08))
+      - border: 1px solid rgba(255,122,24,0.38)
+      - border-radius: 12px
+      - padding: 11px 15px
+      - box-shadow: none
+      grid:
+      - grid-template-areas: '"i n"'
+      - grid-template-columns: min-content auto
+      icon:
+      - color: '#FF7A18'
+      - width: 22px
+      - margin-right: 12px
+      name:
+      - font-size: 13px
+      - font-weight: 700
+      - letter-spacing: 3px
+      - color: '#FF7A18'
+      - text-align: left
+      - justify-self: start
+      - text-transform: uppercase
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_scene_1782176461993
+    icon: mdi:theater
+    icon_color: orange
+    primary: Movie Night
+    layout: horizontal
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_scene_1782176461993
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: full
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
+    secondary: powers on, Speaker Preset 2, Nvidia Shield, Movie mode, Dirac slot 3, 13 channel levels,
+      subwoofer level adjust, -20.0 dB{% set lt = state_attr('script.avr_maestro_YOURMAC_scene_1782176461993','last_triggered')
+      %}{% if lt %} | recalled {{ relative_time(lt) }} ago{% endif %}
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_scene_1782814855171
+    icon: mdi:tune
+    icon_color: orange
+    primary: Speaker Trim
+    layout: horizontal
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_scene_1782814855171
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: full
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
+    secondary: 11 channel levels, subwoofer level adjust{% set lt = state_attr('script.avr_maestro_YOURMAC_scene_1782814855171','last_triggered')
+      %}{% if lt %} | recalled {{ relative_time(lt) }} ago{% endif %}
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_scene_1782865214972
+    icon: mdi:speaker-multiple
+    icon_color: orange
+    primary: Full Channel Levels
+    layout: horizontal
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_scene_1782865214972
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: full
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
+    secondary: 13 channel levels{% set lt = state_attr('script.avr_maestro_YOURMAC_scene_1782865214972','last_triggered')
+      %}{% if lt %} | recalled {{ relative_time(lt) }} ago{% endif %}
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_scene_1782865221344
+    icon: mdi:equalizer
+    icon_color: orange
+    primary: Reference Calibration
+    layout: horizontal
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_scene_1782865221344
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: full
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
+    secondary: 13 channel levels, subwoofer level adjust{% set lt = state_attr('script.avr_maestro_YOURMAC_scene_1782865221344','last_triggered')
+      %}{% if lt %} | recalled {{ relative_time(lt) }} ago{% endif %}
+- type: grid
+  column_span: 1
+  cards:
+  - type: custom:button-card
+    name: Smart Select
+    icon: mdi:gesture-tap-button
+    color_type: label-card
+    tap_action:
+      action: none
+    hold_action:
+      action: none
+    grid_options:
+      columns: full
+      rows: auto
+    styles:
+      card:
+      - background: linear-gradient(135deg, rgba(204,82,0,0.30), rgba(255,122,24,0.08))
+      - border: 1px solid rgba(255,122,24,0.38)
+      - border-radius: 12px
+      - padding: 11px 15px
+      - box-shadow: none
+      grid:
+      - grid-template-areas: '"i n"'
+      - grid-template-columns: min-content auto
+      icon:
+      - color: '#FF7A18'
+      - width: 22px
+      - margin-right: 12px
+      name:
+      - font-size: 13px
+      - font-weight: 700
+      - letter-spacing: 3px
+      - color: '#FF7A18'
+      - text-align: left
+      - justify-self: start
+      - text-transform: uppercase
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_smartselect_1
+    icon: mdi:numeric-1-box-outline
+    icon_color: orange
+    primary: Smart Select 1
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_smartselect_1
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 6
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_smartselect_2
+    icon: mdi:numeric-2-box-outline
+    icon_color: orange
+    primary: Smart Select 2
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_smartselect_2
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 6
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_smartselect_3
+    icon: mdi:numeric-3-box-outline
+    icon_color: orange
+    primary: Smart Select 3
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_smartselect_3
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 6
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_smartselect_4
+    icon: mdi:numeric-4-box-outline
+    icon_color: orange
+    primary: Smart Select 4
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_smartselect_4
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 6
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
+- type: grid
+  column_span: 1
+  cards:
+  - type: custom:button-card
+    name: Speakers and Bass
+    icon: mdi:speaker-multiple
+    color_type: label-card
+    tap_action:
+      action: none
+    hold_action:
+      action: none
+    grid_options:
+      columns: full
+      rows: auto
+    styles:
+      card:
+      - background: linear-gradient(135deg, rgba(204,82,0,0.30), rgba(255,122,24,0.08))
+      - border: 1px solid rgba(255,122,24,0.38)
+      - border-radius: 12px
+      - padding: 11px 15px
+      - box-shadow: none
+      grid:
+      - grid-template-areas: '"i n"'
+      - grid-template-columns: min-content auto
+      icon:
+      - color: '#FF7A18'
+      - width: 22px
+      - margin-right: 12px
+      name:
+      - font-size: 13px
+      - font-weight: 700
+      - letter-spacing: 3px
+      - color: '#FF7A18'
+      - text-align: left
+      - justify-self: start
+      - text-transform: uppercase
+  - type: custom:button-card
+    name: All Zone Stereo
+    color_type: label-card
+    show_icon: false
+    tap_action:
+      action: none
+    hold_action:
+      action: none
+    grid_options:
+      columns: full
+      rows: auto
+    styles:
+      card:
+      - background: transparent
+      - border: none
+      - border-left: 3px solid rgba(255,122,24,0.55)
+      - border-radius: '0'
+      - padding: 2px 0 2px 10px
+      - box-shadow: none
+      name:
+      - font-size: 11px
+      - font-weight: 700
+      - letter-spacing: 2px
+      - color: '#FFB24C'
+      - text-align: left
+      - justify-self: start
+      - text-transform: uppercase
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_all_zone_stereo_on
+    icon: mdi:speaker-multiple
+    icon_color: '{{ ''orange'' if ''ALL ZONE STEREO'' in ((state_attr(''media_player.YOUR_RECEIVER'',''sound_mode'')
+      or '''') ~ '' '' ~ (state_attr(''media_player.YOUR_RECEIVER'',''sound_mode_raw'') or ''''))|upper
+      else ''grey'' }}'
+    primary: All Zones On
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_all_zone_stereo_on
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 6
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        {% if 'ALL ZONE STEREO' in ((state_attr('media_player.YOUR_RECEIVER','sound_mode') or '')\
+        \ ~ ' ' ~ (state_attr('media_player.YOUR_RECEIVER','sound_mode_raw') or ''))|upper %}\n  background:\
+        \ linear-gradient(160deg, rgba(226, 86, 10, 0.34), rgba(15, 15, 17, 0.88));\n  border: 1px solid\
+        \ rgba(255, 122, 24, 0.80);\n{% else %}\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px\
+        \ solid rgba(255, 122, 24, 0.14);\n{% endif %}\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_all_zone_stereo_off
+    icon: mdi:speaker-multiple
+    icon_color: grey
+    primary: All Zones Off
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_all_zone_stereo_off
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 6
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
+  - type: custom:button-card
+    name: Speaker Presets
+    color_type: label-card
+    show_icon: false
+    tap_action:
+      action: none
+    hold_action:
+      action: none
+    grid_options:
+      columns: full
+      rows: auto
+    styles:
+      card:
+      - background: transparent
+      - border: none
+      - border-left: 3px solid rgba(255,122,24,0.55)
+      - border-radius: '0'
+      - padding: 2px 0 2px 10px
+      - box-shadow: none
+      name:
+      - font-size: 11px
+      - font-weight: 700
+      - letter-spacing: 2px
+      - color: '#FFB24C'
+      - text-align: left
+      - justify-self: start
+      - text-transform: uppercase
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_speaker_preset_1
+    icon: mdi:hexagon-multiple
+    icon_color: orange
+    primary: Preset 1
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_speaker_preset_1
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 6
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_speaker_preset_2
+    icon: mdi:hexagon-multiple-outline
+    icon_color: orange
+    primary: Preset 2
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_speaker_preset_2
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 6
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
+  - type: custom:button-card
+    name: Subwoofer and Virtualizer
+    color_type: label-card
+    show_icon: false
+    tap_action:
+      action: none
+    hold_action:
+      action: none
+    grid_options:
+      columns: full
+      rows: auto
+    styles:
+      card:
+      - background: transparent
+      - border: none
+      - border-left: 3px solid rgba(255,122,24,0.55)
+      - border-radius: '0'
+      - padding: 2px 0 2px 10px
+      - box-shadow: none
+      name:
+      - font-size: 11px
+      - font-weight: 700
+      - letter-spacing: 2px
+      - color: '#FFB24C'
+      - text-align: left
+      - justify-self: start
+      - text-transform: uppercase
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_subwoofer_trim_on
+    icon: mdi:speaker
+    icon_color: orange
+    primary: Sub Trim On
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_subwoofer_trim_on
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 6
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_subwoofer_trim_off
+    icon: mdi:speaker
+    icon_color: grey
+    primary: Sub Trim Off
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_subwoofer_trim_off
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 6
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_virtualizer_on
+    icon: mdi:surround-sound-5-1-2
+    icon_color: orange
+    primary: Virtualizer On
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_virtualizer_on
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 6
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_virtualizer_off
+    icon: mdi:surround-sound-5-1-2
+    icon_color: grey
+    primary: Virtualizer Off
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_virtualizer_off
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 6
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
+- type: grid
+  column_span: 1
+  cards:
+  - type: custom:button-card
+    name: The Unit
+    icon: mdi:brightness-7
+    color_type: label-card
+    tap_action:
+      action: none
+    hold_action:
+      action: none
+    grid_options:
+      columns: full
+      rows: auto
+    styles:
+      card:
+      - background: linear-gradient(135deg, rgba(204,82,0,0.30), rgba(255,122,24,0.08))
+      - border: 1px solid rgba(255,122,24,0.38)
+      - border-radius: 12px
+      - padding: 11px 15px
+      - box-shadow: none
+      grid:
+      - grid-template-areas: '"i n"'
+      - grid-template-columns: min-content auto
+      icon:
+      - color: '#FF7A18'
+      - width: 22px
+      - margin-right: 12px
+      name:
+      - font-size: 13px
+      - font-weight: 700
+      - letter-spacing: 3px
+      - color: '#FF7A18'
+      - text-align: left
+      - justify-self: start
+      - text-transform: uppercase
+  - type: custom:button-card
+    name: Front Panel Dimmer
+    color_type: label-card
+    show_icon: false
+    tap_action:
+      action: none
+    hold_action:
+      action: none
+    grid_options:
+      columns: full
+      rows: auto
+    styles:
+      card:
+      - background: transparent
+      - border: none
+      - border-left: 3px solid rgba(255,122,24,0.55)
+      - border-radius: '0'
+      - padding: 2px 0 2px 10px
+      - box-shadow: none
+      name:
+      - font-size: 11px
+      - font-weight: 700
+      - letter-spacing: 2px
+      - color: '#FFB24C'
+      - text-align: left
+      - justify-self: start
+      - text-transform: uppercase
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_dimmer_bright
+    icon: mdi:brightness-7
+    icon_color: orange
+    primary: Bright
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_dimmer_bright
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 6
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_dimmer_dim
+    icon: mdi:brightness-5
+    icon_color: orange
+    primary: Dim
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_dimmer_dim
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 6
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_dimmer_dark
+    icon: mdi:brightness-3
+    icon_color: orange
+    primary: Dark
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_dimmer_dark
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 6
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_dimmer_off
+    icon: mdi:brightness-2
+    icon_color: grey
+    primary: Display Off
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_dimmer_off
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 6
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
+  - type: custom:button-card
+    name: Eco Mode
+    color_type: label-card
+    show_icon: false
+    tap_action:
+      action: none
+    hold_action:
+      action: none
+    grid_options:
+      columns: full
+      rows: auto
+    styles:
+      card:
+      - background: transparent
+      - border: none
+      - border-left: 3px solid rgba(255,122,24,0.55)
+      - border-radius: '0'
+      - padding: 2px 0 2px 10px
+      - box-shadow: none
+      name:
+      - font-size: 11px
+      - font-weight: 700
+      - letter-spacing: 2px
+      - color: '#FFB24C'
+      - text-align: left
+      - justify-self: start
+      - text-transform: uppercase
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_eco_on
+    icon: mdi:leaf
+    icon_color: orange
+    primary: Eco On
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_eco_on
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 4
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_eco_auto
+    icon: mdi:leaf-maple
+    icon_color: orange
+    primary: Eco Auto
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_eco_auto
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 4
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
+  - type: custom:mushroom-template-card
+    entity: script.avr_maestro_YOURMAC_eco_off
+    icon: mdi:leaf-off
+    icon_color: grey
+    primary: Eco Off
+    layout: vertical
+    fill_container: true
+    tap_action:
+      action: perform-action
+      perform_action: script.turn_on
+      target:
+        entity_id: script.avr_maestro_YOURMAC_eco_off
+    hold_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    grid_options:
+      columns: 4
+      rows: auto
+    card_mod:
+      style: "ha-card {\n  --rgb-orange: 255, 122, 24;\n  --mush-rgb-orange: 255, 122, 24;\n  --rgb-amber:\
+        \ 255, 178, 76;\n  --mush-rgb-amber: 255, 178, 76;\n  --rgb-grey: 110, 110, 118;\n  --mush-rgb-grey:\
+        \ 110, 110, 118;\n  --card-primary-font-size: 13px;\n  --card-primary-font-weight: 600;\n  --card-primary-letter-spacing:\
+        \ 0.2px;\n  --card-secondary-font-size: 11px;\n  --card-secondary-color: #A6A6AD;\n  --icon-size:\
+        \ 30px;\n  --spacing: 10px;\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n\
+        \  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24, 0.14);\n}\n"
+- type: grid
+  column_span: 3
+  cards:
+  - type: custom:button-card
+    name: Master Volume History
+    icon: mdi:chart-line
+    color_type: label-card
+    tap_action:
+      action: none
+    hold_action:
+      action: none
+    grid_options:
+      columns: full
+      rows: auto
+    styles:
+      card:
+      - background: linear-gradient(135deg, rgba(204,82,0,0.30), rgba(255,122,24,0.08))
+      - border: 1px solid rgba(255,122,24,0.38)
+      - border-radius: 12px
+      - padding: 11px 15px
+      - box-shadow: none
+      grid:
+      - grid-template-areas: '"i n"'
+      - grid-template-columns: min-content auto
+      icon:
+      - color: '#FF7A18'
+      - width: 22px
+      - margin-right: 12px
+      name:
+      - font-size: 13px
+      - font-weight: 700
+      - letter-spacing: 3px
+      - color: '#FF7A18'
+      - text-align: left
+      - justify-self: start
+      - text-transform: uppercase
+  - type: custom:apexcharts-card
+    grid_options:
+      columns: full
+      rows: auto
+    graph_span: 7d
+    header:
+      show: true
+      title: Master volume in dB, last 7 days
+      show_states: true
+      colorize_states: true
+    series:
+    - entity: media_player.YOUR_RECEIVER
+      attribute: volume_level
+      name: Master volume
+      type: area
+      curve: stepline
+      color: '#FF7A18'
+      stroke_width: 2
+      opacity: 0.22
+      unit: ' dB'
+      float_precision: 1
+      transform: 'return x == null ? null : Number(x) * 100 - 80;'
+      extend_to: now
+      group_by:
+        duration: 1h
+        func: last
+        fill: last
+    apex_config:
+      chart:
+        height: 240
+      grid:
+        borderColor: rgba(255,122,24,0.12)
+        strokeDashArray: 3
+      yaxis:
+        min: -60
+        max: 0
+        tickAmount: 4
+        labels:
+          style:
+            colors: '#A6A6AD'
+      xaxis:
+        labels:
+          style:
+            colors: '#A6A6AD'
+      dataLabels:
+        enabled: false
+      legend:
+        show: false
+      tooltip:
+        theme: dark
+    card_mod:
+      style: "ha-card {\n  background: rgba(15, 15, 17, 0.72);\n  border: 1px solid rgba(255, 122, 24,\
+        \ 0.14);\n  border-radius: 14px;\n  box-shadow: none;\n  backdrop-filter: blur(6px);\n}\n"
+cards: []

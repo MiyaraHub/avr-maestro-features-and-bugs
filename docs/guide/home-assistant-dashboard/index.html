@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Build a Home Assistant dashboard for your receiver | AVR Maestro</title>
-<meta name="description" content="A worked example: turn the scripts AVR Maestro publishes into a Home Assistant dashboard with live source and surround highlighting, real dB volume, scenes and a volume graph. Full YAML for every card, and an honest map of what Home Assistant can and cannot see." />
+<title>How to build a Home Assistant dashboard for your Denon or Marantz receiver | AVR Maestro</title>
+<meta name="description" content="Step by step: which HACS cards to install, how to find your entity IDs, and the YAML for every card. Live source and surround highlighting, volume in real dB, your Scenes, and history. Download the complete view and change two strings." />
 <meta name="keywords" content="Home Assistant Denon dashboard, Marantz Home Assistant card, mushroom card AV receiver, Home Assistant receiver volume dB, denonavr dashboard, AVR Maestro Home Assistant example" />
 <meta name="author" content="MiyaraHub Technologies LLC" />
 <meta name="robots" content="index, follow, max-image-preview:large" />
 <meta name="theme-color" content="#ff6e40" />
 <link rel="canonical" href="https://avrmaestro.com/guide/home-assistant-dashboard/" />
-<meta property="og:title" content="Build a Home Assistant dashboard for your receiver | AVR Maestro" />
-<meta property="og:description" content="A worked example with the full YAML: live source and surround highlighting, real dB volume, scenes and a graph, built from the scripts AVR Maestro publishes." />
+<meta property="og:title" content="How to build a Home Assistant dashboard for your receiver | AVR Maestro" />
+<meta property="og:description" content="Ten steps, the YAML for every card, and a complete view you can download and paste. Built on a real Marantz CINEMA 30." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://avrmaestro.com/guide/home-assistant-dashboard/" />
 <meta property="og:image" content="https://avrmaestro.com/screenshots/ha-dashboard-full.png" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Build a Home Assistant dashboard for your receiver | AVR Maestro" />
+<meta name="twitter:title" content="How to build a Home Assistant dashboard for your receiver | AVR Maestro" />
 <meta name="twitter:image" content="https://avrmaestro.com/screenshots/ha-dashboard-full.png" />
 <link rel="icon" href="../../assets/favicon.ico" />
 <link rel="stylesheet" href="../../assets/site.css" />
@@ -80,10 +80,10 @@
 
 <div class="hero">
   <div class="wrap">
-    <div class="crumb"><a href="/">Home</a> &rsaquo; <a href="/guide/">User Guide</a> &rsaquo; <a href="/guide/home-automation/">Home Automation</a> &rsaquo; Dashboard example</div>
-    <div class="eyebrow">Home Assistant &middot; tips and examples</div>
-    <h1>Build a dashboard <span class="g">worth looking at</span></h1>
-    <p>Once AVR Maestro has synced, Home Assistant has a control for everything your receiver can be told to do, and no opinion at all about how to arrange them. This is one arrangement, built on a Marantz CINEMA 30 that published sixty, with the YAML for every piece of it. Take the whole thing or take one card.</p>
+    <div class="crumb"><a href="/">Home</a> &rsaquo; <a href="/guide/">User Guide</a> &rsaquo; <a href="/guide/home-automation/">Home Automation</a> &rsaquo; Dashboard</div>
+    <div class="eyebrow">Home Assistant &middot; step by step</div>
+    <h1>Build this dashboard <span class="g">in about an hour</span></h1>
+    <p>Ten steps, every card's YAML, and a complete view you can paste in one go. Built and photographed on a real Marantz CINEMA 30. Change two strings and it is yours.</p>
   </div>
 </div>
 
@@ -91,22 +91,9 @@
   <div class="wrap">
     <figure class="hero-shot">
       <img alt="The finished dashboard: a now-playing hero, volume with dB presets, a source grid, surround modes, room correction, scenes and a volume graph" src="../../screenshots/ha-dashboard-full.png" />
-      <figcaption>Everything on this page is built from what AVR Maestro publishes, plus the receiver entity Home Assistant already had</figcaption>
+      <figcaption>What you are building</figcaption>
     </figure>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="section-head">
-      <h2>What you are looking at</h2>
-    </div>
-    <p class="lead">Two things feed this dashboard, and knowing which is which explains everything else about it.</p>
-    <ul class="plain">
-      <li><b>Your receiver's media player entity.</b> That comes from Home Assistant's own Denon AVR integration, and it is where live <em>state</em> comes from: what input is selected, which surround mode is running, the volume, whether it is muted.</li>
-      <li><b>The scripts AVR Maestro published.</b> Sixty of them on the CINEMA 30 this was built on, and however many your own receiver supports: every input, every surround mode, the Audyssey and Dirac set it has, Smart Selects, speaker presets, the dimmer, eco, and your Scenes. These are <em>commands</em>. Tapping one sends it.</li>
-    </ul>
-    <p class="lead">Put them together and a button can both send a command and show whether that command is the one currently running. That is the whole trick, and it is in <a href="#highlight">the highlighting pattern</a> below.</p>
+    <div class="note"><b>In a hurry?</b> Jump to <a href="#whole">step 10</a>, download the complete view, change two strings and paste it. The steps in between explain what each piece does so you can change it.</div>
   </div>
 </section>
 
@@ -115,44 +102,87 @@
     <div class="section-head">
       <h2>Before you start</h2>
     </div>
-    <p class="lead">Do <a href="/guide/home-automation/">the Home Assistant setup</a> first so your scenes and controls exist. Then, if you want it to look like the screenshots, four cards from <a href="https://hacs.xyz/" rel="noopener">HACS</a>:</p>
+    <ul class="plain">
+      <li><b>AVR Maestro is linked to Home Assistant and has synced.</b> <a href="/guide/home-automation/">The setup guide</a> covers that. You should be able to see your controls in Home Assistant before you build anything on top of them.</li>
+      <li><b>Your receiver is added to Home Assistant.</b> Settings &rsaquo; Devices &amp; Services &rsaquo; Add Integration &rsaquo; <b>Denon AVR</b>, then its local IP. This is what gives the dashboard its live state.</li>
+      <li><b>Your receiver is switched on</b> while you build. Half of what you are about to write reads live values, and a receiver in standby publishes almost nothing.</li>
+    </ul>
+    <p class="lead">Two things feed this dashboard, and the difference matters at every step below.</p>
     <table class="t">
-      <thead><tr><th>Card</th><th>Used for</th><th>Without it</th></tr></thead>
+      <thead><tr><th>Comes from</th><th>Gives you</th></tr></thead>
       <tbody>
-        <tr><td>Mushroom</td><td>Every control tile and the volume slider</td><td>Use a plain <code>button</code> card. It works, it is squarer.</td></tr>
-        <tr><td>button-card</td><td>The section headers with a live label</td><td>Use a <code>markdown</code> card, or plain headings.</td></tr>
-        <tr><td>card-mod</td><td>The colour, the glow, the highlight state</td><td>Everything still works. Nothing lights up.</td></tr>
-        <tr><td>apexcharts-card</td><td>The volume history graph</td><td>Use the built-in <code>history-graph</code> card.</td></tr>
+        <tr><td>AVR Maestro's synced scripts</td><td>Every <b>control</b>. Inputs, surround modes, Audyssey, Dirac, Smart Selects, presets, dimmer, eco, your Scenes.</td></tr>
+        <tr><td>The Denon AVR integration's media player entity</td><td>Live <b>state</b>. Power, selected source, surround mode, volume, mute.</td></tr>
       </tbody>
     </table>
-    <div class="note"><b>None of these are required.</b> Every control below runs from a stock Home Assistant button card pointed at the same script. The custom cards are makeup, not plumbing.</div>
   </div>
 </section>
 
 <section>
   <div class="wrap">
     <div class="section-head">
-      <h2>Find your own entity IDs</h2>
+      <div class="eyebrow">Step 1</div>
+      <h2>Install four cards from HACS</h2>
     </div>
-    <p class="lead">Every example here uses two placeholders. Replace them once and the rest copies straight in.</p>
+    <p class="lead">All four are in the default HACS store. In Home Assistant: <b>HACS &rsaquo; Frontend &rsaquo; Explore &amp; Download Repositories</b>, search the name, Download, then reload your browser.</p>
     <table class="t">
-      <thead><tr><th>Placeholder</th><th>What it is</th><th>Where to find it</th></tr></thead>
+      <thead><tr><th>Search for</th><th>Used for</th><th>If you skip it</th></tr></thead>
       <tbody>
-        <tr><td><code>media_player.your_receiver</code></td><td>The receiver entity from the Denon AVR integration</td><td>Settings &rsaquo; Devices &amp; Services &rsaquo; your receiver &rsaquo; the media player entity</td></tr>
-        <tr><td><code>script.avr_maestro_MAC_...</code></td><td>An AVR Maestro control</td><td>Developer Tools &rsaquo; States, filter on <code>avr_maestro</code></td></tr>
+        <tr><td><b>Mushroom</b></td><td>Every control tile, and the volume slider</td><td>Use a plain <code>button</code> card. Works, looks squarer.</td></tr>
+        <tr><td><b>button-card</b></td><td>Section headers with a live label</td><td>Use a <code>markdown</code> card, or plain headings.</td></tr>
+        <tr><td><b>card-mod</b></td><td>The colours, and the lit state on the active tile</td><td>Everything still works. Nothing lights up.</td></tr>
+        <tr><td><b>apexcharts-card</b></td><td>The history graphs</td><td>Use the built-in <code>history-graph</code> card.</td></tr>
       </tbody>
     </table>
-    <p class="lead">The middle of every script ID is your receiver's MAC address, twelve lowercase characters. That is deliberate: naming a script after the scene <em>and</em> the receiver meant renaming either one left the old script behind and quietly made a second. Named after the MAC, a rename updates the same script.</p>
+    <div class="note"><b>None of them are required to make it work.</b> Every control below runs from a stock Home Assistant button card pointed at the same script. The custom cards are makeup, not plumbing.</div>
   </div>
 </section>
 
 <section>
   <div class="wrap">
     <div class="section-head">
-      <div class="eyebrow">Pattern 1</div>
-      <h2>A control that sends a command</h2>
+      <div class="eyebrow">Step 2</div>
+      <h2>Find your two entity IDs</h2>
     </div>
-    <p class="lead">The simplest thing on the board. Tap it, the script runs, the receiver does the thing. No custom cards needed at all.</p>
+    <p class="lead">Every snippet on this page uses two placeholders. Find yours once and the rest is copy and paste.</p>
+    <ul class="plain">
+      <li><b><code>media_player.your_receiver</code></b> &rarr; Settings &rsaquo; Devices &amp; Services &rsaquo; your receiver &rsaquo; the media player entity. Something like <code>media_player.marantz_cinema_30</code>.</li>
+      <li><b><code>script.avr_maestro_MAC_...</code></b> &rarr; Developer Tools &rsaquo; States, and type <code>avr_maestro</code> in the entity filter. Your whole control list appears.</li>
+    </ul>
+    <p class="lead">The middle of every script ID is your receiver's MAC address, twelve lowercase characters, the same on all of them. Copy it once. Everywhere this page writes <code>MAC</code>, put yours.</p>
+    <div class="note"><b>Ignore any that say <code>unavailable</code>.</b> Older builds named scripts after the receiver's name rather than its MAC. If you synced back then, those older ones are still listed and are dead. The live ones are the MAC-named ones.</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Step 3</div>
+      <h2>Create the view</h2>
+    </div>
+    <ol class="plain">
+      <li><b>1.</b> Settings &rsaquo; Dashboards &rsaquo; Add Dashboard &rsaquo; New dashboard from scratch. Call it whatever you like.</li>
+      <li><b>2.</b> Open it, then the pencil icon top right to edit.</li>
+      <li><b>3.</b> Add a view, and choose the <b>Sections</b> layout. Not Masonry. Sections is what makes it reflow properly on a phone.</li>
+      <li><b>4.</b> In the view settings, set <b>Max columns</b> to 3 and turn on <b>Dense section placement</b>.</li>
+    </ol>
+    <p class="lead">From here on, every step is: add a section, then paste cards into it. To paste YAML, use the three-dot menu on a card and choose <b>Edit in YAML</b>, or the three-dot menu on the dashboard for <b>Raw configuration editor</b> to paste the whole thing at once.</p>
+<pre class="code"><span class="c"># The view's own settings, if you prefer to type them</span>
+type: sections
+title: AVR Maestro
+icon: mdi:audio-video
+max_columns: 3
+dense_section_placement: true</pre>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Step 4</div>
+      <h2>Add a control</h2>
+    </div>
+    <p class="lead">Start with the simplest thing on the board, so you know your entity IDs are right before you build anything complicated. Add a section, add a card, Edit in YAML, paste:</p>
 <pre class="code">type: button
 name: Pure Direct
 icon: mdi:speaker
@@ -161,19 +191,19 @@ tap_action:
   perform_action: script.turn_on
   target:
     entity_id: script.avr_maestro_MAC_mode_pure_direct</pre>
-    <p class="capt">Stock Home Assistant. Works out of the box.</p>
-    <p class="lead">That is genuinely all a control is. Everything below is this, dressed.</p>
+    <p class="capt">Stock Home Assistant. No HACS needed.</p>
+    <p class="lead">Tap it. If the receiver changes, your IDs are right and everything below will work. If nothing happens, go back to step 2.</p>
   </div>
 </section>
 
 <section id="highlight">
   <div class="wrap">
     <div class="section-head">
-      <div class="eyebrow">Pattern 2</div>
-      <h2>A control that knows whether it is the live one</h2>
+      <div class="eyebrow">Step 5</div>
+      <h2>Make it light up when it is the live one</h2>
     </div>
-    <p class="lead">This is the one worth stealing. The button sends a script, and colours itself from the receiver entity's state, so the input you are actually on is lit and the other twelve are not.</p>
-    <figure><img alt="The source grid with Nvidia Shield lit in orange and the other twelve inputs dark" src="../../screenshots/ha-dashboard-sources.png" /><figcaption>One lit tile, twelve dark ones, and no guessing</figcaption></figure>
+    <p class="lead">This is the pattern worth learning, and every source and surround tile on the board is a copy of it. The card sends a script, and colours itself from the receiver entity, so the input you are actually on is lit and the others are not.</p>
+    <figure><img alt="The source grid with Nvidia Shield lit in orange and the other twelve inputs dark" src="../../screenshots/ha-dashboard-sources.png" /><figcaption>One lit tile, twelve dark ones</figcaption></figure>
 <pre class="code">type: custom:mushroom-template-card
 entity: script.avr_maestro_MAC_input_cd
 icon: mdi:disc
@@ -200,22 +230,23 @@ card_mod:
       border: 1px solid rgba(255,122,24,0.14);
     {% endif %}
     }</pre>
-    <p class="capt">Mushroom for the tile, card-mod for the lit state.</p>
-    <p class="lead">The same shape does surround modes, with <code>sound_mode</code> in place of <code>source</code>. Two notes from building it on a real receiver:</p>
+    <p class="capt">Change three things per input: the script, the icon, and the string it compares against.</p>
+    <p class="lead">Two things to get right, or a tile will never light:</p>
     <ul class="plain">
-      <li><b>Compare lowercase, and compare against what your receiver actually reports.</b> Open Developer Tools &rsaquo; States, look at your media player entity, and read the <code>source_list</code> and <code>sound_mode_list</code> attributes. Those are your receiver's own strings.</li>
-      <li><b>If you have renamed an input on the receiver, the label and the value differ.</b> Rename GAME1 to "Xbox" on the chassis and the receiver reports <code>Xbox</code> while the AVR Maestro control is still <code>input_game1</code>. Match on what the receiver reports, not on what the script is called.</li>
+      <li><b>Compare against what your receiver actually reports.</b> Developer Tools &rsaquo; States, your media player entity, read the <code>source_list</code> and <code>sound_mode_list</code> attributes. Those are the exact strings. Compare lowercase, as above.</li>
+      <li><b>A renamed input reports its new name.</b> Rename GAME1 to "Xbox" on the receiver and it reports <code>Xbox</code>, while the AVR Maestro control is still called <code>input_game1</code>. Match on what the receiver reports, not on the script name.</li>
     </ul>
+    <p class="lead">Surround modes are the same card with <code>sound_mode</code> in place of <code>source</code>.</p>
   </div>
 </section>
 
 <section>
   <div class="wrap">
     <div class="section-head">
-      <div class="eyebrow">Pattern 3</div>
-      <h2>A header that says what is happening</h2>
+      <div class="eyebrow">Step 6</div>
+      <h2>Give each section a live header</h2>
     </div>
-    <p class="lead">A section title is dead space. Give it the live value underneath and it earns its row: "Sources" becomes "Sources / Now on Nvidia Shield".</p>
+    <p class="lead">A plain title is dead space. Put the live value under it and "Sources" becomes "Sources / Now on Nvidia Shield".</p>
 <pre class="code">type: custom:button-card
 name: Sources
 icon: mdi:video-input-hdmi
@@ -239,20 +270,22 @@ styles:
   label:
     - font-size: 11px
     - justify-self: start</pre>
-    <p class="capt">button-card. The two-line grid is what puts the label under the title rather than beside it.</p>
+    <p class="capt">The two-line grid is what puts the label under the title instead of beside it.</p>
+    <p class="lead">Swap <code>attributes.source</code> for <code>attributes.sound_mode</code> on the Surround header, and so on.</p>
   </div>
 </section>
 
 <section>
   <div class="wrap">
     <div class="section-head">
-      <div class="eyebrow">Pattern 4</div>
-      <h2>Volume in dB, the way you actually read it</h2>
+      <div class="eyebrow">Step 7</div>
+      <h2>Show volume in dB</h2>
     </div>
-    <p class="lead">Home Assistant reports volume as a fraction. Nobody sets a receiver to "0.67". The conversion is one line, and once you have it the whole volume section reads like a receiver instead of a slider.</p>
+    <p class="lead">Home Assistant reports volume as a fraction. Nobody sets a receiver to "0.67". One line of maths fixes it and the whole section starts reading like a receiver.</p>
     <figure><img alt="The volume section: a slider, up, down, mute and four dB presets" src="../../screenshots/ha-dashboard-volume.png" /><figcaption>Night, Dialog, Movie and Loud, each labelled with the dB it sets</figcaption></figure>
-    <div class="note"><b>The maths.</b> Home Assistant publishes <code>volume_level</code> as master volume divided by 100. On Denon and Marantz receivers MV 80 is the 0 dB reference. So <b>dB = volume_level &times; 100 &minus; 80</b>. A <code>volume_level</code> of 0.67 is master volume 67, which is &minus;13.0 dB.</div>
-<pre class="code">type: custom:mushroom-template-card
+    <div class="note"><b>The conversion.</b> Home Assistant publishes <code>volume_level</code> as master volume divided by 100, and on Denon and Marantz receivers MV 80 is the 0 dB reference. So <b>dB = volume_level &times; 100 &minus; 80</b>. A <code>volume_level</code> of 0.67 is master volume 67, which is &minus;13.0 dB.</div>
+<pre class="code"><span class="c"># The readout</span>
+type: custom:mushroom-template-card
 entity: media_player.your_receiver
 icon: mdi:volume-high
 primary: >-
@@ -260,9 +293,15 @@ primary: >-
   {% if v is not none %}{{ (v * 100 - 80) | round(1) }} dB{% else %}Standby{% endif %}
 secondary: Master volume
 layout: vertical</pre>
-    <p class="capt">The readout.</p>
-    <p class="lead">And a preset is a button that sets a level directly, rather than stepping there:</p>
-<pre class="code">type: custom:mushroom-template-card
+<pre class="code"><span class="c"># The slider. media_controls must be empty or the bar becomes a power button</span>
+type: custom:mushroom-media-player-card
+entity: media_player.your_receiver
+volume_controls:
+  - volume_set
+media_controls: []
+show_volume_level: true</pre>
+<pre class="code"><span class="c"># A preset. 0.50 is master volume 50, which is -30 dB</span>
+type: custom:mushroom-template-card
 entity: media_player.your_receiver
 icon: mdi:weather-night
 primary: Night
@@ -274,19 +313,17 @@ tap_action:
     entity_id: media_player.your_receiver
   data:
     volume_level: 0.50</pre>
-    <p class="capt">0.50 is master volume 50, which is -30 dB.</p>
-    <div class="note"><b>Pick your top preset deliberately.</b> The example set stops at &minus;10 dB. A mis-tap at reference level on a big receiver is genuinely loud, and a dashboard is easier to hit by accident than a remote.</div>
+    <div class="note"><b>Choose your loudest preset deliberately.</b> The set above stops at &minus;10 dB. A dashboard is much easier to hit by accident than a remote, and reference level on a big receiver is genuinely loud.</div>
   </div>
 </section>
 
 <section>
   <div class="wrap">
     <div class="section-head">
-      <div class="eyebrow">Pattern 5</div>
-      <h2>Your Scenes, as tiles</h2>
+      <div class="eyebrow">Step 8</div>
+      <h2>Add your Scenes</h2>
     </div>
-    <p class="lead">Scenes are the reason most people link the two in the first place. Read the name from the script rather than typing it, and renaming a scene in AVR Maestro renames the tile with no dashboard edit.</p>
-    <p class="lead">The second line is worth the extra minute. A wall of scene buttons all called something evocative tells you nothing at 11pm; a line under each one saying what it actually restores tells you which to press.</p>
+    <p class="lead">Read the name from the script instead of typing it, and renaming a Scene in AVR Maestro renames the tile with no dashboard edit.</p>
     <figure><img alt="Four scene tiles, each listing the settings that scene restores" src="../../screenshots/ha-dashboard-scenes.png" /><figcaption>Each tile says what its scene actually restores</figcaption></figure>
 <pre class="code">type: custom:mushroom-template-card
 entity: script.avr_maestro_MAC_scene_1234567890123
@@ -297,22 +334,24 @@ primary: >-
 secondary: >-
   {% set t = states.script['avr_maestro_MAC_scene_1234567890123'].attributes.last_triggered %}
   {{ 'recalled ' ~ relative_time(t) ~ ' ago' if t else 'not run yet' }}
+multiline_secondary: true
 tap_action:
   action: perform-action
   perform_action: script.turn_on
   target:
     entity_id: script.avr_maestro_MAC_scene_1234567890123</pre>
     <p class="capt">The two replace() calls trim the prefix and the receiver name off the friendly name.</p>
+    <p class="lead">A second line is worth the extra minute. A wall of evocatively named buttons tells you nothing at 11pm; a line saying what each one restores tells you which to press.</p>
   </div>
 </section>
 
 <section>
   <div class="wrap">
     <div class="section-head">
-      <div class="eyebrow">Pattern 6</div>
-      <h2>A volume graph that reads in dB</h2>
+      <div class="eyebrow">Step 9</div>
+      <h2>Add history</h2>
     </div>
-    <p class="lead">A recorder history of your listening levels, which is more interesting than it sounds once you have a week of it. The <code>transform</code> line is the same dB conversion as above.</p>
+    <p class="lead">The receiver's media player entity is recorded by Home Assistant like any other, so you get a listening history for free. Volume in dB uses the same conversion as step 7.</p>
 <pre class="code">type: custom:apexcharts-card
 graph_span: 7d
 header:
@@ -322,7 +361,7 @@ series:
   - entity: media_player.your_receiver
     attribute: volume_level
     name: Master volume
-    type: area
+    type: line
     curve: stepline
     unit: dB
     float_precision: 1
@@ -338,18 +377,40 @@ apex_config:
   yaxis:
     min: -60
     max: 0</pre>
-    <p class="capt">group_by with fill: last is what turns sparse events into a continuous line.</p>
-    <div class="note"><b>Check your recorder retention first.</b> Home Assistant keeps ten days by default, so a 7-day span is about the most you can ask for without extending it. A receiver that has been off all week gives you a very short graph.</div>
+    <p class="capt">group_by with fill: last turns sparse events into a continuous line. The y-axis has to go in apex_config to take effect.</p>
+    <p class="lead">And a plain state timeline, which needs no custom cards at all:</p>
+<pre class="code">type: history-graph
+hours_to_show: 168
+entities:
+  - entity: media_player.your_receiver
+    name: Receiver</pre>
+    <div class="note"><b>Check your recorder retention first.</b> Home Assistant keeps ten days by default, so seven days is about the most you can usefully ask for. A receiver that has been off all week gives you a very short graph.</div>
+  </div>
+</section>
+
+<section id="whole">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Step 10</div>
+      <h2>Or take the whole thing</h2>
+    </div>
+    <p class="lead">The complete view, every section and every card, with placeholders instead of entity IDs.</p>
+    <ol class="plain">
+      <li><b>1.</b> <a href="avr-maestro-dashboard.yaml" download>Download the view YAML</a>.</li>
+      <li><b>2.</b> Open it in any text editor and replace two strings, everywhere they appear: <code>YOUR_RECEIVER</code> with your media player entity's name, and <code>YOURMAC</code> with your receiver's twelve characters from step 2.</li>
+      <li><b>3.</b> In Home Assistant, open your dashboard, pencil icon, three-dot menu, <b>Raw configuration editor</b>, and paste it in as a view.</li>
+    </ol>
+    <div class="note"><b>Your Scene IDs will not match.</b> Scene scripts are named after when the Scene was created, so the four in the file will not exist on your system. Replace those four entity IDs with your own from step 2, or delete the Scenes section and rebuild it with step 8.</div>
   </div>
 </section>
 
 <section>
   <div class="wrap">
     <div class="section-head">
-      <h2>Why some tiles highlight and some do not</h2>
+      <h2>If a tile never lights up</h2>
     </div>
-    <p class="lead">This is the part that will save you an hour, so it is worth being plain about.</p>
-    <p class="lead">A tile can only light up if Home Assistant can read the matching state. Home Assistant reads the receiver through its Denon AVR integration, and that integration publishes a specific list:</p>
+    <p class="lead">Before assuming you built it wrong: some of them cannot light up, and it is worth knowing which.</p>
+    <p class="lead">A tile can only show its state if Home Assistant can read it. Home Assistant reads your receiver through the Denon AVR integration, and that publishes a specific list.</p>
     <table class="t">
       <thead><tr><th>Home Assistant can see</th><th>Home Assistant cannot see</th></tr></thead>
       <tbody>
@@ -360,8 +421,9 @@ apex_config:
         <tr><td>Dynamic EQ, sometimes</td><td>Eco mode, speaker preset, virtualizer</td></tr>
       </tbody>
     </table>
-    <p class="lead">Everything in the right-hand column is <em>readable from the receiver</em> - it answers when asked. It simply is not published to Home Assistant, so a dashboard has nowhere to read it from. Those buttons still work perfectly; they just cannot show you which one is currently active.</p>
-    <div class="note"><b>If a value can mean two things, say so.</b> Dynamic EQ is published as <code>true</code>, <code>false</code>, or not at all. Treating "not at all" as "off" puts a confident wrong answer on your wall. The example dashboard lights On for true, Off for false, and neither when the attribute is missing - with the header reading "state not published" so you know the difference.</div>
+    <p class="lead">Everything in the right-hand column is <em>readable from the receiver</em> - it answers when asked, over the same protocol AVR Maestro uses to draw its own screens. It just is not published to Home Assistant, so a dashboard has nowhere to read it from. Those buttons work perfectly; they cannot show you which one is active.</p>
+    <p class="lead">Measured on the receiver this was built on: <b>twenty of sixty controls can show their state, and forty cannot</b>. Publishing the other forty is on the roadmap, and it is the difference between a wall of buttons and a control surface.</p>
+    <div class="note"><b>If a value can mean two things, say so.</b> Dynamic EQ arrives as <code>true</code>, <code>false</code>, or not at all. Treating "not at all" as "off" puts a confident wrong answer on your wall.</div>
 <pre class="code">icon_color: >-
   {% set d = state_attr('media_player.your_receiver','dynamic_eq') %}
   {{ 'orange' if d is true else 'grey' }}
@@ -375,20 +437,16 @@ secondary: >-
 <section>
   <div class="wrap">
     <div class="section-head">
-      <h2>Arranging it</h2>
+      <h2>Other things worth knowing</h2>
     </div>
-    <p class="lead">The layout is a Home Assistant <b>sections</b> view with <code>max_columns: 3</code>. Sections reflow on their own, so the same dashboard is a three-column wall on a tablet and a single readable column on a phone with nothing extra to configure.</p>
-    <figure><img alt="The same dashboard at phone width, reflowed into a single column" src="../../screenshots/ha-dashboard-narrow.png" /><figcaption>Same dashboard at phone width: the three columns become one, and nothing was configured to make that happen</figcaption></figure>
-    <p class="lead">The grouping that worked, after a couple of tries, is by <em>what you are doing</em> rather than by what kind of control it is:</p>
     <ul class="plain">
-      <li><b>Now Playing</b> - full width, and a conditional card so it shows a "tap to power on" strip while the receiver is in standby and the real readout when it is awake.</li>
-      <li><b>Volume</b> - slider, steps, mute, presets.</li>
-      <li><b>Sources</b> - full width, six across, with the streaming input on a wide tile of its own.</li>
-      <li><b>Surround Sound</b>, <b>Room Correction</b>, <b>Scenes</b> - one column each, side by side.</li>
-      <li><b>Smart Select</b>, <b>Speakers and Bass</b>, <b>The Unit</b> - the things you set once.</li>
-      <li><b>History</b> - full width at the bottom.</li>
+      <li><b>Tiles come out a third of the width you expect.</b> In a section spanning 3 columns the internal grid is <b>36</b> columns, not 12. For four tiles across, set <code>grid_options: {columns: 9}</code>. For six across, 6.</li>
+      <li><b>The volume slider shows a power button instead of a bar.</b> That is <code>media_controls</code> with <code>on_off</code> in it. Set <code>media_controls: []</code>.</li>
+      <li><b>Labels truncate.</b> "Volume Down" becomes "Volume Do...". Shorten to "Vol Down", or widen the tile.</li>
+      <li><b>Scene descriptions get clipped.</b> Add <code>multiline_secondary: true</code>.</li>
+      <li><b>It reflows on a phone by itself.</b> Sections views stack into one column at narrow widths with nothing extra configured.</li>
     </ul>
-    <p class="lead">Room Correction is the tallest column on purpose. It is the one nobody else's dashboard has.</p>
+    <figure><img alt="The same dashboard at phone width, reflowed into a single column" src="../../screenshots/ha-dashboard-narrow.png" /><figcaption>Same dashboard at phone width: the three columns become one, and nothing was configured to make that happen</figcaption></figure>
   </div>
 </section>
 
