@@ -461,7 +461,8 @@ apex_config:
     <p class="capt">Put your own sources in the transform array and in both formatter arrays. Keep index 0 as "Other".</p>
     <p class="lead">A chart axis needs numbers, so the <code>transform</code> maps each source name to a position and the formatters map it back for the labels and the tooltip. Make the mapping <b>total</b>: <code>null</code> (receiver off) stays a gap, and anything not in your list falls to "Other", so the two can never be confused. Same card again with <code>sound_mode</code> gives you surround mode, with the strings in upper case exactly as your receiver reports them.</p>
     <div class="note"><b>Keep <code>stepline</code> on those last two.</b> A source or a surround mode is a category, not a number. Smooth the curve and the line swoops between Shield and Xbox through whatever sits between them on the axis, drawing an input that was never selected. Volume is a real quantity and smooths honestly; a category does not.</div>
-    <div class="note"><b>Check your recorder retention first.</b> Home Assistant keeps ten days by default, so seven days is about the most you can usefully ask for. A receiver that has been off all week gives you a very short graph.</div>
+    <div class="note"><b>Check your recorder retention first.</b> Home Assistant keeps ten days by default, so seven days is about the most you can usefully ask for. To go back further you need a <code>state_class: measurement</code> template sensor, which Home Assistant keeps as long-term statistics for years.</div>
+    <div class="note"><b>A missing day is usually correct.</b> Home Assistant records changes, not samples. Leave the receiver on one input at one volume for two days and it writes nothing at all, so that day has no bar. It looks like data loss and it is the opposite: nothing happened.</div>
   </div>
 </section>
 
