@@ -16,7 +16,7 @@
 
 <br/>
 
-## &#128214; [**Read the full visual manual &rarr;**](https://miyarahub.github.io/avr-maestro-for-denon-marantz/)
+## &#128214; [**Read the full visual manual &rarr;**](https://www.avrmaestro.com)
 
 <br/>
 
@@ -39,7 +39,7 @@ Connect to a receiver on your local network and the app becomes your remote: pow
 - **A real remote** - full D-pad, transport, a live IN/OUT channel map, plus rename/reorder of your inputs.
 - **Power features** - TJ Mode accent colors, a customizable dashboard, hide/reorder tabs, FM/AM tuner presets, HEOS now-playing, backup &amp; restore, home-screen widgets and hardware volume keys.
 
-&#128073; **The full, illustrated manual lives here:** **https://miyarahub.github.io/avr-maestro-for-denon-marantz/**
+&#128073; **The full, illustrated manual lives here:** **https://www.avrmaestro.com**
 
 ---
 
