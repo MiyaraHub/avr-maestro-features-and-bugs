@@ -47,8 +47,8 @@ Connect to a receiver on your local network and the app becomes your remote: pow
 
 This is the **public bug + feature request repo** for AVR Maestro. (The app source code lives in a separate, private repository.)
 
-- **[Report a bug](https://github.com/MiyaraHub/avr-maestro-for-denon-marantz/issues/new?template=bug_report.yml)** - the app crashed, a button doesn't work, something looks wrong.
-- **[Request a feature](https://github.com/MiyaraHub/avr-maestro-for-denon-marantz/issues/new?template=feature_request.yml)** - something the app should do but doesn't.
+- **[Report a bug](https://github.com/MiyaraHub/avrmaestro/issues/new?template=bug_report.yml)** - the app crashed, a button doesn't work, something looks wrong.
+- **[Request a feature](https://github.com/MiyaraHub/avrmaestro/issues/new?template=feature_request.yml)** - something the app should do but doesn't.
 
 For general questions, drop into [Discord](https://discord.gg/UmVtxE5fXN), the [Facebook community](https://www.facebook.com/groups/avrmaestro), or email [admin@miyarahub.com](mailto:admin@miyarahub.com).
 
@@ -60,7 +60,7 @@ Reachability comes down to your network, not just the model. If the receiver's o
 
 ## Support
 
-- **Bugs / features:** [open an issue](https://github.com/MiyaraHub/avr-maestro-for-denon-marantz/issues/new/choose)
+- **Bugs / features:** [open an issue](https://github.com/MiyaraHub/avrmaestro/issues/new/choose)
 - **Discord:** [discord.gg/UmVtxE5fXN](https://discord.gg/UmVtxE5fXN)
 - **Facebook:** [facebook.com/groups/avrmaestro](https://www.facebook.com/groups/avrmaestro)
 - **Email:** [admin@miyarahub.com](mailto:admin@miyarahub.com)
