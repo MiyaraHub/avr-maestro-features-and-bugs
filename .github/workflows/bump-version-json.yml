@@ -3,12 +3,24 @@ name: Bump version.json
 on:
   workflow_dispatch:
     inputs:
-      version:
-        description: 'Production version now live on ALL stores (e.g. 4.17.2)'
-        required: true
+      android:
+        description: 'Version now live on Google Play (blank = leave untouched)'
+        required: false
+        type: string
+      ios:
+        description: 'Version now live on the App Store, iOS (blank = leave untouched)'
+        required: false
+        type: string
+      macos:
+        description: 'Version now live on the App Store, macOS (blank = leave untouched)'
+        required: false
+        type: string
+      windows:
+        description: 'Version now live on the Microsoft Store (blank = leave untouched)'
+        required: false
         type: string
       min_version:
-        description: 'Minimum supported version floor (optional; blank keeps current)'
+        description: 'Minimum supported version floor, applies to ALL platforms (optional; blank keeps current)'
         required: false
         type: string
 
@@ -23,33 +35,74 @@ jobs:
 
       - name: Update docs/version.json
         env:
-          NEW_VERSION: ${{ inputs.version }}
+          IN_ANDROID: ${{ inputs.android }}
+          IN_IOS: ${{ inputs.ios }}
+          IN_MACOS: ${{ inputs.macos }}
+          IN_WINDOWS: ${{ inputs.windows }}
           NEW_MIN: ${{ inputs.min_version }}
         run: |
           python3 - <<'PY'
           import json, os, re
-          version = os.environ['NEW_VERSION'].strip()
+
+          SEMVER = re.compile(r'\d+\.\d+\.\d+')
+
+          # Blank means "this store has not shipped it yet", which is the whole
+          # point of the change: stores approve on different days and
+          # version.json drives the in-app update prompt. Bumping a platform
+          # before its listing serves the build sends those users to a store
+          # page that does not have it.
+          requested = {
+              'android': os.environ.get('IN_ANDROID', '').strip(),
+              'ios': os.environ.get('IN_IOS', '').strip(),
+              'macos': os.environ.get('IN_MACOS', '').strip(),
+              'windows': os.environ.get('IN_WINDOWS', '').strip(),
+          }
           minv = os.environ.get('NEW_MIN', '').strip()
-          if not re.fullmatch(r'\d+\.\d+\.\d+', version):
-              raise SystemExit(f'version must be X.Y.Z, got: {version!r}')
-          if minv and not re.fullmatch(r'\d+\.\d+\.\d+', minv):
+
+          for platform, version in requested.items():
+              if version and not SEMVER.fullmatch(version):
+                  raise SystemExit(f'{platform} must be X.Y.Z, got: {version!r}')
+          if minv and not SEMVER.fullmatch(minv):
               raise SystemExit(f'min_version must be X.Y.Z, got: {minv!r}')
+
+          # A run that sets nothing is a mistake, not a no-op. Failing loudly
+          # is the difference between "I forgot to fill anything in" and
+          # "the bump silently did nothing and I believed it worked".
+          if not any(requested.values()) and not minv:
+              raise SystemExit(
+                  'nothing to do: set at least one platform version, or min_version'
+              )
+
           path = 'docs/version.json'
           with open(path) as f:
               data = json.load(f)
-          for platform in data:
+
+          unknown = [p for p, v in requested.items() if v and p not in data]
+          if unknown:
+              raise SystemExit(f'version.json has no entry for: {", ".join(unknown)}')
+
+          touched = []
+          for platform, version in requested.items():
+              if not version:
+                  continue
               data[platform]['latest'] = version
-              if minv:
+              touched.append(f'{platform}={version}')
+          if minv:
+              for platform in data:
                   data[platform]['min'] = minv
+
           with open(path, 'w') as f:
               json.dump(data, f, indent=2)
               f.write('\n')
-          print('version.json latest ->', version, '| min ->', minv or 'unchanged')
+
+          print('latest ->', ', '.join(touched) or 'unchanged')
+          print('min    ->', minv or 'unchanged')
+          untouched = [p for p, v in requested.items() if not v]
+          if untouched:
+              print('left alone ->', ', '.join(untouched))
           PY
 
       - name: Commit and push
-        env:
-          NEW_VERSION: ${{ inputs.version }}
         run: |
           git config user.name 'Meir Miyara'
           git config user.email 'mase1981@users.noreply.github.com'
@@ -57,6 +110,11 @@ jobs:
             echo 'version.json already at the requested values; nothing to commit.'
             exit 0
           fi
+          SUMMARY=$(python3 -c "
+          import json,subprocess
+          d=json.load(open('docs/version.json'))
+          print(', '.join(f\"{k} {v['latest']}\" for k,v in d.items()))
+          ")
           git add docs/version.json
-          git commit -m "chore: bump version.json latest to ${NEW_VERSION}"
+          git commit -m "chore: bump version.json (${SUMMARY})"
           git push
